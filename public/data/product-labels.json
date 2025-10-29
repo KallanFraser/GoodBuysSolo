@@ -1,0 +1,5 @@
+[
+	{ "product_id": "p-patagonia-down", "label_ids": ["gots", "oeko-tex"] },
+	{ "product_id": "p-hm-basic-tee", "label_ids": ["oeko-tex"] },
+	{ "product_id": "p-ben-jerrys-vanilla", "label_ids": ["rainforest-alliance"] }
+]

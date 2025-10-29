@@ -1,0 +1,18 @@
+/** @format */
+html,
+body {
+	background: #0b0b0b;
+	color: #eaeaea;
+	font-family: system-ui, sans-serif;
+}
+a {
+	text-decoration: underline;
+}
+input,
+button {
+	background: #151515;
+	color: #eaeaea;
+}
+button {
+	cursor: pointer;
+}

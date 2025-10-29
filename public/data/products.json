@@ -1,0 +1,27 @@
+[
+	{
+		"id": "p-nike-air-zoom",
+		"name": "Nike Air Zoom Pegasus",
+		"manufacturer_id": "m-nike",
+		"alt_names": ["Pegasus", "Air Zoom"]
+	},
+	{
+		"id": "p-hm-basic-tee",
+		"name": "H&M Basic T-Shirt",
+		"manufacturer_id": "m-hm",
+		"alt_names": ["Basic Tee"]
+	},
+	{
+		"id": "p-patagonia-down",
+		"name": "Patagonia Down Sweater",
+		"manufacturer_id": "m-patagonia",
+		"alt_names": ["Down Sweater"]
+	},
+	{
+		"id": "p-ben-jerrys-vanilla",
+		"name": "Ben & Jerry's Vanilla",
+		"manufacturer_id": "m-unilever",
+		"alt_names": ["Vanilla Ice Cream"]
+	},
+	{ "id": "p-kitkat", "name": "KitKat Bar", "manufacturer_id": "m-nestle", "alt_names": ["Kit Kat"] }
+]

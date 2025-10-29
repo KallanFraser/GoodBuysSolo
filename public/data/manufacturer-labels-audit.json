@@ -1,0 +1,309 @@
+[
+  {
+    "manufacturer_id": "m-apple",
+    "manufacturer_name": "Apple",
+    "label_id": "fsc",
+    "evidence": [
+      "https://www.fsc.org/en/newsfeed?page=2"
+    ],
+    "ts": "2025-10-22T23:58:34.734Z"
+  },
+  {
+    "manufacturer_id": "m-apple",
+    "manufacturer_name": "Apple",
+    "label_id": "rainforest-alliance",
+    "evidence": [
+      "https://www.rainforest-alliance.org/find-certified/"
+    ],
+    "ts": "2025-10-22T23:58:34.853Z"
+  },
+  {
+    "manufacturer_id": "m-apple",
+    "manufacturer_name": "Apple",
+    "label_id": "oeko-tex",
+    "evidence": [
+      "https://www.oeko-tex.com/en/buying-guide",
+      "https://www.oeko-tex.com/en/buying-guide"
+    ],
+    "ts": "2025-10-22T23:58:34.858Z"
+  },
+  {
+    "manufacturer_id": "m-apple",
+    "manufacturer_name": "Apple",
+    "label_id": "fair-wear",
+    "evidence": [
+      "https://www.fairwear.org/brands",
+      "https://www.fairwear.org/brands"
+    ],
+    "ts": "2025-10-22T23:58:34.900Z"
+  },
+  {
+    "manufacturer_id": "m-apple",
+    "manufacturer_name": "Apple",
+    "label_id": "bluesign",
+    "evidence": [
+      "https://www.bluesign.com/en/brands"
+    ],
+    "ts": "2025-10-22T23:58:35.025Z"
+  },
+  {
+    "manufacturer_id": "m-apple",
+    "manufacturer_name": "Apple",
+    "label_id": "certified-vegan",
+    "evidence": [
+      "https://vegan.org/companies-using-our-logo/",
+      "https://vegan.org/companies-using-our-logo/"
+    ],
+    "ts": "2025-10-22T23:58:35.079Z"
+  },
+  {
+    "manufacturer_id": "m-apple",
+    "manufacturer_name": "Apple",
+    "label_id": "lwg",
+    "evidence": [
+      "https://www.leatherworkinggroup.com/members/"
+    ],
+    "ts": "2025-10-22T23:58:35.162Z"
+  },
+  {
+    "manufacturer_id": "m-apple",
+    "manufacturer_name": "Apple",
+    "label_id": "bap",
+    "evidence": [
+      "https://www.bapcertification.org/Marketplace",
+      "https://www.bapcertification.org/Marketplace",
+      "https://www.bapcertification.org/Marketplace"
+    ],
+    "ts": "2025-10-22T23:58:35.240Z"
+  },
+  {
+    "manufacturer_id": "m-apple",
+    "manufacturer_name": "Apple",
+    "label_id": "green-seal",
+    "evidence": [
+      "https://certified.greenseal.org/"
+    ],
+    "ts": "2025-10-22T23:58:35.320Z"
+  },
+  {
+    "manufacturer_id": "m-apple",
+    "manufacturer_name": "Apple",
+    "label_id": "carbon-trust",
+    "evidence": [
+      "https://www.carbontrust.com/what-we-do/assurance-and-certification",
+      "https://www.carbontrust.com/what-we-do/assurance-and-certification"
+    ],
+    "ts": "2025-10-22T23:58:35.541Z"
+  },
+  {
+    "manufacturer_id": "m-amazon",
+    "manufacturer_name": "Amazon",
+    "label_id": "fsc",
+    "evidence": [
+      "https://www.fsc.org/en/newsfeed?page=2",
+      "https://www.fsc.org/en/newscentre/stories/from-the-heart-of-the-amazon"
+    ],
+    "ts": "2025-10-22T23:58:46.979Z"
+  },
+  {
+    "manufacturer_id": "m-amazon",
+    "manufacturer_name": "Amazon",
+    "label_id": "lwg",
+    "evidence": [
+      "https://www.leatherworkinggroup.com/members/",
+      "https://www.leatherworkinggroup.com/members/"
+    ],
+    "ts": "2025-10-22T23:58:47.148Z"
+  },
+  {
+    "manufacturer_id": "m-amazon",
+    "manufacturer_name": "Amazon",
+    "label_id": "green-seal",
+    "evidence": [
+      "https://certified.greenseal.org/",
+      "https://certified.greenseal.org/",
+      "https://certified.greenseal.org/"
+    ],
+    "ts": "2025-10-22T23:58:47.491Z"
+  },
+  {
+    "manufacturer_id": "m-amazon",
+    "manufacturer_name": "Amazon",
+    "label_id": "carbon-trust",
+    "evidence": [
+      "https://www.carbontrust.com/what-we-do/assurance-and-certification",
+      "https://www.carbontrust.com/amazons-climate-pledge-friendly-programme-and-the-carbon-trust"
+    ],
+    "ts": "2025-10-22T23:58:47.499Z"
+  },
+  {
+    "manufacturer_id": "m-google",
+    "manufacturer_name": "Google",
+    "label_id": "rainforest-alliance",
+    "evidence": [
+      "https://www.rainforest-alliance.org/find-certified/",
+      "https://www.rainforest-alliance.org/find-certified/",
+      "https://www.rainforest-alliance.org/find-certified/"
+    ],
+    "ts": "2025-10-22T23:59:01.074Z"
+  },
+  {
+    "manufacturer_id": "m-google",
+    "manufacturer_name": "Google",
+    "label_id": "oeko-tex",
+    "evidence": [
+      "https://www.oeko-tex.com/en/buying-guide",
+      "https://www.oeko-tex.com/en/buying-guide",
+      "https://www.oeko-tex.com/en/buying-guide"
+    ],
+    "ts": "2025-10-22T23:59:01.083Z"
+  },
+  {
+    "manufacturer_id": "m-google",
+    "manufacturer_name": "Google",
+    "label_id": "bluesign",
+    "evidence": [
+      "https://www.bluesign.com/en/brands",
+      "https://www.bluesign.com/en/brands",
+      "https://www.bluesign.com/en/brands"
+    ],
+    "ts": "2025-10-22T23:59:01.565Z"
+  },
+  {
+    "manufacturer_id": "m-google",
+    "manufacturer_name": "Google",
+    "label_id": "animal-welfare-approved",
+    "evidence": [
+      "https://agreenerworld.org/certifications/animal-welfare-approved/",
+      "https://policies.google.com/privacy",
+      "https://policies.google.com/terms"
+    ],
+    "ts": "2025-10-22T23:59:01.580Z"
+  },
+  {
+    "manufacturer_id": "m-google",
+    "manufacturer_name": "Google",
+    "label_id": "certified-vegan",
+    "evidence": [
+      "https://vegan.org/companies-using-our-logo/",
+      "https://vegan.org/companies-using-our-logo/",
+      "https://vegan.org/companies-using-our-logo/"
+    ],
+    "ts": "2025-10-22T23:59:01.704Z"
+  },
+  {
+    "manufacturer_id": "m-google",
+    "manufacturer_name": "Google",
+    "label_id": "lwg",
+    "evidence": [
+      "https://www.leatherworkinggroup.com/members/"
+    ],
+    "ts": "2025-10-22T23:59:02.034Z"
+  },
+  {
+    "manufacturer_id": "m-google",
+    "manufacturer_name": "Google",
+    "label_id": "bap",
+    "evidence": [
+      "https://www.bapcertification.org/Marketplace",
+      "https://www.bapcertification.org/Marketplace",
+      "https://www.bapcertification.org/Marketplace"
+    ],
+    "ts": "2025-10-22T23:59:02.061Z"
+  },
+  {
+    "manufacturer_id": "m-google",
+    "manufacturer_name": "Google",
+    "label_id": "green-seal",
+    "evidence": [
+      "https://certified.greenseal.org/",
+      "https://certified.greenseal.org/"
+    ],
+    "ts": "2025-10-22T23:59:02.185Z"
+  },
+  {
+    "manufacturer_id": "m-microsoft",
+    "manufacturer_name": "Microsoft",
+    "label_id": "lwg",
+    "evidence": [
+      "https://www.leatherworkinggroup.com/members/"
+    ],
+    "ts": "2025-10-22T23:59:12.954Z"
+  },
+  {
+    "manufacturer_id": "m-adidas",
+    "manufacturer_name": "Adidas",
+    "label_id": "lwg",
+    "evidence": [
+      "http://www.adidas-group.com/",
+      "https://www.leatherworkinggroup.com/members/",
+      "http://www.adidas-group.com/"
+    ],
+    "ts": "2025-10-22T23:59:38.179Z"
+  },
+  {
+    "manufacturer_id": "m-patagonia",
+    "manufacturer_name": "Patagonia",
+    "label_id": "b-corp",
+    "evidence": [
+      "https://www.bcorporation.net/en-us/find-a-b-corp/company/patagonia-works/"
+    ],
+    "ts": "2025-10-23T00:00:14.778Z"
+  },
+  {
+    "manufacturer_id": "m-nestle",
+    "manufacturer_name": "Nestlé",
+    "label_id": "rainforest-alliance",
+    "evidence": [
+      "https://www.rainforest-alliance.org/find-certified/",
+      "https://www.rainforest-alliance.org/find-certified/"
+    ],
+    "ts": "2025-10-23T00:00:41.975Z"
+  },
+  {
+    "manufacturer_id": "m-nestle",
+    "manufacturer_name": "Nestlé",
+    "label_id": "certified-vegan",
+    "evidence": [
+      "https://vegan.org/companies-using-our-logo/"
+    ],
+    "ts": "2025-10-23T00:00:42.410Z"
+  },
+  {
+    "manufacturer_id": "m-starbucks",
+    "manufacturer_name": "Starbucks",
+    "label_id": "certified-vegan",
+    "evidence": [
+      "https://vegan.org/companies-using-our-logo/"
+    ],
+    "ts": "2025-10-23T00:01:44.092Z"
+  },
+  {
+    "manufacturer_id": "m-hershey",
+    "manufacturer_name": "Hershey",
+    "label_id": "rainforest-alliance",
+    "evidence": [
+      "https://www.rainforest-alliance.org/find-certified/page/2/",
+      "https://www.rainforest-alliance.org/find-certified/hersheys/"
+    ],
+    "ts": "2025-10-23T00:04:38.981Z"
+  },
+  {
+    "manufacturer_id": "m-patagonia",
+    "manufacturer_name": "Patagonia",
+    "label_id": "b-corp",
+    "evidence": [
+      "manual-manufacturer-labels.json"
+    ],
+    "ts": "2025-10-23T00:04:51.141Z"
+  },
+  {
+    "manufacturer_id": "m-patagonia",
+    "manufacturer_name": "Patagonia",
+    "label_id": "gots",
+    "evidence": [
+      "manual-manufacturer-labels.json"
+    ],
+    "ts": "2025-10-23T00:04:51.141Z"
+  }
+]

@@ -1,0 +1,31 @@
+{
+	"name": "goodbuyssolo",
+	"version": "1.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"scrape:labels": "node scripts/scrape-manufacturer-labels.js",
+		"scrape:labels:deep": "node scripts/scrape-manufacturer-labels.js --max-pages 6",
+		"scrape:labels:brand": "node scripts/scrape-manufacturer-labels.js --brand \"Nike\"",
+		"scrape:labels:headless": "node scripts/scrape-manufacturer-labels.js --headless"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/KallanFraser/GoodBuysSolo.git"
+	},
+	"bugs": {
+		"url": "https://github.com/KallanFraser/GoodBuysSolo/issues"
+	},
+	"homepage": "https://github.com/KallanFraser/GoodBuysSolo#readme",
+	"dependencies": {
+		"cheerio": "^1.1.2",
+		"next": "^16.0.0",
+		"node-fetch": "^3.3.2",
+		"react": "^19.2.0",
+		"react-dom": "^19.2.0",
+		"fuse.js": "^7.0.0",
+		"p-limit": "^5.0.0"
+	}
+}

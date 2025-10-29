@@ -1,0 +1,322 @@
+[
+	{
+		"id": "fair-trade",
+		"name": "Fair Trade Certified",
+		"category": "Labor",
+		"description": "Standards around fair wages, safe working conditions, and community development funds.",
+		"source_url": "https://www.fairtradecertified.org/",
+		"rigor_score": 9
+	},
+	{
+		"id": "rainforest-alliance",
+		"name": "Rainforest Alliance",
+		"category": "Environment",
+		"description": "Focuses on biodiversity, climate, and livelihoods across agriculture and forestry.",
+		"source_url": "https://www.rainforest-alliance.org/",
+		"rigor_score": 7
+	},
+	{
+		"id": "b-corp",
+		"name": "B Corp Certification",
+		"category": "Governance",
+		"description": "Assesses overall social and environmental impact; requires legal accountability.",
+		"source_url": "https://www.bcorporation.net/",
+		"rigor_score": 8
+	},
+	{
+		"id": "gots",
+		"name": "GOTS (Global Organic Textile Standard)",
+		"category": "Textiles",
+		"description": "Organic fiber standard with environmental + social criteria across the supply chain.",
+		"source_url": "https://global-standard.org/",
+		"rigor_score": 8
+	},
+	{
+		"id": "fsc",
+		"name": "FSC",
+		"category": "Forestry",
+		"description": "Responsible forest management for wood/paper products.",
+		"source_url": "https://fsc.org/",
+		"rigor_score": 7
+	},
+	{
+		"id": "oeko-tex",
+		"name": "OEKO-TEX Standard 100",
+		"category": "Chemicals",
+		"description": "Tests textiles for harmful substances.",
+		"source_url": "https://www.oeko-tex.com/",
+		"rigor_score": 6
+	},
+	{
+		"id": "cradle-to-cradle",
+		"name": "Cradle to Cradle",
+		"category": "Design",
+		"description": "Multi-criteria product standard (material health, circularity, energy, water, social).",
+		"source_url": "https://c2ccertified.org/",
+		"rigor_score": 7
+	},
+	{
+		"id": "clean-clothes-campaign",
+		"name": "Clean Clothes Campaign",
+		"category": "Labor/Advocacy",
+		"description": "Global network improving working conditions and empowering workers in garment and sportswear industries.",
+		"source_url": "https://cleanclothes.org/",
+		"rigor_score": 5
+	},
+	{
+		"id": "canopy-style",
+		"name": "CanopyStyle",
+		"category": "Forestry/Textiles",
+		"description": "Initiative to keep ancient and endangered forests out of viscose and other MMCF supply chains.",
+		"source_url": "https://canopyplanet.org/campaigns/canopystyle/",
+		"rigor_score": 5
+	},
+	{
+		"id": "better-cotton",
+		"name": "Better Cotton (BCI)",
+		"category": "Agriculture/Textiles",
+		"description": "Program to make global cotton production better for farmers, the environment, and the sector’s future.",
+		"source_url": "https://bettercotton.org/",
+		"rigor_score": 6
+	},
+	{
+		"id": "bluesign",
+		"name": "bluesign",
+		"category": "Chemicals/Manufacturing",
+		"description": "Audits textile inputs and processes for chemical safety and environmental health.",
+		"source_url": "https://www.bluesign.com/",
+		"rigor_score": 8
+	},
+	{
+		"id": "soil-association-organic",
+		"name": "Soil Association Organic",
+		"category": "Agriculture/Organic",
+		"description": "UK organic certification with high standards for animal welfare and no GM or artificial preservatives.",
+		"source_url": "https://www.soilassociation.org/",
+		"rigor_score": 7
+	},
+	{
+		"id": "wrap",
+		"name": "WRAP",
+		"category": "Labor/Factory",
+		"description": "Worldwide Responsible Accredited Production—factory certification focused on lawful, humane, and ethical manufacturing.",
+		"source_url": "https://wrapcompliance.org/en/",
+		"rigor_score": 6
+	},
+	{
+		"id": "rws",
+		"name": "Responsible Wool Standard (RWS)",
+		"category": "Animal Welfare/Textiles",
+		"description": "Assures wool comes from farms with progressive land management and responsible animal treatment.",
+		"source_url": "https://textileexchange.org/standards/responsible-wool/",
+		"rigor_score": 7
+	},
+	{
+		"id": "nordic-swan",
+		"name": "Nordic Swan Ecolabel",
+		"category": "Environment",
+		"description": "Nordic official ecolabel reducing lifecycle environmental impact across product/services categories.",
+		"source_url": "https://www.nordic-swan-ecolabel.org/",
+		"rigor_score": 8
+	},
+	{
+		"id": "zq-merino",
+		"name": "ZQ Merino",
+		"category": "Animal Welfare/Textiles",
+		"description": "Ethical wool standard covering animal welfare, environmental care, social responsibility, and fiber quality.",
+		"source_url": "https://www.discoverzq.com/",
+		"rigor_score": 6
+	},
+	{
+		"id": "sa8000",
+		"name": "SA8000",
+		"category": "Labor/Social",
+		"description": "Auditable social accountability standard for decent working conditions and management systems.",
+		"source_url": "https://sa-intl.org/resources/sa8000-standard/",
+		"rigor_score": 8
+	},
+	{
+		"id": "caregora",
+		"name": "Caregora",
+		"category": "Animal Welfare/Fibers",
+		"description": "Welfare and quality seal for angora; focuses on responsible harvesting and animal living conditions.",
+		"source_url": "https://naturaland.eu/caregora-certificate-eng",
+		"rigor_score": 5
+	},
+	{
+		"id": "lwg",
+		"name": "Leather Working Group (LWG)",
+		"category": "Leather/Environment",
+		"description": "Leather supply-chain certification with environmental performance audit protocols for tanneries.",
+		"source_url": "https://www.leatherworkinggroup.com/",
+		"rigor_score": 7
+	},
+	{
+		"id": "carbon-trust",
+		"name": "Carbon Trust",
+		"category": "Carbon/Climate",
+		"description": "Certifications and services to measure, manage, and reduce carbon footprints.",
+		"source_url": "https://www.carbontrust.com/",
+		"rigor_score": 7
+	},
+	{
+		"id": "rds",
+		"name": "Responsible Down Standard (RDS)",
+		"category": "Animal Welfare/Textiles",
+		"description": "Ensures down/feathers come from animals not subjected to unnecessary harm; traceability and welfare focused.",
+		"source_url": "https://textileexchange.org/standards/responsible-down/",
+		"rigor_score": 7
+	},
+	{
+		"id": "fair-wear",
+		"name": "Fair Wear",
+		"category": "Labor/Brand Programs",
+		"description": "Improves labor conditions in garment factories via brand commitments and factory engagement.",
+		"source_url": "https://www.fairwear.org/brands",
+		"rigor_score": 6
+	},
+	{
+		"id": "american-grassfed",
+		"name": "American Grassfed",
+		"category": "Animal Welfare/Agriculture",
+		"description": "Standards for animals humanely raised on pasture; supports pasture-based farms and ranches.",
+		"source_url": "https://www.americangrassfed.org/",
+		"rigor_score": 6
+	},
+	{
+		"id": "bpi-compostable",
+		"name": "BPI Certified Compostable",
+		"category": "Waste/Compostability",
+		"description": "Third-party verification that products meet compostability standards and are independently tested.",
+		"source_url": "https://bpiworld.org/",
+		"rigor_score": 6
+	},
+	{
+		"id": "blue-angel",
+		"name": "Blue Angel",
+		"category": "Environment",
+		"description": "Germany’s official ecolabel—lifecycle-based criteria driving continuous environmental improvement.",
+		"source_url": "https://www.blauer-engel.de/en",
+		"rigor_score": 8
+	},
+	{
+		"id": "carbon-care-certified",
+		"name": "Carbon Care Certified",
+		"category": "Carbon/Climate",
+		"description": "Recognition for organizations managing and reducing greenhouse gas emissions responsibly.",
+		"source_url": "https://www.ecolabelindex.com/ecolabel/carbon-care-certification",
+		"rigor_score": 6
+	},
+	{
+		"id": "leaping-bunny",
+		"name": "Leaping Bunny (Cruelty Free International)",
+		"category": "Animal Testing",
+		"description": "Global gold standard logo for products not tested on animals, with supply-chain checks.",
+		"source_url": "https://crueltyfreeinternational.org/LeapingBunny",
+		"rigor_score": 7
+	},
+	{
+		"id": "certified-naturally-grown",
+		"name": "Certified Naturally Grown",
+		"category": "Agriculture/Organic",
+		"description": "Peer-review certification for farms/beekeepers using ecologically minded practices without GMOs.",
+		"source_url": "https://certified.naturallygrown.org/",
+		"rigor_score": 6
+	},
+	{
+		"id": "usda-organic",
+		"name": "USDA Organic",
+		"category": "Agriculture/Organic",
+		"description": "U.S. national organic standard: no most synthetic pesticides, fertilizers, GMOs, or ionizing radiation.",
+		"source_url": "https://www.usda.gov/topics/organic",
+		"rigor_score": 7
+	},
+	{
+		"id": "audubon-international",
+		"name": "Audubon International",
+		"category": "Environment/Places",
+		"description": "Environmental certification programs for properties and communities to improve resource stewardship.",
+		"source_url": "https://auduboninternational.org/",
+		"rigor_score": 5
+	},
+	{
+		"id": "bap",
+		"name": "Best Aquaculture Practices (BAP)",
+		"category": "Seafood/Aquaculture",
+		"description": "Seafood certification across environmental, social, food safety, and animal health & welfare.",
+		"source_url": "https://www.bapcertification.org/",
+		"rigor_score": 7
+	},
+	{
+		"id": "certified-vegan",
+		"name": "Certified Vegan",
+		"category": "Vegan",
+		"description": "Verification that products contain no animal ingredients or byproducts and are not tested on animals.",
+		"source_url": "https://vegan.org/",
+		"rigor_score": 6
+	},
+	{
+		"id": "animal-welfare-approved",
+		"name": "Animal Welfare Approved (AGW)",
+		"category": "Animal Welfare/Agriculture",
+		"description": "High-welfare farm certification by A Greener World; promotes pasture-based systems and humane slaughter.",
+		"source_url": "https://agreenerworld.org/certifications/animal-welfare-approved/",
+		"rigor_score": 7
+	},
+	{
+		"id": "energy-star",
+		"name": "ENERGY STAR",
+		"category": "Energy",
+		"description": "U.S. EPA energy-efficiency certification for products, homes, and buildings.",
+		"source_url": "https://www.energystar.gov/",
+		"rigor_score": 7
+	},
+	{
+		"id": "green-seal",
+		"name": "Green Seal",
+		"category": "Environment",
+		"description": "Independent certification for products/services meeting rigorous health, sustainability, and performance criteria.",
+		"source_url": "https://www.greenseal.org/",
+		"rigor_score": 8
+	},
+	{
+		"id": "wildlife-friendly",
+		"name": "Wildlife Friendly",
+		"category": "Biodiversity",
+		"description": "Standards that incentivize protection of biodiversity and support rural communities via market recognition.",
+		"source_url": "https://wildlifefriendly.org/",
+		"rigor_score": 6
+	},
+	{
+		"id": "bird-friendly-coffee",
+		"name": "Bird Friendly (Smithsonian)",
+		"category": "Biodiversity/Agriculture",
+		"description": "Coffee grown under rigorous shade and habitat criteria to protect migratory birds and wildlife.",
+		"source_url": "https://nationalzoo.si.edu/migratory-birds/bird-friendly",
+		"rigor_score": 8
+	},
+	{
+		"id": "carbonfree",
+		"name": "Carbonfree",
+		"category": "Carbon/Offsets",
+		"description": "Program to calculate, reduce, and offset carbon footprints; logo indicates participation and offsets.",
+		"source_url": "https://carbonfund.org/",
+		"rigor_score": 6
+	},
+	{
+		"id": "climate-registered",
+		"name": "Climate Registered (The Climate Registry)",
+		"category": "Carbon/Disclosure",
+		"description": "Recognizes organizations that measure and publicly report GHG emissions with verified inventories.",
+		"source_url": "https://www.theclimateregistry.org/",
+		"rigor_score": 6
+	},
+	{
+		"id": "leed",
+		"name": "LEED",
+		"category": "Buildings",
+		"description": "Green building rating system by USGBC with levels (Certified–Platinum) across multiple building types.",
+		"source_url": "https://www.usgbc.org/leed",
+		"rigor_score": 8
+	}
+]

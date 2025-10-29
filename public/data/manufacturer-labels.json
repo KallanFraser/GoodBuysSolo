@@ -1,0 +1,110 @@
+[
+  {
+    "manufacturer_id": "m-adidas",
+    "manufacturer_name": "Adidas",
+    "label_ids": [
+      "lwg"
+    ]
+  },
+  {
+    "manufacturer_id": "m-amazon",
+    "manufacturer_name": "Amazon",
+    "label_ids": [
+      "fsc",
+      "lwg",
+      "green-seal",
+      "carbon-trust"
+    ]
+  },
+  {
+    "manufacturer_id": "m-apple",
+    "manufacturer_name": "Apple",
+    "label_ids": [
+      "b-corp",
+      "rainforest-alliance",
+      "fsc",
+      "oeko-tex",
+      "fair-wear",
+      "bluesign",
+      "certified-vegan",
+      "lwg",
+      "bap",
+      "green-seal",
+      "carbon-trust"
+    ]
+  },
+  {
+    "manufacturer_id": "m-google",
+    "manufacturer_name": "Google",
+    "label_ids": [
+      "fsc",
+      "animal-welfare-approved",
+      "rainforest-alliance",
+      "oeko-tex",
+      "bluesign",
+      "certified-vegan",
+      "lwg",
+      "bap",
+      "green-seal"
+    ]
+  },
+  {
+    "manufacturer_id": "m-hm",
+    "manufacturer_name": "H&M",
+    "label_ids": [
+      "oeko-tex"
+    ]
+  },
+  {
+    "manufacturer_id": "m-hershey",
+    "manufacturer_name": "Hershey",
+    "label_ids": [
+      "rainforest-alliance"
+    ]
+  },
+  {
+    "manufacturer_id": "m-microsoft",
+    "manufacturer_name": "Microsoft",
+    "label_ids": [
+      "lwg"
+    ]
+  },
+  {
+    "manufacturer_id": "m-nestle",
+    "manufacturer_name": "Nestlé",
+    "label_ids": [
+      "fsc",
+      "certified-vegan",
+      "rainforest-alliance"
+    ]
+  },
+  {
+    "manufacturer_id": "m-nike",
+    "manufacturer_name": "Nike",
+    "label_ids": [
+      "oeko-tex"
+    ]
+  },
+  {
+    "manufacturer_id": "m-patagonia",
+    "manufacturer_name": "Patagonia",
+    "label_ids": [
+      "b-corp",
+      "gots"
+    ]
+  },
+  {
+    "manufacturer_id": "m-starbucks",
+    "manufacturer_name": "Starbucks",
+    "label_ids": [
+      "certified-vegan"
+    ]
+  },
+  {
+    "manufacturer_id": "m-unilever",
+    "manufacturer_name": "Unilever",
+    "label_ids": [
+      "rainforest-alliance"
+    ]
+  }
+]
