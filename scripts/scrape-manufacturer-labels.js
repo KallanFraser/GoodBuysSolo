@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * GoodBuys Scraper (v0.4)
+ * GoodBuys Scraper
  * - Inputs: /public/data/big-brands.json (+ products.json manufacturers + extra-brands.csv)
  * - Aliases: explicit + auto (diacritics, common shorthands)
  * - Adapters: b-corp, rainforest-alliance, oeko-tex, gots, fsc,
@@ -334,10 +334,7 @@ async function checkBCorp(_brand, aliases, slugs) {
 		$("a[href]").each((_, el) => {
 			const href = $(el).attr("href") || "";
 			const text = ($(el).text() || "").trim();
-			if (
-				/\/en-us\/find-a-b-corp\/company\/[^/]+\/?$/i.test(href) &&
-				(re.test(text) || re.test(href.replace(/-/g, " ")))
-			) {
+			if (/\/en-us\/find-a-b-corp\/company\/[^/]+\/?$/i.test(href) && (re.test(text) || re.test(href.replace(/-/g, " ")))) {
 				try {
 					evidences.push(new URL(href, base).toString());
 				} catch {}
@@ -373,9 +370,7 @@ async function checkBCorp(_brand, aliases, slugs) {
 // 2) try exact-ish matches; if nothing, try fuzzy+confirm
 async function checkRainforestAlliance(_b, aliases) {
 	const pages = Array.from({ length: MAX_PAGES }, (_, i) =>
-		i === 0
-			? "https://www.rainforest-alliance.org/find-certified/"
-			: `https://www.rainforest-alliance.org/find-certified/page/${i + 1}/`
+		i === 0 ? "https://www.rainforest-alliance.org/find-certified/" : `https://www.rainforest-alliance.org/find-certified/page/${i + 1}/`
 	);
 	let evidences = await scanPagesForAliases(pages, aliases);
 	if (!evidences.length) evidences = await scanPagesFuzzyThenConfirm(pages, aliases);
@@ -384,9 +379,7 @@ async function checkRainforestAlliance(_b, aliases) {
 
 async function checkOekoTex(_b, aliases) {
 	const pages = Array.from({ length: MAX_PAGES }, (_, i) =>
-		i === 0
-			? "https://www.oeko-tex.com/en/buying-guide"
-			: `https://www.oeko-tex.com/en/buying-guide?page=${i + 1}`
+		i === 0 ? "https://www.oeko-tex.com/en/buying-guide" : `https://www.oeko-tex.com/en/buying-guide?page=${i + 1}`
 	);
 	let evidences = await scanPagesForAliases(pages, aliases);
 	if (!evidences.length) evidences = await scanPagesFuzzyThenConfirm(pages, aliases);
@@ -395,9 +388,7 @@ async function checkOekoTex(_b, aliases) {
 
 async function checkGOTS(_b, aliases) {
 	const pages = Array.from({ length: MAX_PAGES }, (_, i) =>
-		i === 0
-			? "https://global-standard.org/find-suppliers"
-			: `https://global-standard.org/find-suppliers?page=${i + 1}`
+		i === 0 ? "https://global-standard.org/find-suppliers" : `https://global-standard.org/find-suppliers?page=${i + 1}`
 	);
 	let evidences = await scanPagesForAliases(pages, aliases);
 	if (!evidences.length) evidences = await scanPagesFuzzyThenConfirm(pages, aliases);
@@ -426,10 +417,7 @@ async function checkBetterCotton(_b, aliases) {
 	return { ok: evidences.length > 0, evidences };
 }
 async function checkLWG(_b, aliases) {
-	const pages = [
-		"https://www.leatherworkinggroup.com/members/",
-		"https://www.leatherworkinggroup.com/news/",
-	];
+	const pages = ["https://www.leatherworkinggroup.com/members/", "https://www.leatherworkinggroup.com/news/"];
 	let evidences = await scanPagesForAliases(pages, aliases);
 	if (!evidences.length) evidences = await scanPagesFuzzyThenConfirm(pages, aliases);
 	return { ok: evidences.length > 0, evidences };
@@ -459,10 +447,7 @@ async function checkBPI(_b, aliases) {
 	return { ok: evidences.length > 0, evidences };
 }
 async function checkAnimalWelfareApproved(_b, aliases) {
-	const pages = [
-		"https://agreenerworld.org/certifications/animal-welfare-approved/",
-		"https://directory.certifiedbyagw.com/",
-	];
+	const pages = ["https://agreenerworld.org/certifications/animal-welfare-approved/", "https://directory.certifiedbyagw.com/"];
 	let evidences = await scanPagesForAliases(pages, aliases);
 	if (!evidences.length) evidences = await scanPagesFuzzyThenConfirm(pages, aliases);
 	return { ok: evidences.length > 0, evidences };
@@ -486,10 +471,7 @@ async function checkGreenSeal(_b, aliases) {
 	return { ok: evidences.length > 0, evidences };
 }
 async function checkCarbonTrust(_b, aliases) {
-	const pages = [
-		"https://www.carbontrust.com/what-we-do/assurance-and-certification",
-		"https://www.carbontrust.com/resources",
-	];
+	const pages = ["https://www.carbontrust.com/what-we-do/assurance-and-certification", "https://www.carbontrust.com/resources"];
 	let evidences = await scanPagesForAliases(pages, aliases);
 	if (!evidences.length) evidences = await scanPagesFuzzyThenConfirm(pages, aliases);
 	return { ok: evidences.length > 0, evidences };
@@ -571,11 +553,7 @@ const ADAPTERS = [
 			limit(async () => {
 				try {
 					const { ok, evidences } = await a.check(brand.name, aliasList, loadJson(SLUGS_PATH, {}));
-					console.log(
-						`  • ${a.human}: ${ok ? "YES" : "no"}${
-							ok && evidences?.length ? `  (${evidences[0]})` : ""
-						}`
-					);
+					console.log(`  • ${a.human}: ${ok ? "YES" : "no"}${ok && evidences?.length ? `  (${evidences[0]})` : ""}`);
 					if (ok) {
 						// Update output rows with the label
 						upsert(rows, {

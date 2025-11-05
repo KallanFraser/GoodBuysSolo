@@ -1,27 +1,278 @@
 [
-	{
-		"id": "p-nike-air-zoom",
-		"name": "Nike Air Zoom Pegasus",
-		"manufacturer_id": "m-nike",
-		"alt_names": ["Pegasus", "Air Zoom"]
-	},
-	{
-		"id": "p-hm-basic-tee",
-		"name": "H&M Basic T-Shirt",
-		"manufacturer_id": "m-hm",
-		"alt_names": ["Basic Tee"]
-	},
-	{
-		"id": "p-patagonia-down",
-		"name": "Patagonia Down Sweater",
-		"manufacturer_id": "m-patagonia",
-		"alt_names": ["Down Sweater"]
-	},
-	{
-		"id": "p-ben-jerrys-vanilla",
-		"name": "Ben & Jerry's Vanilla",
-		"manufacturer_id": "m-unilever",
-		"alt_names": ["Vanilla Ice Cream"]
-	},
-	{ "id": "p-kitkat", "name": "KitKat Bar", "manufacturer_id": "m-nestle", "alt_names": ["Kit Kat"] }
+  {
+    "name": "Nike Sportswear",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Air Superfly",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Sportswear Phoenix Fleece",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Sabrina",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Field General",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Total 90",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Air Force 1 '07",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Shox TL",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Aura",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Sportswear Classic Puffer",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Sportswear Classic",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Sportswear Modern Fleece",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Air Max Isla",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Hayward Patrol",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Sportswear Windrunner",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike 24.7 ImpossiblySoft",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike LD-1000 SE",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike One",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Motiva",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike V5 RNR",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Initiator",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Run Defy",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike 24.7 PerfectStretch",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Zoom Vomero 5",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Air Max Fire",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Cortez Textile",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Zenvy Strappy",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Indy Light Support",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Swoosh",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Swift",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Pro",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Air Max Dn8",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Sportswear Club Fleece",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Shox R4",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Sportswear Swoosh Series",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike V2K Run",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Pacific",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Vomero Premium",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Air Max Muse",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Quest 6",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Sportswear Classics",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Air Max Moto 2K",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Air Max Excee",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Downshifter 13",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Hyperice Venom 2 Back",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Universa",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Air Max 270",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike x Hyperice Hyperboot",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Hyperice Normatec Elite Legs",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Recovery",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike P-6000",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Sportswear Puffle",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Pegasus Premium",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Shox Z",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Sportswear Tech Fleece",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Dunk Low",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Sportswear Windpuffer",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Form",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike ReactX Rejuven8",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Pegasus 41",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Field General Suede",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Structure 26",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Metcon 10",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Pegasus Trail 5",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Killshot 2",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Free Metcon 6",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Court Legacy Lift",
+    "manufacturer_id": "m-nike"
+  },
+  {
+    "name": "Nike Sportswear Classic Wovens",
+    "manufacturer_id": "m-nike"
+  }
 ]
