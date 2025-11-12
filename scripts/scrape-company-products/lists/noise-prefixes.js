@@ -1,0 +1,28 @@
+/** @format */
+// If a product candidate starts with any of these, drop it (case-insensitive).
+export default [
+	"view",
+	"learn",
+	"read",
+	"see",
+	"download",
+	"request",
+	"book",
+	"schedule",
+	"get",
+	"shop",
+	"add to",
+	"subscribe",
+	"contact",
+	"call",
+	"chat",
+	"buy",
+	"proceed",
+	"continue",
+	"apply",
+	"start",
+	"sign in",
+	"sign up",
+	"log in",
+	"log out",
+];

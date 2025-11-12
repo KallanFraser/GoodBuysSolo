@@ -5,14 +5,3 @@ body {
 	color: #eaeaea;
 	font-family: system-ui, sans-serif;
 }
-a {
-	text-decoration: underline;
-}
-input,
-button {
-	background: #151515;
-	color: #eaeaea;
-}
-button {
-	cursor: pointer;
-}

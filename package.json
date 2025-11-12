@@ -5,11 +5,7 @@
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
-		"start": "next start",
-		"scrape:labels": "node scripts/scrape-manufacturer-labels.js",
-		"scrape:labels:deep": "node scripts/scrape-manufacturer-labels.js --max-pages 6",
-		"scrape:labels:brand": "node scripts/scrape-manufacturer-labels.js --brand \"Nike\"",
-		"scrape:labels:headless": "node scripts/scrape-manufacturer-labels.js --headless"
+		"start": "next start"
 	},
 	"repository": {
 		"type": "git",
@@ -20,13 +16,14 @@
 	},
 	"homepage": "https://github.com/KallanFraser/GoodBuysSolo#readme",
 	"dependencies": {
+		"axios": "^1.13.2",
 		"cheerio": "^1.1.2",
 		"fast-xml-parser": "^4.4.0",
+		"fuse.js": "^7.0.0",
 		"next": "^16.0.0",
 		"node-fetch": "^3.3.2",
+		"p-limit": "^5.0.0",
 		"react": "^19.2.0",
-		"react-dom": "^19.2.0",
-		"fuse.js": "^7.0.0",
-		"p-limit": "^5.0.0"
+		"react-dom": "^19.2.0"
 	}
 }

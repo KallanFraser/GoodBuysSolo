@@ -1,0 +1,26 @@
+/** @format */
+// Lowercase exact phrases that should never be product names.
+export default [
+	"add to cart",
+	"view details",
+	"learn more",
+	"read more",
+	"see more",
+	"continue reading",
+	"request a quote",
+	"get a quote",
+	"request a demo",
+	"book a demo",
+	"download pdf",
+	"download brochure",
+	"price calculator",
+	"premium calculator",
+	"find a store",
+	"find a retailer",
+	"where to buy",
+	"out of stock",
+	"in stock",
+	"new arrivals",
+	"best sellers",
+	"featured products",
+];

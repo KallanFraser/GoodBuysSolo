@@ -1,0 +1,56 @@
+[
+  {
+    "company": "Patagonia",
+    "domain": "patagonia.com",
+    "platform": "sfcc",
+    "sample": [
+      "Capilene® Cool Daily and Tropic Comfort UPF Products",
+      "Infant Capilene®Midweight Set"
+    ],
+    "totalProducts": 2,
+    "pagesVisited": 4
+  },
+  {
+    "company": "IKEA",
+    "domain": "ikea.com",
+    "platform": "generic",
+    "sample": [],
+    "totalProducts": 0,
+    "pagesVisited": 0
+  },
+  {
+    "company": "Nike",
+    "domain": "nike.com",
+    "platform": "generic",
+    "sample": [],
+    "totalProducts": 0,
+    "pagesVisited": 0
+  },
+  {
+    "company": "Adidas",
+    "domain": "adidas.com",
+    "platform": "generic",
+    "sample": [],
+    "totalProducts": 0,
+    "pagesVisited": 2
+  },
+  {
+    "company": "LEGO",
+    "domain": "lego.com",
+    "platform": "generic",
+    "sample": [
+      "\"Brick Friday 2019\"-minifigur",
+      "1,001 Stickers",
+      "1/2 CONE 2X4X3",
+      "1/4 CONE, 4X4X1, W/ CUTOUT, NO. 1",
+      "1/4 SPHERE 2X2X1 2/3, W/ CUTOUT, NO. 1",
+      "1/4 SPHERE 4X4X2 2/3, W/ KNOB",
+      "100 Ways to Rebuild the World",
+      "100 Ways to Rebuild the World",
+      "1989-Batmobile™ – Limited Edition-udgave",
+      "2 Fast 2 Furious Auto Nissan Skyline GT-R (R34)"
+    ],
+    "totalProducts": 3350,
+    "pagesVisited": 3504
+  }
+]

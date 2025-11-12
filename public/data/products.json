@@ -1,278 +1,139 @@
 [
   {
-    "name": "Nike Sportswear",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Air Superfly",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Sportswear Phoenix Fleece",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Sabrina",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Field General",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Total 90",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Air Force 1 '07",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Shox TL",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Aura",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Sportswear Classic Puffer",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Sportswear Classic",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Sportswear Modern Fleece",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Air Max Isla",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Hayward Patrol",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Sportswear Windrunner",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike 24.7 ImpossiblySoft",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike LD-1000 SE",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike One",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Motiva",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike V5 RNR",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Initiator",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Run Defy",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike 24.7 PerfectStretch",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Zoom Vomero 5",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Air Max Fire",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Cortez Textile",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Zenvy Strappy",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Indy Light Support",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Swoosh",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Swift",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Pro",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Air Max Dn8",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Sportswear Club Fleece",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Shox R4",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Sportswear Swoosh Series",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike V2K Run",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Pacific",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Vomero Premium",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Air Max Muse",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Quest 6",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Sportswear Classics",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Air Max Moto 2K",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Air Max Excee",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Downshifter 13",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Hyperice Venom 2 Back",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Universa",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Air Max 270",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike x Hyperice Hyperboot",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Hyperice Normatec Elite Legs",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Recovery",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike P-6000",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Sportswear Puffle",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Pegasus Premium",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Shox Z",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Sportswear Tech Fleece",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Dunk Low",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Sportswear Windpuffer",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Form",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike ReactX Rejuven8",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Pegasus 41",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Field General Suede",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Structure 26",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Metcon 10",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Pegasus Trail 5",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Killshot 2",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Free Metcon 6",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Court Legacy Lift",
-    "manufacturer_id": "m-nike"
-  },
-  {
-    "name": "Nike Sportswear Classic Wovens",
-    "manufacturer_id": "m-nike"
+    "company": "Patagonia",
+    "domain": "www.patagonia.com",
+    "platform": "sfcc",
+    "products": [
+      "M's Nano Puff® Jacket",
+      "M's Better Sweater® Vest",
+      "W's Nano Puff® Jacket",
+      "M's Better Sweater® Jacket",
+      "Kids' Hi-Loft Down Sweater™ Hoody",
+      "M's Nano Puff® Vest",
+      "M's Nano Puff® Hoody",
+      "W's Better Sweater® Jacket",
+      "M's Torrentshell 3L Rain Jacket",
+      "M's Down Sweater™ Hoody",
+      "Kids' Reversible Ready Freddy Hoody",
+      "W's Down With It Parka",
+      "W's Nano Puff® Vest",
+      "Baby Reversible Tribbles Hoody",
+      "W's Nano Puff® Hoody",
+      "M's Classic Retro-X® Jacket",
+      "W's Classic Retro-X® Jacket",
+      "M's Stormshadow Parka",
+      "Baby Hi-Loft Down Sweater™ Hoody",
+      "W's Silent Down Long Parka",
+      "Black Hole® Mini MLC® 30L",
+      "Kids' 4-in-1 Everyday Jacket",
+      "Kids' Reversible Down Sweater™ Hoody",
+      "M's R1® Air Jacket",
+      "W's Torrentshell 3L Rain Jacket",
+      "M's Tres 3-in-1 Parka",
+      "W's Better Sweater® Vest",
+      "M's Long-Sleeved Lightweight Fjord Flannel Shirt",
+      "M's Micro D® Pullover",
+      "Black Hole® Duffel 40L",
+      "M's Better Sweater® 1/4-Zip",
+      "Black Hole® Wheeled Duffel 100L",
+      "M's R1® Air Full-Zip Hoody",
+      "M's R1® Air Zip-Neck",
+      "W's Fitz Roy Down Hoody",
+      "Black Hole® Duffel 55L"
+    ],
+    "endpointsUsed": [
+      "https://www.patagonia.com/sitemap.xml",
+      "https://www.patagonia.com/sitemap_index.xml",
+      "https://www.patagonia.com/sitemaps/sitemap.xml",
+      "https://www.patagonia.com/c/",
+      "https://www.patagonia.com/shop"
+    ],
+    "pagesVisited": [
+      "https://www.patagonia.com/c/",
+      "https://www.patagonia.com/shop"
+    ],
+    "notes": []
+  },
+  {
+    "company": "IKEA",
+    "domain": "www.ikea.com",
+    "platform": "generic",
+    "products": [],
+    "endpointsUsed": [],
+    "pagesVisited": [],
+    "notes": [
+      "homepage_fetch_failed"
+    ]
+  },
+  {
+    "company": "Nike",
+    "domain": "www.nike.com",
+    "platform": "generic",
+    "products": [],
+    "endpointsUsed": [
+      "https://www.nike.com/sitemap-us-help.xml",
+      "https://www.nike.com/sitemap-v2-landingpage-index.xml",
+      "https://www.nike.com/sitemap-v2-pdp-index.xml",
+      "https://www.nike.com/sitemap-v2-snkrsweb-index.xml",
+      "https://www.nike.com/sitemap-v2-gridwall-index.xml",
+      "https://www.nike.com/sitemap-v2-article-index.xml",
+      "https://www.nike.com/sitemap-locator-index.xml"
+    ],
+    "pagesVisited": [],
+    "notes": []
+  },
+  {
+    "company": "LEGO",
+    "domain": "www.lego.com",
+    "platform": "generic",
+    "products": [],
+    "endpointsUsed": [
+      "https://www.lego.com/sitemap.xml",
+      "https://www.lego.com/productPage-sitemap.xml",
+      "https://www.lego.com/productlisting-sitemap.xml",
+      "https://www.lego.com/store_info-sitemap.xml",
+      "https://www.lego.com/aboutus/sitemap.xml",
+      "https://www.lego.com/legal/sitemap.xml",
+      "https://www.lego.com/local-news/sitemap.xml",
+      "https://www.lego.com/sustainability/sitemap.xml",
+      "https://www.lego.com/en-us/products?page=1",
+      "https://www.lego.com/en-us/products/page/1",
+      "https://www.lego.com/en-us/products",
+      "https://www.lego.com/en-us/catalog?page=1",
+      "https://www.lego.com/en-us/catalog/page/1",
+      "https://www.lego.com/en-us/catalog",
+      "https://www.lego.com/products?page=1",
+      "https://www.lego.com/products/page/1",
+      "https://www.lego.com/products",
+      "https://www.lego.com/catalog?page=1",
+      "https://www.lego.com/catalog/page/1",
+      "https://www.lego.com/catalog"
+    ],
+    "pagesVisited": [
+      "https://www.lego.com/en-us/products?page=1",
+      "https://www.lego.com/en-us/products/page/1",
+      "https://www.lego.com/en-us/products",
+      "https://www.lego.com/en-us/catalog?page=1",
+      "https://www.lego.com/en-us/catalog/page/1",
+      "https://www.lego.com/en-us/catalog",
+      "https://www.lego.com/products?page=1",
+      "https://www.lego.com/products/page/1",
+      "https://www.lego.com/products",
+      "https://www.lego.com/catalog?page=1",
+      "https://www.lego.com/catalog/page/1",
+      "https://www.lego.com/catalog"
+    ],
+    "notes": []
+  },
+  {
+    "company": "Adidas",
+    "domain": "www.adidas.com",
+    "platform": "generic",
+    "products": [],
+    "endpointsUsed": [],
+    "pagesVisited": [],
+    "notes": [
+      "homepage_fetch_failed"
+    ]
   }
 ]
