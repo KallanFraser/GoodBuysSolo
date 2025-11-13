@@ -84,6 +84,30 @@ const PRODUCT_OR_VERB = new RegExp(`\\b(${PRODUCT_OR_VERB_TOKENS.map((t) => t.re
 // Optional allowlist for legit symbolic brands (keep exact casing)
 const SYMBOL_BRAND_ALLOW = new Set(SYMBOL_BRAND_ALLOW_LIST);
 
+// Extra audit-driven noise guards
+const LANGUAGE_WORDS = new Set([
+	"english",
+	"spanish",
+	"french",
+	"german",
+	"italian",
+	"portuguese",
+	"chinese",
+	"japanese",
+	"korean",
+	"arabic",
+	"russian",
+	"hindi",
+	"bengali",
+	"urdu",
+]);
+
+// phrases like "7 billion tonnes of CO₂"
+const METRIC_PHRASE_RE = /\b(billion|million|thousand|tonnes?|tons?|kg|gigatonnes?|megatonnes?|tco2|co₂|co2)\b/i;
+
+// phrases like "As mentioned in the report"
+const AS_MENTIONED_PREFIX_RE = /^(as mentioned|as described|as shown|as outlined)\b/i;
+
 // Per-host adaptive backoff multiplier (starts at 1)
 const hostPenalty = new Map();
 
@@ -151,6 +175,58 @@ function randomUserAgent() {
 		"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0",
 	];
 	return uas[Math.floor(Math.random() * uas.length)];
+}
+
+// ---------- Known companies from previous runs ----------
+let KNOWN_COMPANY_SET = new Set(); // lowercase
+let KNOWN_COMPANY_CANON = new Map(); // lowercase -> canonical casing
+
+function bootstrapKnownCompanies(existingArr) {
+	KNOWN_COMPANY_SET = new Set();
+	KNOWN_COMPANY_CANON = new Map();
+
+	if (!Array.isArray(existingArr)) return;
+
+	for (const row of existingArr) {
+		if (!row || !row.company) continue;
+		const canon = normalizeText(row.company);
+		if (!canon) continue;
+		const lower = canon.toLowerCase();
+		if (!lower) continue;
+
+		// Only seed names that still look like legit companies under current rules
+		if (!looksLikeCompany(canon)) continue;
+
+		KNOWN_COMPANY_SET.add(lower);
+		if (!KNOWN_COMPANY_CANON.has(lower)) {
+			KNOWN_COMPANY_CANON.set(lower, canon);
+		}
+	}
+
+	if (KNOWN_COMPANY_SET.size) {
+		console.log(`[seed] Loaded ${KNOWN_COMPANY_SET.size} known companies from existing company-labels.json`);
+	}
+}
+
+// Inject known companies that appear in the page text into the candidate list
+function injectKnownCompaniesFromHistory($, names) {
+	if (!KNOWN_COMPANY_CANON.size) return names;
+
+	const bodyText = normalizeText($("body").text()).toLowerCase();
+	if (!bodyText) return names;
+
+	const extra = new Set();
+
+	for (const [lower, canon] of KNOWN_COMPANY_CANON.entries()) {
+		if (lower.length < 3) continue;
+		if (bodyText.includes(lower)) {
+			extra.add(canon);
+		}
+	}
+
+	if (!extra.size) return names;
+
+	return Array.from(new Set([...names, ...extra]));
 }
 
 async function fetchHtml(url, attempt = 0) {
@@ -245,6 +321,8 @@ function extractLinks($, baseUrl) {
 	});
 
 	const prioritized = [];
+	theOthers: {
+	}
 	const others = [];
 
 	for (const u of out) {
@@ -307,6 +385,15 @@ function looksLikeCompany(txt) {
 	if (GENERIC_NOUNS.has(lower)) return false;
 	if (BAD_PLURALS.has(lower)) return false;
 
+	// language-only tokens like "English", "Spanish" showing up in menus
+	if (LANGUAGE_WORDS.has(lower)) return false;
+
+	// "As mentioned in ..." style fragments
+	if (AS_MENTIONED_PREFIX_RE.test(t)) return false;
+
+	// Metric / CO₂ phrases like "7 billion tonnes of CO₂"
+	if (/\d/.test(t) && METRIC_PHRASE_RE.test(t)) return false;
+
 	// Block common meta suffixes when the phrase looks like a heading
 	if (
 		/\b(membership form|products|farmer services|policy and guidelines|full story|privacy policy|award criteria|requirements|faqs?)\b/i.test(
@@ -343,6 +430,15 @@ function looksLikeCompany(txt) {
 		);
 
 	return suffixHit || allCapsShort || titleLike;
+}
+
+// One-time plausibility filter for existing company-labels.json rows
+function isPlausibleCompanyRow(row) {
+	if (!row || !row.company) return false;
+	const canon = normalizeText(row.company);
+	if (!canon) return false;
+	if (!looksLikeCompany(canon)) return false;
+	return true;
 }
 
 function extractCompaniesGeneric($) {
@@ -397,7 +493,7 @@ function extractCompaniesPerSite($, hostname) {
 
 /**
  * Score a bunch of candidate names on a single page.
- * Returns Map(name -> { score, reasons[], urls:Set, ext, detail, suffix, schema, snippets[] })
+ * Returns Map(name -> { score, reasons[], urls:Set, ext, detail, suffix, schema, known, snippets[] })
  */
 function scoreCandidates($, baseUrl, rawNames) {
 	const pagePath = new URL(baseUrl).pathname.toLowerCase();
@@ -439,6 +535,7 @@ function scoreCandidates($, baseUrl, rawNames) {
 				detail: false,
 				suffix: false,
 				schema: false,
+				known: false,
 				snippets: [],
 			});
 		}
@@ -457,6 +554,14 @@ function scoreCandidates($, baseUrl, rawNames) {
 		add(n, baseDirBoost, pageDirLike ? "directory_like_url" : hasDirHeading ? "directory_heading" : "base", baseUrl);
 		const r = result.get(n);
 
+		const lower = n.toLowerCase();
+		const isKnown = KNOWN_COMPANY_SET.size > 0 && KNOWN_COMPANY_SET.has(lower);
+
+		if (isKnown) {
+			add(n, 8, "known_company_from_history", baseUrl);
+			r.known = true;
+		}
+
 		if (externalNames.has(n)) {
 			add(n, 2, "external_link_anchor", baseUrl);
 			r.ext = true;
@@ -471,7 +576,6 @@ function scoreCandidates($, baseUrl, rawNames) {
 		}
 
 		// penalties
-		const lower = n.toLowerCase();
 		if (NOISE_EXACT.has(lower)) add(n, -6, "noise_exact", baseUrl);
 		if (NOISE_STARTS.some((p) => lower.startsWith(p))) add(n, -4, "noise_prefix", baseUrl);
 		if (GENERIC_NOUNS.has(lower)) add(n, -6, "generic_noun", baseUrl);
@@ -538,7 +642,7 @@ async function crawlLabel(startUrl, opts) {
 	}
 
 	const visited = new Set();
-	const agg = new Map(); // name -> { totalScore, reasons[], urls Set, pages Set, flags, snippets }
+	const agg = new Map(); // name -> { totalScore, reasons[], urls Set, pages Set, flags, known, snippets }
 	const dropped = [];
 	let pagesCrawled = 0;
 	let cursor = 0;
@@ -583,7 +687,10 @@ async function crawlLabel(startUrl, opts) {
 		}
 
 		// Merge with schema names
-		const mergedNames = Array.from(new Set([...names, ...ldSet]));
+		let mergedNames = Array.from(new Set([...names, ...ldSet]));
+
+		// Also inject previously-confirmed companies that show up in the page body
+		mergedNames = injectKnownCompaniesFromHistory($, mergedNames);
 
 		if (mergedNames.length > 0) {
 			// Score all candidates on this page in one shot
@@ -591,7 +698,7 @@ async function crawlLabel(startUrl, opts) {
 
 			for (const [name, info] of scoredMap.entries()) {
 				// quick per-page filter: if it's garbage and has no strong signal, drop
-				const hasStrongSignal = info.ext || info.detail || info.suffix || info.schema;
+				const hasStrongSignal = info.ext || info.detail || info.suffix || info.schema || info.known;
 
 				if (info.score < MIN_SCORE && !hasStrongSignal) {
 					dropped.push({
@@ -615,6 +722,7 @@ async function crawlLabel(startUrl, opts) {
 							suffix: false,
 							schema: false,
 						},
+						known: false,
 						snippets: [],
 					});
 				}
@@ -630,6 +738,7 @@ async function crawlLabel(startUrl, opts) {
 				rec.flags.detail = rec.flags.detail || !!info.detail;
 				rec.flags.suffix = rec.flags.suffix || !!info.suffix;
 				rec.flags.schema = rec.flags.schema || !!info.schema;
+				rec.known = rec.known || !!info.known;
 
 				if (info.snippets) {
 					for (const sn of info.snippets) {
@@ -665,7 +774,7 @@ async function crawlLabel(startUrl, opts) {
 
 	for (const [name, rec] of agg.entries()) {
 		const pageCount = rec.pages.size;
-		const strongSignal = rec.flags.ext || rec.flags.detail || rec.flags.suffix || rec.flags.schema;
+		const strongSignal = rec.flags.ext || rec.flags.detail || rec.flags.suffix || rec.flags.schema || rec.known;
 
 		const baseScore = rec.totalScore;
 		const diversityBoost = Math.log2(1 + pageCount);
@@ -675,7 +784,8 @@ async function crawlLabel(startUrl, opts) {
 			finalScore *= 0.4;
 		}
 
-		if (finalScore < MIN_SCORE || (!strongSignal && finalScore < HARD_MIN_SCORE)) {
+		// Be kinder to companies we've already confirmed historically
+		if ((!rec.known && finalScore < MIN_SCORE) || (!strongSignal && finalScore < HARD_MIN_SCORE)) {
 			dropped.push({
 				name,
 				score: finalScore,
@@ -769,7 +879,23 @@ function mergeCompanyLabels(existingArr, labelId, keptWithEvidence) {
 		process.exit(1);
 	}
 
-	let companyLabels = CLEAR_OUTPUT ? [] : await loadJson(OUTPUT_PATH, []);
+	const existingCompanyLabelsRaw = await loadJson(OUTPUT_PATH, []);
+
+	// Clean existing company-labels.json rows using current heuristics
+	const existingCompanyLabels = Array.isArray(existingCompanyLabelsRaw)
+		? existingCompanyLabelsRaw.filter((row) => isPlausibleCompanyRow(row))
+		: [];
+
+	if (Array.isArray(existingCompanyLabelsRaw) && existingCompanyLabels.length !== existingCompanyLabelsRaw.length) {
+		console.log(`[clean] Filtered existing company-labels.json: ${existingCompanyLabelsRaw.length} -> ${existingCompanyLabels.length}`);
+	}
+
+	// Use cleaned existing list as seed of "known good" companies unless we're explicitly nuking output
+	if (!CLEAR_OUTPUT && Array.isArray(existingCompanyLabels) && existingCompanyLabels.length) {
+		bootstrapKnownCompanies(existingCompanyLabels);
+	}
+
+	let companyLabels = CLEAR_OUTPUT ? [] : existingCompanyLabels;
 
 	const auditAll = [];
 
