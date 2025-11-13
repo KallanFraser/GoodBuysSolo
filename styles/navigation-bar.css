@@ -1,3 +1,4 @@
+/** @format */
 /* -------------------- NAV BAR SHELL -------------------- */
 
 #navigation-bar {
@@ -14,9 +15,9 @@
 
 	padding: 0 2.5rem; /* a bit smaller */
 
-	background: rgba(0, 0, 0, 0.65);
+	background: rgba(2, 9, 0, 0.65);
 	backdrop-filter: blur(10px);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+	border-bottom: 1px solid rgba(3, 50, 13, 0.08);
 }
 
 /* -------------------- LOGO -------------------- */
@@ -43,7 +44,7 @@
 	text-transform: uppercase;
 }
 
-/* -------------------- LINKS -------------------- */
+/* -------------------- LINKS (DESKTOP BASE) -------------------- */
 
 .nav-links {
 	display: flex;
@@ -86,7 +87,7 @@
 	height: 2px;
 	border-radius: 999px;
 
-	/* 🔽 updated to green → dark green → deeper green */
+	/* green → dark green → deeper green */
 	background: linear-gradient(90deg, #bbf7d0, #4ade80, #15803d);
 
 	transition: width 0.2s ease-out;
@@ -96,16 +97,138 @@
 	width: 100%;
 }
 
-/* -------------------- BASIC RESPONSIVE TWEAK -------------------- */
+/* -------------------- MOBILE TOGGLE -------------------- */
+
+.nav-toggle {
+	/* hidden by default (desktop / larger screens) */
+	display: none;
+
+	position: relative; /* so spans can be absolutely positioned */
+	background: transparent;
+	border: none;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+
+	height: 2.4rem;
+	width: 2.4rem;
+
+	align-items: center;
+	justify-content: center;
+
+	border-radius: 999px; /* clean circular tap target */
+}
+
+/* hamburger lines */
+.nav-toggle span {
+	position: absolute;
+	left: 50%;
+	width: 1.5rem;
+	height: 2px;
+	border-radius: 999px;
+	background: #f5f5f5;
+
+	transform: translateX(-50%);
+	transition: transform 0.18s ease-out, opacity 0.18s ease-out, top 0.18s ease-out;
+}
+
+/* top, middle, bottom bars */
+.nav-toggle span:nth-child(1) {
+	top: 8px;
+}
+
+.nav-toggle span:nth-child(2) {
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.nav-toggle span:nth-child(3) {
+	top: calc(100% - 8px);
+}
+
+/* OPEN STATE → turn into a clean X */
+.nav-toggle-open span:nth-child(1) {
+	top: 50%;
+	transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.nav-toggle-open span:nth-child(2) {
+	opacity: 0;
+}
+
+.nav-toggle-open span:nth-child(3) {
+	top: 50%;
+	transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* -------------------- BASIC RESPONSIVE TWEAK (DESKTOP-LITE) -------------------- */
+
+@media (max-width: 1024px) and (min-width: 769px) {
+	#navigation-bar {
+		padding: 0 1.75rem;
+	}
+
+	.nav-links {
+		gap: 1.2rem;
+	}
+
+	.navigation-bar-button {
+		font-size: 0.95rem;
+	}
+}
+
+/* -------------------- MOBILE LAYOUT -------------------- */
 
 @media (max-width: 768px) {
 	#navigation-bar {
 		padding: 0 1.25rem; /* tighter on mobile */
+		height: 4rem;
 	}
 
+	/* only show burger on mobile */
+	.nav-toggle {
+		display: flex;
+	}
+
+	/* Turn nav-links into a slide-down panel */
 	.nav-links {
+		position: absolute;
+		top: 4rem; /* below navbar */
+		right: 0;
+		left: 0;
+
+		display: none;
+		flex-direction: column;
+		align-items: flex-start;
 		gap: 0.75rem;
+
+		padding: 0.9rem 1.25rem 1.2rem;
+
+		background: rgba(2, 9, 0, 0.95);
+		backdrop-filter: blur(14px);
+		border-bottom: 1px solid rgba(3, 50, 13, 0.4);
+
+		/* subtle slide */
+		transform: translateY(-6px);
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.18s ease-out, transform 0.18s ease-out;
+	}
+
+	.nav-links-open {
+		display: flex;
+		transform: translateY(0);
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	.navigation-bar-button {
 		font-size: 0.9rem;
-		flex-wrap: wrap; /* let them wrap instead of sticking off-screen */
+		padding-block: 0.1rem;
+	}
+
+	/* simplify underline on touch screens */
+	.navigation-bar-button::after {
+		bottom: -0.2rem;
 	}
 }

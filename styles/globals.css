@@ -21,16 +21,12 @@ body {
 	overflow-x: hidden;
 }
 
-/* actual background image */
-.app-bg-shell::before {
-	content: "";
+/* wrapper that we animate instead of a CSS background */
+.app-bg {
 	position: fixed;
 	inset: 0;
 	z-index: -2;
-	background-image: url("/images/Background.jpg");
-	background-size: 115% 115%; /* a bit oversized so you don't see edges while it moves */
-	background-position: center;
-	background-repeat: no-repeat;
+	overflow: hidden;
 
 	/* wind sway */
 	transform-origin: center center;
@@ -38,12 +34,18 @@ body {
 	will-change: transform;
 }
 
+/* the actual Next.js <Image /> element */
+.app-bg-image {
+	object-fit: cover;
+	/* you can overscale slightly if you still want that "115%" feel */
+	transform: scale(1.08);
+}
+
 /* blur + darken overlay */
 .app-bg-overlay {
 	position: fixed;
 	inset: 0;
 	z-index: -1;
-	backdrop-filter: blur(40px);
 	opacity: 0.99;
 	background: rgba(0, 0, 0, 0.45);
 }

@@ -196,4 +196,8 @@ export default [
 	"add ",
 	"click here",
 	"check ",
+
+	"skip navigation",
+	"ask us",
+	"for consumers",
 ];

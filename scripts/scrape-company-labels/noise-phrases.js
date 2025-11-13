@@ -209,4 +209,21 @@ export default [
 	"director council",
 	"marine stewardship council",
 	"vegan trade council",
+
+	"Business Emissions Calculator",
+	"Individual Carbon Footprint Calculator",
+	"Carbon Credits",
+	"Offset Now",
+	"Plant Trees",
+
+	"Skip Navigation",
+	"Ask Us Questions",
+	"For Consumers",
+
+	"ClimeCo Certified Program",
+	"EcoCommitted Partner Program",
+	"ZQ Grower Standard",
+	"Sustainability Solutions for Large Companies",
+	"Program Integrity",
+	"Program Standards",
 ];

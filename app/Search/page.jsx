@@ -136,7 +136,7 @@ export default function Search() {
 						behind any brand.
 					</h1>
 					<p className="search-lede">
-						Type a company name to see which ecolabels are associated with it — and what those labels actually mean.
+						Type a company name to see which ecolabels are associated with it — and how rigorous those standards really are.
 					</p>
 
 					<form className="search-form" onSubmit={handleSubmit}>
@@ -145,16 +145,22 @@ export default function Search() {
 							<label className="search-label" htmlFor="search-input">
 								Search for a company
 							</label>
+
+							<span className="search-input-icon" aria-hidden="true">
+								🔍
+							</span>
+
 							<input
 								id="search-input"
 								type="text"
 								autoComplete="off"
-								className="search-input"
+								className="search-input has-icon"
 								value={searchValue}
 								onChange={handleChange}
 								placeholder={isLoading ? "Loading dataset..." : "e.g. Adidas, Amazon, Patagonia"}
 								disabled={isLoading}
 							/>
+
 							<button type="submit" className="search-submit" aria-label="Search">
 								<span className="search-submit-label">Search</span>
 								<span className="search-submit-icon">↵</span>
@@ -183,7 +189,9 @@ export default function Search() {
 
 					{/* No match state */}
 					{!isLoading && searchValue.trim() && suggestions.length === 0 && !selectedCompany && (
-						<p className="search-no-results">No matches yet. Try a shorter or slightly different company name.</p>
+						<p className="search-no-results">
+							No matches yet. Try a shorter, simpler company name (e.g. “Nike” instead of “Nike Inc.”).
+						</p>
 					)}
 
 					{error && <p className="search-error">{error}</p>}
@@ -206,6 +214,22 @@ export default function Search() {
 								<div className="search-labels-grid">
 									{ecoLabels.map((label) => {
 										const imagePath = label.image_name ? `/images/ecolabels/${label.image_name}` : null;
+										const rigorScore = typeof label.rigor_score === "number" ? label.rigor_score : null;
+
+										let rigorBand = "";
+										let rigorLabel = "";
+										if (rigorScore !== null) {
+											if (rigorScore >= 8) {
+												rigorBand = "high";
+												rigorLabel = "High rigor standard";
+											} else if (rigorScore >= 6) {
+												rigorBand = "medium";
+												rigorLabel = "Moderate rigor standard";
+											} else {
+												rigorBand = "low";
+												rigorLabel = "Lower rigor standard";
+											}
+										}
 
 										return (
 											<div key={label.id} className="search-label-card">
@@ -231,11 +255,27 @@ export default function Search() {
 													{label.description && (
 														<p className="search-label-description">{label.description}</p>
 													)}
-													{typeof label.rigor_score === "number" && (
-														<p className="search-label-rigor">
-															Rigor score: {label.rigor_score}
-															<span className="search-label-rigor-max"> / 10</span>
-														</p>
+
+													{rigorScore !== null && (
+														<div
+															className={`search-label-rigor-row ${
+																rigorBand ? `rigor-${rigorBand}` : ""
+															}`}
+														>
+															<span className="search-label-rigor-dot" />
+															<div className="search-label-rigor-text">
+																<span className="search-label-rigor-score">
+																	Rigor {rigorScore}
+																	<span className="search-label-rigor-max">
+																		{" "}
+																		/ 10
+																	</span>
+																</span>
+																<span className="search-label-rigor-level">
+																	{rigorLabel}
+																</span>
+															</div>
+														</div>
 													)}
 												</div>
 											</div>
@@ -248,7 +288,7 @@ export default function Search() {
 						<div className="search-placeholder">
 							<p>
 								Type at least a few letters of a company name to preview matches. Select one to see its associated
-								ecolabels and what they cover.
+								ecolabels, how strict each standard is, and where it focuses (labor, carbon, animal welfare, etc.).
 							</p>
 						</div>
 					)}

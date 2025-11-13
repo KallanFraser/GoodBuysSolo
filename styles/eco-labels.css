@@ -158,7 +158,7 @@
 	gap: 1.2rem;
 }
 
-/* from tablet up: exactly 2 columns, fixed half width */
+/* from tablet up: exactly 2 columns */
 @media (min-width: 768px) {
 	.eco-grid {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -262,21 +262,73 @@
 	color: rgba(148, 163, 184, 0.95);
 }
 
-.eco-card-rigor {
-	margin: 0;
-	font-size: 0.76rem;
-	color: rgba(190, 242, 100, 0.9);
+/* ---------------- RIGOR BLOCK (banded, like search page) ---------------- */
+
+.eco-rigor-row {
+	display: flex;
+	align-items: center;
+	gap: 0.55rem;
+	margin-top: 0.1rem;
+}
+
+.eco-rigor-dot {
+	width: 0.6rem;
+	height: 0.6rem;
+	border-radius: 999px;
+	box-shadow: 0 0 0 2px rgba(15, 23, 42, 1), 0 0 18px rgba(34, 197, 94, 0.6);
+	background: radial-gradient(circle at 30% 0, #bbf7d0, #22c55e);
+}
+
+.eco-rigor-text {
+	display: flex;
+	flex-direction: column;
+	gap: 0.05rem;
+}
+
+.eco-rigor-score {
+	font-size: 0.78rem;
 	text-transform: uppercase;
 	letter-spacing: 0.16em;
-	white-space: nowrap;
+	font-weight: 600;
+	color: rgba(190, 242, 100, 0.95);
 }
 
-.eco-card-rigor-score {
-	font-weight: 700;
-}
-
-.eco-card-rigor-max {
+.eco-rigor-max {
 	color: rgba(148, 163, 184, 0.9);
+}
+
+.eco-rigor-level {
+	font-size: 0.78rem;
+	color: rgba(203, 213, 225, 0.94);
+}
+
+/* band colors */
+
+.eco-rigor-row.rigor-high .eco-rigor-dot {
+	background: radial-gradient(circle at 30% 0, #bbf7d0, #22c55e);
+	box-shadow: 0 0 0 2px rgba(15, 23, 42, 1), 0 0 22px rgba(34, 197, 94, 0.9);
+}
+
+.eco-rigor-row.rigor-high .eco-rigor-score {
+	color: #bbf7d0;
+}
+
+.eco-rigor-row.rigor-medium .eco-rigor-dot {
+	background: radial-gradient(circle at 30% 0, #facc15, #eab308);
+	box-shadow: 0 0 0 2px rgba(15, 23, 42, 1), 0 0 18px rgba(234, 179, 8, 0.85);
+}
+
+.eco-rigor-row.rigor-medium .eco-rigor-score {
+	color: #facc15;
+}
+
+.eco-rigor-row.rigor-low .eco-rigor-dot {
+	background: radial-gradient(circle at 30% 0, #f97373, #b91c1c);
+	box-shadow: 0 0 0 2px rgba(15, 23, 42, 1), 0 0 18px rgba(248, 113, 113, 0.9);
+}
+
+.eco-rigor-row.rigor-low .eco-rigor-score {
+	color: #fecaca;
 }
 
 /* description */

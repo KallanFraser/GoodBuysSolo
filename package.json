@@ -5,7 +5,10 @@
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
-		"start": "next start"
+		"start": "next start",
+		"build:static": "next build",
+		"scrape:companies": "dotenv -e .env.scraper -- node ./scripts/scrape-company-labels/run.js",
+		"scrape:companies:dry": "DRY_RUN=1 npm run scrape:companies"
 	},
 	"repository": {
 		"type": "git",
@@ -25,5 +28,8 @@
 		"p-limit": "^5.0.0",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0"
+	},
+	"devDependencies": {
+		"dotenv-cli": "^11.0.0"
 	}
 }

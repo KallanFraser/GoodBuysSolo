@@ -536,4 +536,8 @@ export default [
 	"start page",
 	"home page",
 	"site home",
+
+	"asia",
+	"europe",
+	"food service",
 ];

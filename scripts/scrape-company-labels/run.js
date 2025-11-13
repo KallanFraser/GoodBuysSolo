@@ -7,12 +7,10 @@
  *
  * Env:
  *   MAX_PAGES=100 DEPTH=3 CONCURRENCY=24 BASE_DELAY_MS=900 JITTER_MS=700
- *   DRY_RUN=0            -> set to 1 / true / yes to avoid writing outputs
- *   SCORE_THRESHOLD=3    -> raise to get stricter (default relaxed)
+ *   DRY_RUN=0            -> set to 1 to avoid writing outputs
+ *   SCORE_THRESHOLD=7    -> raise to get stricter
  *   PER_LABEL_KEEP=500
- *   CLEAR_OUTPUT=1       -> start fresh
- *   TIME_LIMIT_MINUTES=30
- *   MAX_CANDIDATES_PER_LABEL=2500
+ *   CLEAR_OUTPUT=1       -> start fresh (recommended if you saw past noise)
  */
 
 import fs from "fs/promises";
@@ -22,7 +20,7 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 import pLimit from "p-limit";
 
-// Core modular lists you already maintain
+// Core modular lists
 import NEGATIVE_TERMS from "./negative-terms.js";
 import SECTION_FILTERS from "./section-filters.js";
 import IGNORED_PATHS from "./ignore-paths.js";
@@ -50,41 +48,27 @@ const OUTPUT_PATH = path.join(ROOT, "public", "data", "company-labels.json");
 const AUDIT_PATH = path.join(ROOT, "public", "data", "company-labels.audit.json");
 
 // ---------- Config ----------
-
-// helper to parse boolean-ish env flags
-function envFlag(name, def = false) {
-	const v = process.env[name];
-	if (v === undefined) return def;
-	const norm = String(v).trim().toLowerCase();
-	return norm === "1" || norm === "true" || norm === "yes";
-}
-
 const MAX_PAGES = parseInt(process.env.MAX_PAGES || "100", 10);
 const MAX_DEPTH = parseInt(process.env.DEPTH || "3", 10);
 const CONCURRENCY = parseInt(process.env.CONCURRENCY || "24", 10);
 const BASE_DELAY_MS = parseInt(process.env.BASE_DELAY_MS || "900", 10);
 const JITTER_MS = parseInt(process.env.JITTER_MS || "700", 10);
-
-// shorter + tunable request timeout
 const REQUEST_TIMEOUT = parseInt(process.env.REQUEST_TIMEOUT || "12000", 10);
+
 const RETRIES = 2;
-
-// ✅ these now behave correctly with 0/1, true/false, yes/no
-const DRY_RUN = envFlag("DRY_RUN", false);
-const CLEAR_OUTPUT = envFlag("CLEAR_OUTPUT", false);
-
-// more relaxed default threshold to stop murdering legit brands
-const SCORE_THRESHOLD = parseInt(process.env.SCORE_THRESHOLD || "3", 10);
+const DRY_RUN = !!process.env.DRY_RUN;
+const SCORE_THRESHOLD = parseInt(process.env.SCORE_THRESHOLD || "7", 10);
 const PER_LABEL_KEEP = parseInt(process.env.PER_LABEL_KEEP || "500", 10);
+const CLEAR_OUTPUT = !!process.env.CLEAR_OUTPUT;
 
-const MIN_SCORE = SCORE_THRESHOLD; // soft threshold at final aggregation
-const HARD_MIN_SCORE = SCORE_THRESHOLD + 3; // harder bar for weak-signal names
+const MIN_SCORE = SCORE_THRESHOLD; // soft threshold per-page
+const HARD_MIN_SCORE = SCORE_THRESHOLD + 3; // harder final filter
 
-// Global time limit (minutes) for the *whole* run
+// Global time limit (minutes) for the whole run
 const TIME_LIMIT_MINUTES = parseInt(process.env.TIME_LIMIT_MINUTES || "30", 10);
 const DEADLINE = Date.now() + TIME_LIMIT_MINUTES * 60 * 1000;
 
-// Hard cap on how many unique candidate names we consider per label
+// Hard cap on unique candidate names per label
 const MAX_CANDIDATES_PER_LABEL = parseInt(process.env.MAX_CANDIDATES_PER_LABEL || "2500", 10);
 
 // ---------- Build sets/regex from lists ----------
@@ -95,7 +79,7 @@ const NOISE_STARTS = NOISE_PREFIXES.map((s) => s.trim().toLowerCase());
 const GENERIC_NOUNS = new Set(GENERIC_NOUNS_LIST.map((s) => s.trim().toLowerCase()));
 const BAD_PLURALS = new Set(BAD_PLURALS_LIST.map((s) => s.trim().toLowerCase()));
 
-const PRODUCT_OR_VERB = new RegExp(`\\b(${PRODUCT_OR_VERB_TOKENS.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})\\b`, "i");
+const PRODUCT_OR_VERB = new RegExp(`\\b(${PRODUCT_OR_VERB_TOKENS.map((t) => t.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\$&")).join("|")})\\b`, "i");
 
 // Optional allowlist for legit symbolic brands (keep exact casing)
 const SYMBOL_BRAND_ALLOW = new Set(SYMBOL_BRAND_ALLOW_LIST);
@@ -107,7 +91,7 @@ const hostPenalty = new Map();
 const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 const jitter = (base, j) => base + Math.floor(Math.random() * (j + 1));
 
-// clamp host delay so we don't end up sleeping 8s per request
+// Clamp host delay so we don't end up sleeping 8s per request
 const delayFor = async (host) => {
 	const mult = Math.min(3, hostPenalty.get(host) || 1);
 	const wait = Math.round(jitter(BASE_DELAY_MS, JITTER_MS) * mult);
@@ -153,7 +137,9 @@ function stripNoisySections($) {
 	for (const sel of SECTION_FILTERS) {
 		try {
 			$(sel).remove();
-		} catch {}
+		} catch {
+			// ignore bad selectors
+		}
 	}
 }
 
@@ -177,6 +163,14 @@ async function fetchHtml(url, attempt = 0) {
 	};
 
 	const host = new URL(url).host;
+	const penalty = Math.min(3, hostPenalty.get(host) || 1);
+	const startTime = Date.now();
+
+	if (attempt === 0) {
+		console.log(`      [http] GET ${url} (host=${host}, penalty=${penalty.toFixed(2)})`);
+	} else {
+		console.log(`      [http] RETRY ${attempt} ${url} (host=${host}, penalty=${penalty.toFixed(2)})`);
+	}
 
 	try {
 		const resp = await axios.get(url, {
@@ -186,6 +180,16 @@ async function fetchHtml(url, attempt = 0) {
 			validateStatus: () => true,
 		});
 
+		const dur = Date.now() - startTime;
+
+		if (!isHtmlResponse(resp) || !resp.data) {
+			const ct = (resp.headers && resp.headers["content-type"]) || "?";
+			console.log(`      [http] ${resp.status} non-HTML/empty (host=${host}, ${dur}ms, ct=${ct})`);
+		} else {
+			console.log(`      [http] ${resp.status} OK (host=${host}, ${dur}ms)`);
+		}
+
+		// Success path
 		if (resp.status >= 200 && resp.status < 400 && isHtmlResponse(resp) && resp.data) {
 			const cur = hostPenalty.get(host) || 1;
 			hostPenalty.set(host, Math.max(1, cur * 0.95)); // cool off on success
@@ -195,19 +199,31 @@ async function fetchHtml(url, attempt = 0) {
 		// Adaptive backoff for throttles (clamped)
 		if ([403, 429].includes(resp.status)) {
 			const cur = hostPenalty.get(host) || 1;
-			hostPenalty.set(host, Math.min(3, cur * 1.3));
+			const next = Math.min(3, cur * 1.3);
+			console.warn(`      [http] throttle status=${resp.status} on host=${host}, bump penalty ${cur.toFixed(2)} -> ${next.toFixed(2)}`);
+			hostPenalty.set(host, next);
 		}
 
 		if (attempt < RETRIES && [403, 429, 500, 502, 503, 504].includes(resp.status)) {
-			await sleep(800 * (attempt + 1));
+			const backoff = 800 * (attempt + 1);
+			console.log(`      [http] scheduling retry ${attempt + 1} for ${url} after ${backoff}ms`);
+			await sleep(backoff);
 			return fetchHtml(url, attempt + 1);
 		}
+
+		console.warn(`      [http] giving up on ${url} with status ${resp.status}`);
 		return null;
-	} catch {
+	} catch (err) {
+		const dur = Date.now() - startTime;
+		console.error(`      [http] error on ${url} (attempt=${attempt}, ${dur}ms):`, err?.message || err);
+
 		if (attempt < RETRIES) {
-			await sleep(800 * (attempt + 1));
+			const backoff = 800 * (attempt + 1);
+			console.log(`      [http] scheduling retry ${attempt + 1} for ${url} after ${backoff}ms (error path)`);
+			await sleep(backoff);
 			return fetchHtml(url, attempt + 1);
 		}
+
 		return null;
 	}
 }
@@ -250,7 +266,9 @@ function parseJsonLD($) {
 			const parsed = JSON.parse(txt);
 			const items = Array.isArray(parsed) ? parsed : [parsed];
 			for (const it of items) collectLd(it, orgs, lists);
-		} catch {}
+		} catch {
+			// ignore parse errors
+		}
 	});
 	return { orgs, lists };
 }
@@ -289,7 +307,7 @@ function looksLikeCompany(txt) {
 	if (GENERIC_NOUNS.has(lower)) return false;
 	if (BAD_PLURALS.has(lower)) return false;
 
-	// block common meta suffixes when the phrase looks like a heading
+	// Block common meta suffixes when the phrase looks like a heading
 	if (
 		/\b(membership form|products|farmer services|policy and guidelines|full story|privacy policy|award criteria|requirements|faqs?)\b/i.test(
 			t
@@ -337,10 +355,12 @@ function extractCompaniesGeneric($) {
 		"a",
 		"h3, h4, h5",
 	];
+
 	$(selectors.join(",")).each((_, el) => {
 		const tt = normalizeText($(el).text());
 		if (looksLikeCompany(tt)) candidates.add(tt);
 	});
+
 	$("a[title], a[aria-label]").each((_, el) => {
 		const tt = normalizeText($(el).attr("title") || $(el).attr("aria-label") || "");
 		if (looksLikeCompany(tt)) candidates.add(tt);
@@ -363,10 +383,12 @@ function extractCompaniesPerSite($, hostname) {
 		const { listSelector, itemSelector, nameSelector } = cfg;
 		const scope = listSelector ? $(listSelector) : $;
 		const items = itemSelector ? scope.find(itemSelector) : scope.find(nameSelector);
+
 		items.each((_, el) => {
 			const t = nameSelector ? normalizeText($(el).find(nameSelector).text()) : normalizeText($(el).text());
 			if (looksLikeCompany(t)) names.add(t);
 		});
+
 		return Array.from(names);
 	} catch {
 		return null;
@@ -390,15 +412,19 @@ function scoreCandidates($, baseUrl, rawNames) {
 	// link context
 	const externalNames = new Set();
 	const detailNames = new Set();
+
 	$("a[href]").each((_, el) => {
 		const text = normalizeText($(el).text());
 		if (!looksLikeCompany(text)) return;
 		const abs = absolutize(baseUrl, $(el).attr("href"));
 		if (!abs) return;
-		if (!sameHost(baseUrl, abs)) externalNames.add(text);
-		else {
+		if (!sameHost(baseUrl, abs)) {
+			externalNames.add(text);
+		} else {
 			const path = new URL(abs).pathname.toLowerCase();
-			if (/\/(member|company|brand|licensee)[\/-]/.test(path)) detailNames.add(text);
+			if (/\/(member|company|brand|licensee)[\/-]/.test(path)) {
+				detailNames.add(text);
+			}
 		}
 	});
 
@@ -462,7 +488,9 @@ function scoreCandidates($, baseUrl, rawNames) {
 		const t = normalizeText($(el).text());
 		if (!want.has(t)) return;
 		const rec = result.get(t);
-		if (rec && rec.snippets.length < 2) rec.snippets.push(t.slice(0, 160));
+		if (rec && rec.snippets.length < 2) {
+			rec.snippets.push(t.slice(0, 160));
+		}
 	});
 
 	return result;
@@ -479,7 +507,9 @@ async function crawlLabel(startUrl, opts) {
 		try {
 			const u = new URL(hint, origin).toString();
 			if (!shouldIgnorePath(u)) seeds.add(u);
-		} catch {}
+		} catch {
+			// ignore bad URLs from hints
+		}
 	}
 
 	// Optional per-label seeds from labels.json (seed_urls)
@@ -491,12 +521,15 @@ async function crawlLabel(startUrl, opts) {
 				// keep it anchored to the same host as the base URL
 				if (!sameHost(startUrl, u)) continue;
 				if (!shouldIgnorePath(u)) seeds.add(u);
-			} catch {}
+			} catch {
+				// ignore bad URLs from label seed_urls
+			}
 		}
 	}
 
 	const queue = [];
 	const enqueued = new Set();
+
 	for (const s of seeds) {
 		if (!enqueued.has(s)) {
 			queue.push({ url: s, depth: 0 });
@@ -523,7 +556,13 @@ async function crawlLabel(startUrl, opts) {
 		visited.add(url);
 
 		const host = new URL(url).host;
-		process.stdout.write(`  ↳ [${pagesCrawled + 1}/${maxPages}] GET ${url}\n`);
+		const penalty = Math.min(3, hostPenalty.get(host) || 1);
+		const remaining = queue.length - cursor;
+
+		console.log(
+			`  ↳ [${pagesCrawled + 1}/${maxPages}] depth=${depth} host=${host} penalty=${penalty.toFixed(2)} remaining=${remaining} GET ${url}`
+		);
+
 		await delayFor(host);
 
 		const html = await fetchHtml(url);
@@ -539,7 +578,9 @@ async function crawlLabel(startUrl, opts) {
 
 		// Per-site or generic
 		let names = extractCompaniesPerSite($, hostname);
-		if (!names || names.length === 0) names = extractCompaniesGeneric($);
+		if (!names || names.length === 0) {
+			names = extractCompaniesGeneric($);
+		}
 
 		// Merge with schema names
 		const mergedNames = Array.from(new Set([...names, ...ldSet]));
@@ -549,15 +590,14 @@ async function crawlLabel(startUrl, opts) {
 			const scoredMap = scoreCandidates($, url, mergedNames);
 
 			for (const [name, info] of scoredMap.entries()) {
+				// quick per-page filter: if it's garbage and has no strong signal, drop
 				const hasStrongSignal = info.ext || info.detail || info.suffix || info.schema;
 
-				// NEW: only kill really bad negatives at page level.
-				// Mild/low scores flow through to the global aggregation.
-				if (info.score <= -5 && !hasStrongSignal) {
+				if (info.score < MIN_SCORE && !hasStrongSignal) {
 					dropped.push({
 						name,
 						url,
-						reason: "failed_score_filter_strong_negative",
+						reason: "failed_score_filter",
 						score: info.score,
 					});
 					continue;
@@ -569,22 +609,33 @@ async function crawlLabel(startUrl, opts) {
 						reasons: [],
 						urls: new Set(),
 						pages: new Set(),
-						flags: { ext: false, detail: false, suffix: false, schema: false },
+						flags: {
+							ext: false,
+							detail: false,
+							suffix: false,
+							schema: false,
+						},
 						snippets: [],
 					});
 				}
+
 				const rec = agg.get(name);
 				rec.totalScore += info.score;
 				for (const rs of info.reasons) rec.reasons.push(rs);
-				if (info.urls) for (const u of info.urls) rec.urls.add(u);
+				if (info.urls) {
+					for (const u of info.urls) rec.urls.add(u);
+				}
 				rec.pages.add(url);
 				rec.flags.ext = rec.flags.ext || !!info.ext;
 				rec.flags.detail = rec.flags.detail || !!info.detail;
 				rec.flags.suffix = rec.flags.suffix || !!info.suffix;
 				rec.flags.schema = rec.flags.schema || !!info.schema;
+
 				if (info.snippets) {
 					for (const sn of info.snippets) {
-						if (rec.snippets.length < 5) rec.snippets.push(sn);
+						if (rec.snippets.length < 5) {
+							rec.snippets.push(sn);
+						}
 					}
 				}
 			}
@@ -611,6 +662,7 @@ async function crawlLabel(startUrl, opts) {
 
 	// Collapse agg into a sorted list with final scores
 	const kept = [];
+
 	for (const [name, rec] of agg.entries()) {
 		const pageCount = rec.pages.size;
 		const strongSignal = rec.flags.ext || rec.flags.detail || rec.flags.suffix || rec.flags.schema;
@@ -647,9 +699,14 @@ async function crawlLabel(startUrl, opts) {
 	}
 
 	kept.sort((a, b) => b.evidence.score - a.evidence.score || a.company.localeCompare(b.company));
+
 	const keptTrimmed = kept.slice(0, PER_LABEL_KEEP);
 
-	return { pagesCrawled, kept: keptTrimmed, droppedSample: dropped.slice(0, 200) };
+	return {
+		pagesCrawled,
+		kept: keptTrimmed,
+		droppedSample: dropped.slice(0, 200),
+	};
 }
 
 // ---------- IO ----------
@@ -677,11 +734,18 @@ function mergeCompanyLabels(existingArr, labelId, keptWithEvidence) {
 
 	for (const item of keptWithEvidence) {
 		const { company, evidence } = item;
-		if (!map.has(company)) map.set(company, { labels: new Set(), evidenceByLabel: {} });
+		if (!map.has(company)) {
+			map.set(company, {
+				labels: new Set(),
+				evidenceByLabel: {},
+			});
+		}
 		const rec = map.get(company);
 		rec.labels.add(labelId);
 		rec.evidenceByLabel[labelId] = rec.evidenceByLabel[labelId] || [];
-		if (rec.evidenceByLabel[labelId].length < 3) rec.evidenceByLabel[labelId].push(evidence);
+		if (rec.evidenceByLabel[labelId].length < 3) {
+			rec.evidenceByLabel[labelId].push(evidence);
+		}
 	}
 
 	const out = Array.from(map.entries()).map(([company, rec]) => ({
@@ -689,7 +753,9 @@ function mergeCompanyLabels(existingArr, labelId, keptWithEvidence) {
 		labels: Array.from(rec.labels).sort(),
 		evidenceByLabel: rec.evidenceByLabel,
 	}));
+
 	out.sort((a, b) => a.company.localeCompare(b.company));
+
 	return out;
 }
 
@@ -704,6 +770,7 @@ function mergeCompanyLabels(existingArr, labelId, keptWithEvidence) {
 	}
 
 	let companyLabels = CLEAR_OUTPUT ? [] : await loadJson(OUTPUT_PATH, []);
+
 	const auditAll = [];
 
 	console.log(`Loaded ${labels.length} labels from ${LABELS_PATH}`);
@@ -713,9 +780,8 @@ function mergeCompanyLabels(existingArr, labelId, keptWithEvidence) {
 		`Limits: pages/label=${MAX_PAGES}, depth=${MAX_DEPTH}, concurrency=${CONCURRENCY}, threshold=${SCORE_THRESHOLD}, clear=${CLEAR_OUTPUT}`
 	);
 	console.log(
-		`Timeouts: request=${REQUEST_TIMEOUT}ms, time_limit=${TIME_LIMIT_MINUTES}min, max_candidates_per_label=${MAX_CANDIDATES_PER_LABEL}`
+		`Timeouts: request=${REQUEST_TIMEOUT}ms, time_limit=${TIME_LIMIT_MINUTES}min, max_candidates_per_label=${MAX_CANDIDATES_PER_LABEL}\n`
 	);
-	console.log(`Flags: dry_run=${DRY_RUN}, clear_output=${CLEAR_OUTPUT}\n`);
 
 	const tasks = labels.map((label) =>
 		limit(async () => {
@@ -745,12 +811,11 @@ function mergeCompanyLabels(existingArr, labelId, keptWithEvidence) {
 				if (kept.length > 0 && !DRY_RUN) {
 					companyLabels = mergeCompanyLabels(companyLabels, id, kept);
 					await fs.mkdir(path.dirname(OUTPUT_PATH), { recursive: true });
+
 					const tmp = OUTPUT_PATH + ".tmp";
 					await fs.writeFile(tmp, JSON.stringify(companyLabels, null, 2), "utf8");
 					await fs.rename(tmp, OUTPUT_PATH);
 					console.log(`Merged & wrote → ${OUTPUT_PATH}`);
-				} else if (kept.length === 0) {
-					console.log("No companies kept for this label.");
 				}
 
 				auditAll.push({
@@ -762,7 +827,10 @@ function mergeCompanyLabels(existingArr, labelId, keptWithEvidence) {
 				});
 			} catch (err) {
 				console.error(`Error crawling ${id}:`, err?.message || err);
-				auditAll.push({ labelId: id, error: String(err?.message || err) });
+				auditAll.push({
+					labelId: id,
+					error: String(err?.message || err),
+				});
 			}
 		})
 	);
@@ -774,7 +842,6 @@ function mergeCompanyLabels(existingArr, labelId, keptWithEvidence) {
 		const tmpA = AUDIT_PATH + ".tmp";
 		await fs.writeFile(tmpA, JSON.stringify(auditAll, null, 2), "utf8");
 		await fs.rename(tmpA, AUDIT_PATH);
-		console.log(`Wrote audit → ${AUDIT_PATH}`);
 	} catch (e) {
 		console.error("Failed writing audit file:", e?.message || e);
 	}

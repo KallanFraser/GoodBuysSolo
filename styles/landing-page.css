@@ -171,25 +171,61 @@
 
 @media (max-width: 768px) {
 	#landing-page {
-		padding: 3.5rem 1.25rem 2.75rem;
+		/* stop full vertical centering, start closer to top */
+		min-height: auto;
+		padding: 2rem 1.25rem 2.5rem;
+		align-items: flex-start;
+	}
+
+	.hero {
+		max-width: 26rem;
+		width: 100%;
+		margin: 0 auto;
+		align-items: center; /* center column */
+		text-align: center; /* center text */
 	}
 
 	.hero-title {
-		font-size: 3.1rem;
+		font-size: 2.5rem;
+		line-height: 1.1;
+		margin: 0 0 0.75rem;
 	}
 
 	.hero-text {
-		font-size: 1.25rem;
+		font-size: 1.05rem;
+		line-height: 1.6;
+		margin: 0 0 1rem;
 	}
 
 	.hero-actions {
 		flex-direction: column;
 		align-items: stretch;
+		justify-content: flex-start;
+		gap: 0.75rem;
+		margin-bottom: 1rem;
 	}
 
 	.primary-cta,
 	.ghost-cta {
+		/* stacked but still feel like a centered column */
 		width: 100%;
+		max-width: 20rem;
+		margin: 0 auto;
+
 		justify-content: center;
+		padding: 0.8rem 1.5rem;
+		font-size: 1rem;
+		letter-spacing: 0.07em;
+	}
+
+	.hero-tags {
+		justify-content: center;
+		gap: 0.45rem;
+	}
+
+	.hero-tag {
+		font-size: 0.8rem;
+		padding: 0.35rem 0.9rem;
+		letter-spacing: 0.04em;
 	}
 }

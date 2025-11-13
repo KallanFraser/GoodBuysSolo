@@ -1,0 +1,139 @@
+[
+  {
+    "company": "Patagonia",
+    "domain": "www.patagonia.com",
+    "platform": "sfcc",
+    "products": [
+      "M's Nano Puff® Jacket",
+      "M's Better Sweater® Vest",
+      "W's Nano Puff® Jacket",
+      "M's Better Sweater® Jacket",
+      "Kids' Hi-Loft Down Sweater™ Hoody",
+      "M's Nano Puff® Vest",
+      "M's Nano Puff® Hoody",
+      "W's Better Sweater® Jacket",
+      "M's Torrentshell 3L Rain Jacket",
+      "M's Down Sweater™ Hoody",
+      "Kids' Reversible Ready Freddy Hoody",
+      "W's Down With It Parka",
+      "W's Nano Puff® Vest",
+      "Baby Reversible Tribbles Hoody",
+      "W's Nano Puff® Hoody",
+      "M's Classic Retro-X® Jacket",
+      "W's Classic Retro-X® Jacket",
+      "M's Stormshadow Parka",
+      "Baby Hi-Loft Down Sweater™ Hoody",
+      "W's Silent Down Long Parka",
+      "Black Hole® Mini MLC® 30L",
+      "Kids' 4-in-1 Everyday Jacket",
+      "Kids' Reversible Down Sweater™ Hoody",
+      "M's R1® Air Jacket",
+      "W's Torrentshell 3L Rain Jacket",
+      "M's Tres 3-in-1 Parka",
+      "W's Better Sweater® Vest",
+      "M's Long-Sleeved Lightweight Fjord Flannel Shirt",
+      "M's Micro D® Pullover",
+      "Black Hole® Duffel 40L",
+      "M's Better Sweater® 1/4-Zip",
+      "Black Hole® Wheeled Duffel 100L",
+      "M's R1® Air Full-Zip Hoody",
+      "M's R1® Air Zip-Neck",
+      "W's Fitz Roy Down Hoody",
+      "Black Hole® Duffel 55L"
+    ],
+    "endpointsUsed": [
+      "https://www.patagonia.com/sitemap.xml",
+      "https://www.patagonia.com/sitemap_index.xml",
+      "https://www.patagonia.com/sitemaps/sitemap.xml",
+      "https://www.patagonia.com/c/",
+      "https://www.patagonia.com/shop"
+    ],
+    "pagesVisited": [
+      "https://www.patagonia.com/c/",
+      "https://www.patagonia.com/shop"
+    ],
+    "notes": []
+  },
+  {
+    "company": "IKEA",
+    "domain": "www.ikea.com",
+    "platform": "generic",
+    "products": [],
+    "endpointsUsed": [],
+    "pagesVisited": [],
+    "notes": [
+      "homepage_fetch_failed"
+    ]
+  },
+  {
+    "company": "Nike",
+    "domain": "www.nike.com",
+    "platform": "generic",
+    "products": [],
+    "endpointsUsed": [
+      "https://www.nike.com/sitemap-us-help.xml",
+      "https://www.nike.com/sitemap-v2-landingpage-index.xml",
+      "https://www.nike.com/sitemap-v2-pdp-index.xml",
+      "https://www.nike.com/sitemap-v2-snkrsweb-index.xml",
+      "https://www.nike.com/sitemap-v2-gridwall-index.xml",
+      "https://www.nike.com/sitemap-v2-article-index.xml",
+      "https://www.nike.com/sitemap-locator-index.xml"
+    ],
+    "pagesVisited": [],
+    "notes": []
+  },
+  {
+    "company": "LEGO",
+    "domain": "www.lego.com",
+    "platform": "generic",
+    "products": [],
+    "endpointsUsed": [
+      "https://www.lego.com/sitemap.xml",
+      "https://www.lego.com/productPage-sitemap.xml",
+      "https://www.lego.com/productlisting-sitemap.xml",
+      "https://www.lego.com/store_info-sitemap.xml",
+      "https://www.lego.com/aboutus/sitemap.xml",
+      "https://www.lego.com/legal/sitemap.xml",
+      "https://www.lego.com/local-news/sitemap.xml",
+      "https://www.lego.com/sustainability/sitemap.xml",
+      "https://www.lego.com/en-us/products?page=1",
+      "https://www.lego.com/en-us/products/page/1",
+      "https://www.lego.com/en-us/products",
+      "https://www.lego.com/en-us/catalog?page=1",
+      "https://www.lego.com/en-us/catalog/page/1",
+      "https://www.lego.com/en-us/catalog",
+      "https://www.lego.com/products?page=1",
+      "https://www.lego.com/products/page/1",
+      "https://www.lego.com/products",
+      "https://www.lego.com/catalog?page=1",
+      "https://www.lego.com/catalog/page/1",
+      "https://www.lego.com/catalog"
+    ],
+    "pagesVisited": [
+      "https://www.lego.com/en-us/products?page=1",
+      "https://www.lego.com/en-us/products/page/1",
+      "https://www.lego.com/en-us/products",
+      "https://www.lego.com/en-us/catalog?page=1",
+      "https://www.lego.com/en-us/catalog/page/1",
+      "https://www.lego.com/en-us/catalog",
+      "https://www.lego.com/products?page=1",
+      "https://www.lego.com/products/page/1",
+      "https://www.lego.com/products",
+      "https://www.lego.com/catalog?page=1",
+      "https://www.lego.com/catalog/page/1",
+      "https://www.lego.com/catalog"
+    ],
+    "notes": []
+  },
+  {
+    "company": "Adidas",
+    "domain": "www.adidas.com",
+    "platform": "generic",
+    "products": [],
+    "endpointsUsed": [],
+    "pagesVisited": [],
+    "notes": [
+      "homepage_fetch_failed"
+    ]
+  }
+]

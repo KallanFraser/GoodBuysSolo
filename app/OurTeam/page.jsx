@@ -167,7 +167,7 @@ export default function OurTeam() {
 										<div className="team-avatar-wrap small">
 											<div className="team-avatar-orbit" />
 											<img
-												src={`/images/team/${member.image}`}
+												src={`/images/team/resizedTeam/${member.image}`}
 												alt={member.name}
 												className="team-avatar"
 												loading="lazy"

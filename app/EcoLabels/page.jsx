@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import EcoLabelLogo from "../../components/EcoLabelLogo"; // 👈 import it
 import "../../styles/eco-labels.css";
 
 export default function EcoLabels() {
@@ -100,18 +101,29 @@ export default function EcoLabels() {
 					) : (
 						<div className="eco-grid">
 							{filteredLabels.map((label) => {
-								const imagePath = label.image_name ? `/images/ecolabels/${label.image_name}` : null;
+								const rigorScore = typeof label.rigor_score === "number" ? label.rigor_score : null;
+
+								let rigorBand = "";
+								let rigorLabel = "";
+								if (rigorScore !== null) {
+									if (rigorScore >= 8) {
+										rigorBand = "high";
+										rigorLabel = "High rigor standard";
+									} else if (rigorScore >= 6) {
+										rigorBand = "medium";
+										rigorLabel = "Moderate rigor standard";
+									} else {
+										rigorBand = "low";
+										rigorLabel = "Lower rigor standard";
+									}
+								}
 
 								return (
 									<article key={label.id || label.name} className="eco-card">
-										{imagePath && (
+										{/* ---------- LOGO USING COMPONENT ---------- */}
+										{label.image_name && (
 											<div className="eco-logo-wrap">
-												<img
-													src={imagePath}
-													alt={label.name ? `${label.name} logo` : "Ecolabel logo"}
-													className="eco-logo"
-													loading="lazy"
-												/>
+												<EcoLabelLogo imageName={label.image_name} name={label.name} />
 											</div>
 										)}
 
@@ -124,12 +136,21 @@ export default function EcoLabels() {
 													)}
 												</div>
 
-												{typeof label.rigor_score === "number" && (
-													<p className="eco-card-rigor">
-														Rigor{" "}
-														<span className="eco-card-rigor-score">{label.rigor_score}</span>
-														<span className="eco-card-rigor-max"> / 10</span>
-													</p>
+												{rigorScore !== null && (
+													<div
+														className={
+															"eco-rigor-row " + (rigorBand ? `rigor-${rigorBand}` : "")
+														}
+													>
+														<span className="eco-rigor-dot" />
+														<div className="eco-rigor-text">
+															<span className="eco-rigor-score">
+																Rigor {rigorScore}
+																<span className="eco-rigor-max"> / 10</span>
+															</span>
+															<span className="eco-rigor-level">{rigorLabel}</span>
+														</div>
+													</div>
 												)}
 											</header>
 
