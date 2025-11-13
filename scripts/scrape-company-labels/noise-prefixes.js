@@ -185,4 +185,15 @@ export default [
 	"~ ",
 	"# ",
 	"* ",
+
+	"view",
+	"get",
+	"apply",
+	"learn",
+	"see",
+	"read",
+	"watch",
+	"add ",
+	"click here",
+	"check ",
 ];

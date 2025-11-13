@@ -1,0 +1,441 @@
+/** @format */
+/* --------------------------------------------------------------------------
+   LAYOUT
+--------------------------------------------------------------------------- */
+
+#eco-labels {
+	position: relative;
+	min-height: calc(100vh - 8.5rem);
+	padding: 4.5rem 1.5rem 3.5rem;
+	display: flex;
+	justify-content: center;
+	color: #f9fff5;
+	overflow-x: hidden;
+
+	opacity: 0;
+	transform: translateY(18px) scale(0.985);
+	filter: blur(6px);
+	animation: ecolabels-page-in 0.7s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+	animation-delay: 0.08s;
+}
+
+.eco-labels-inner {
+	max-width: 80rem;
+	width: 100%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	gap: 3.5rem;
+}
+
+@keyframes ecolabels-page-in {
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+		filter: blur(0);
+	}
+}
+
+/* --------------------------------------------------------------------------
+   HERO
+--------------------------------------------------------------------------- */
+
+.eco-hero {
+	display: flex;
+	flex-direction: column;
+	gap: 1.7rem;
+	align-items: center;
+	text-align: center;
+}
+
+/* pill */
+
+.eco-pill {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.25rem 0.7rem;
+	border-radius: 999px;
+	background: radial-gradient(circle at 0 0, rgba(34, 197, 94, 0.45), transparent 60%),
+		radial-gradient(circle at 100% 100%, rgba(45, 212, 191, 0.35), transparent 60%),
+		linear-gradient(135deg, rgba(6, 95, 70, 0.96), rgba(15, 23, 42, 0.98));
+	border: 1px solid rgba(74, 222, 128, 0.7);
+	font-size: 0.76rem;
+	font-weight: 600;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: #bbf7d0;
+	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.95);
+}
+
+.eco-title {
+	margin: 0;
+	font-size: clamp(2.4rem, 4.2vw, 3.2rem);
+	line-height: 1.08;
+	font-weight: 800;
+	letter-spacing: 0.01em;
+	background: conic-gradient(from 180deg, #ecfeff, #bbf7d0, #22c55e, #2dd4bf, #f9fafb);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+.eco-lede {
+	max-width: 38rem;
+	margin: 0;
+	font-size: 1.02rem;
+	line-height: 1.8;
+	color: rgba(226, 243, 233, 0.94);
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
+}
+
+.eco-error {
+	margin: 0.6rem 0 0;
+	font-size: 0.9rem;
+	color: #fecaca;
+}
+
+/* --------------------------------------------------------------------------
+   FILTER CHIPS
+--------------------------------------------------------------------------- */
+
+.eco-filters {
+	margin-top: 1.8rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.5rem;
+}
+
+.eco-filter-chip {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.4rem 0.9rem;
+	border-radius: 999px;
+	border: 1px solid rgba(30, 64, 54, 0.9);
+	background: radial-gradient(circle at 30% 0, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.98));
+	color: rgba(209, 250, 229, 0.92);
+	font-size: 0.78rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.16em;
+	cursor: pointer;
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.9);
+	transition: background 0.14s ease-out, border-color 0.14s ease-out, box-shadow 0.14s ease-out, transform 0.12s ease-out;
+}
+
+.eco-filter-chip:hover {
+	transform: translateY(-1px);
+	border-color: rgba(34, 197, 94, 0.7);
+}
+
+.eco-filter-chip-active {
+	background: radial-gradient(circle at 30% 0, rgba(34, 197, 94, 0.45), transparent 60%),
+		linear-gradient(135deg, rgba(6, 95, 70, 1), rgba(15, 23, 42, 1));
+	border-color: rgba(34, 197, 94, 0.9);
+	color: #bbf7d0;
+	box-shadow: 0 16px 40px rgba(0, 0, 0, 1);
+}
+
+.eco-filter-label {
+	white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   GRID
+--------------------------------------------------------------------------- */
+
+.eco-grid-section {
+	display: flex;
+	flex-direction: column;
+	gap: 1.6rem;
+}
+
+.eco-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr); /* 1 col mobile */
+	gap: 1.2rem;
+}
+
+/* from tablet up: exactly 2 columns, fixed half width */
+@media (min-width: 768px) {
+	.eco-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+/* --------------------------------------------------------------------------
+   CARDS
+--------------------------------------------------------------------------- */
+
+.eco-card {
+	position: relative;
+	padding: 0.9rem 1rem;
+	border-radius: 18px;
+	background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
+	border: 1px solid rgba(30, 64, 54, 0.95);
+	box-shadow: 0 14px 34px rgba(0, 0, 0, 1);
+	display: flex;
+	align-items: flex-start;
+	gap: 1rem;
+	min-height: 190px;
+
+	opacity: 0;
+	transform: translateY(12px) scale(0.99);
+	animation: eco-card-in 0.6s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+@keyframes eco-card-in {
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+.eco-card:hover {
+	border-color: rgba(34, 197, 94, 0.7);
+	box-shadow: 0 20px 52px rgba(0, 0, 0, 1), 0 0 26px rgba(22, 163, 74, 0.45);
+}
+
+/* logo */
+
+.eco-logo-wrap {
+	flex: 0 0 auto;
+	width: 3.2rem;
+	height: 3.2rem;
+	border-radius: 999px;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: radial-gradient(circle at 30% 0, #020b09, #020611);
+	box-shadow: 0 0 0 1px rgba(15, 23, 42, 1), 0 8px 18px rgba(0, 0, 0, 1), inset 0 4px 8px rgba(15, 23, 42, 0.95);
+}
+
+.eco-logo {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
+	display: block;
+}
+
+/* body */
+
+.eco-card-body {
+	flex: 1 1 auto;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+}
+
+/* header */
+
+.eco-card-header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 0.5rem;
+	margin-bottom: 0.1rem;
+}
+
+.eco-card-title-block {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+	min-width: 0;
+}
+
+.eco-card-name {
+	margin: 0;
+	font-size: 0.98rem;
+	font-weight: 600;
+	color: #e5f9ef;
+}
+
+.eco-card-category {
+	font-size: 0.72rem;
+	text-transform: uppercase;
+	letter-spacing: 0.16em;
+	font-weight: 600;
+	color: rgba(148, 163, 184, 0.95);
+}
+
+.eco-card-rigor {
+	margin: 0;
+	font-size: 0.76rem;
+	color: rgba(190, 242, 100, 0.9);
+	text-transform: uppercase;
+	letter-spacing: 0.16em;
+	white-space: nowrap;
+}
+
+.eco-card-rigor-score {
+	font-weight: 700;
+}
+
+.eco-card-rigor-max {
+	color: rgba(148, 163, 184, 0.9);
+}
+
+/* description */
+
+.eco-card-description {
+	margin: 0.1rem 0 0.4rem;
+	font-size: 0.86rem;
+	line-height: 1.6;
+	color: rgba(226, 243, 233, 0.96);
+}
+
+/* footer */
+
+.eco-card-footer {
+	margin-top: auto;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.eco-card-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	padding: 0.36rem 0.75rem;
+	border-radius: 999px;
+	border: 1px solid transparent;
+	background-image: linear-gradient(#020d0a, #020d0a), linear-gradient(135deg, #059669, #16a34a);
+	background-origin: border-box;
+	background-clip: padding-box, border-box;
+
+	color: #ecfdf5;
+	font-size: 0.76rem;
+	font-weight: 600;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	text-decoration: none;
+	white-space: nowrap;
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.95);
+	transition: transform 0.14s ease-out, box-shadow 0.14s ease-out, filter 0.14s ease-out;
+}
+
+.eco-card-link:hover {
+	transform: translateY(-1px);
+	filter: brightness(1.04);
+	box-shadow: 0 14px 30px rgba(0, 0, 0, 1);
+}
+
+.eco-card-link-arrow {
+	font-size: 0.9rem;
+}
+
+/* --------------------------------------------------------------------------
+   SKELETON / EMPTY
+--------------------------------------------------------------------------- */
+
+.eco-grid-skeleton .eco-card {
+	animation: none;
+	opacity: 1;
+	transform: none;
+}
+
+.eco-card-skeleton {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: 0.9rem 1rem;
+	border-radius: 18px;
+	background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
+	border: 1px solid rgba(30, 64, 54, 0.95);
+	box-shadow: 0 14px 34px rgba(0, 0, 0, 1);
+}
+
+.eco-logo-skeleton {
+	width: 3.2rem;
+	height: 3.2rem;
+	border-radius: 999px;
+	background: linear-gradient(90deg, #020617, #0f172a, #020617);
+	background-size: 200% 100%;
+	animation: eco-shimmer 1.4s infinite;
+}
+
+.eco-lines-skeleton {
+	flex: 1 1 auto;
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
+}
+
+.eco-line-skeleton {
+	height: 0.55rem;
+	border-radius: 999px;
+	background: linear-gradient(90deg, #020617, #0f172a, #020617);
+	background-size: 200% 100%;
+	animation: eco-shimmer 1.4s infinite;
+}
+
+.eco-line-skeleton.long {
+	width: 80%;
+}
+
+.eco-line-skeleton.short {
+	width: 45%;
+}
+
+@keyframes eco-shimmer {
+	0% {
+		background-position: 200% 0;
+	}
+	100% {
+		background-position: -200% 0;
+	}
+}
+
+.eco-empty {
+	margin: 0;
+	font-size: 0.9rem;
+	color: rgba(209, 250, 229, 0.9);
+}
+
+.eco-empty-reset {
+	border: none;
+	background: none;
+	color: #6ee7b7;
+	font-weight: 600;
+	cursor: pointer;
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+--------------------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+	#eco-labels {
+		padding: 4rem 1.25rem 3.2rem;
+	}
+
+	.eco-hero {
+		align-items: flex-start;
+		text-align: left;
+	}
+
+	.eco-labels-inner {
+		gap: 3rem;
+	}
+}
+
+@media (max-width: 640px) {
+	#eco-labels {
+		padding: 3.5rem 1.1rem 3rem;
+	}
+
+	.eco-title {
+		font-size: clamp(2.1rem, 8vw, 2.7rem);
+	}
+
+	.eco-card {
+		padding: 0.9rem 0.9rem;
+	}
+}

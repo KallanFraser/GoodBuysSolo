@@ -7,10 +7,12 @@
  *
  * Env:
  *   MAX_PAGES=100 DEPTH=3 CONCURRENCY=24 BASE_DELAY_MS=900 JITTER_MS=700
- *   DRY_RUN=0            -> set to 1 to avoid writing outputs
- *   SCORE_THRESHOLD=7    -> raise to get stricter
+ *   DRY_RUN=0            -> set to 1 / true / yes to avoid writing outputs
+ *   SCORE_THRESHOLD=3    -> raise to get stricter (default relaxed)
  *   PER_LABEL_KEEP=500
- *   CLEAR_OUTPUT=1       -> start fresh (recommended if you saw past noise)
+ *   CLEAR_OUTPUT=1       -> start fresh
+ *   TIME_LIMIT_MINUTES=30
+ *   MAX_CANDIDATES_PER_LABEL=2500
  */
 
 import fs from "fs/promises";
@@ -31,7 +33,7 @@ import NOISE_PHRASES from "./noise-phrases.js";
 import NOISE_PREFIXES from "./noise-prefixes.js";
 import NOISE_TOPICS from "./noise-topics.js";
 
-// NEW: split-out lists so you can expand them easily
+// Split-out lists
 import DIRECTORY_HINTS from "./directory-hints.js";
 import GENERIC_NOUNS_LIST from "./generic-nouns.js";
 import BAD_PLURALS_LIST from "./bad-plurals.js";
@@ -48,17 +50,42 @@ const OUTPUT_PATH = path.join(ROOT, "public", "data", "company-labels.json");
 const AUDIT_PATH = path.join(ROOT, "public", "data", "company-labels.audit.json");
 
 // ---------- Config ----------
+
+// helper to parse boolean-ish env flags
+function envFlag(name, def = false) {
+	const v = process.env[name];
+	if (v === undefined) return def;
+	const norm = String(v).trim().toLowerCase();
+	return norm === "1" || norm === "true" || norm === "yes";
+}
+
 const MAX_PAGES = parseInt(process.env.MAX_PAGES || "100", 10);
 const MAX_DEPTH = parseInt(process.env.DEPTH || "3", 10);
 const CONCURRENCY = parseInt(process.env.CONCURRENCY || "24", 10);
 const BASE_DELAY_MS = parseInt(process.env.BASE_DELAY_MS || "900", 10);
 const JITTER_MS = parseInt(process.env.JITTER_MS || "700", 10);
-const REQUEST_TIMEOUT = 20000;
+
+// shorter + tunable request timeout
+const REQUEST_TIMEOUT = parseInt(process.env.REQUEST_TIMEOUT || "12000", 10);
 const RETRIES = 2;
-const DRY_RUN = !!process.env.DRY_RUN;
-const SCORE_THRESHOLD = parseInt(process.env.SCORE_THRESHOLD || "7", 10);
+
+// ✅ these now behave correctly with 0/1, true/false, yes/no
+const DRY_RUN = envFlag("DRY_RUN", false);
+const CLEAR_OUTPUT = envFlag("CLEAR_OUTPUT", false);
+
+// more relaxed default threshold to stop murdering legit brands
+const SCORE_THRESHOLD = parseInt(process.env.SCORE_THRESHOLD || "3", 10);
 const PER_LABEL_KEEP = parseInt(process.env.PER_LABEL_KEEP || "500", 10);
-const CLEAR_OUTPUT = !!process.env.CLEAR_OUTPUT;
+
+const MIN_SCORE = SCORE_THRESHOLD; // soft threshold at final aggregation
+const HARD_MIN_SCORE = SCORE_THRESHOLD + 3; // harder bar for weak-signal names
+
+// Global time limit (minutes) for the *whole* run
+const TIME_LIMIT_MINUTES = parseInt(process.env.TIME_LIMIT_MINUTES || "30", 10);
+const DEADLINE = Date.now() + TIME_LIMIT_MINUTES * 60 * 1000;
+
+// Hard cap on how many unique candidate names we consider per label
+const MAX_CANDIDATES_PER_LABEL = parseInt(process.env.MAX_CANDIDATES_PER_LABEL || "2500", 10);
 
 // ---------- Build sets/regex from lists ----------
 const STOP_WORDS = new Set(NEGATIVE_TERMS.map((s) => s.trim().toLowerCase()));
@@ -79,8 +106,10 @@ const hostPenalty = new Map();
 // ---------- Helpers ----------
 const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 const jitter = (base, j) => base + Math.floor(Math.random() * (j + 1));
+
+// clamp host delay so we don't end up sleeping 8s per request
 const delayFor = async (host) => {
-	const mult = hostPenalty.get(host) || 1;
+	const mult = Math.min(3, hostPenalty.get(host) || 1);
 	const wait = Math.round(jitter(BASE_DELAY_MS, JITTER_MS) * mult);
 	await sleep(wait);
 };
@@ -163,10 +192,10 @@ async function fetchHtml(url, attempt = 0) {
 			return String(resp.data);
 		}
 
-		// Adaptive backoff for throttles
+		// Adaptive backoff for throttles (clamped)
 		if ([403, 429].includes(resp.status)) {
 			const cur = hostPenalty.get(host) || 1;
-			hostPenalty.set(host, Math.min(6, cur * 1.4));
+			hostPenalty.set(host, Math.min(3, cur * 1.3));
 		}
 
 		if (attempt < RETRIES && [403, 429, 500, 502, 503, 504].includes(resp.status)) {
@@ -201,12 +230,15 @@ function extractLinks($, baseUrl) {
 
 	const prioritized = [];
 	const others = [];
+
 	for (const u of out) {
 		const p = new URL(u).pathname.toLowerCase();
 		if (DIRECTORY_HINTS.some((h) => p.includes(h))) prioritized.push(u);
 		else others.push(u);
 	}
-	return Array.from(new Set([...prioritized, ...others]));
+
+	// directory-like URLs first
+	return [...prioritized, ...others];
 }
 
 function parseJsonLD($) {
@@ -256,6 +288,15 @@ function looksLikeCompany(txt) {
 	if (NOISE_STARTS.some((p) => lower.startsWith(p))) return false;
 	if (GENERIC_NOUNS.has(lower)) return false;
 	if (BAD_PLURALS.has(lower)) return false;
+
+	// block common meta suffixes when the phrase looks like a heading
+	if (
+		/\b(membership form|products|farmer services|policy and guidelines|full story|privacy policy|award criteria|requirements|faqs?)\b/i.test(
+			t
+		)
+	) {
+		return false;
+	}
 
 	if (PHONEISH.test(t) || /\d{2,}[-\s)]+/.test(t)) return false;
 	if (/^(about|access|according to|all )/i.test(t)) return false;
@@ -332,6 +373,10 @@ function extractCompaniesPerSite($, hostname) {
 	}
 }
 
+/**
+ * Score a bunch of candidate names on a single page.
+ * Returns Map(name -> { score, reasons[], urls:Set, ext, detail, suffix, schema, snippets[] })
+ */
 function scoreCandidates($, baseUrl, rawNames) {
 	const pagePath = new URL(baseUrl).pathname.toLowerCase();
 
@@ -359,8 +404,18 @@ function scoreCandidates($, baseUrl, rawNames) {
 
 	const result = new Map();
 	const add = (name, delta, reason, url) => {
-		if (!result.has(name))
-			result.set(name, { score: 0, reasons: [], urls: new Set(), ext: false, detail: false, suffix: false, schema: false, snippets: [] });
+		if (!result.has(name)) {
+			result.set(name, {
+				score: 0,
+				reasons: [],
+				urls: new Set(),
+				ext: false,
+				detail: false,
+				suffix: false,
+				schema: false,
+				snippets: [],
+			});
+		}
 		const r = result.get(name);
 		r.score += delta;
 		r.reasons.push(reason);
@@ -403,7 +458,7 @@ function scoreCandidates($, baseUrl, rawNames) {
 
 	// snippets (small, capped)
 	const want = new Set(rawNames.slice(0, 50));
-	$("*, *:not(:has(*))").each((_, el) => {
+	$("*:not(:has(*))").each((_, el) => {
 		const t = normalizeText($(el).text());
 		if (!want.has(t)) return;
 		const rec = result.get(t);
@@ -415,7 +470,7 @@ function scoreCandidates($, baseUrl, rawNames) {
 
 // ---------- Crawl ----------
 async function crawlLabel(startUrl, opts) {
-	const { maxPages, maxDepth } = opts;
+	const { maxPages, maxDepth, seeds: extraSeeds } = opts || {};
 	const origin = new URL(startUrl).origin;
 	const hostname = new URL(startUrl).host;
 
@@ -427,16 +482,42 @@ async function crawlLabel(startUrl, opts) {
 		} catch {}
 	}
 
+	// Optional per-label seeds from labels.json (seed_urls)
+	if (Array.isArray(extraSeeds)) {
+		for (const hint of extraSeeds) {
+			if (!hint) continue;
+			try {
+				const u = new URL(hint, origin).toString();
+				// keep it anchored to the same host as the base URL
+				if (!sameHost(startUrl, u)) continue;
+				if (!shouldIgnorePath(u)) seeds.add(u);
+			} catch {}
+		}
+	}
+
 	const queue = [];
-	for (const s of seeds) queue.push({ url: s, depth: 0 });
+	const enqueued = new Set();
+	for (const s of seeds) {
+		if (!enqueued.has(s)) {
+			queue.push({ url: s, depth: 0 });
+			enqueued.add(s);
+		}
+	}
 
 	const visited = new Set();
 	const agg = new Map(); // name -> { totalScore, reasons[], urls Set, pages Set, flags, snippets }
 	const dropped = [];
 	let pagesCrawled = 0;
+	let cursor = 0;
 
-	while (queue.length && pagesCrawled < maxPages) {
-		const { url, depth } = queue.shift();
+	while (cursor < queue.length && pagesCrawled < maxPages) {
+		// Global time limit for the whole run
+		if (Date.now() > DEADLINE) {
+			console.log("  [STOP] Global time limit reached, stopping crawl for this label.");
+			break;
+		}
+
+		const { url, depth } = queue[cursor++];
 		if (visited.has(url)) continue;
 		if (shouldIgnorePath(url)) continue;
 		visited.add(url);
@@ -463,96 +544,109 @@ async function crawlLabel(startUrl, opts) {
 		// Merge with schema names
 		const mergedNames = Array.from(new Set([...names, ...ldSet]));
 
-		// Score
-		const scored = scoreCandidates($, url, mergedNames);
+		if (mergedNames.length > 0) {
+			// Score all candidates on this page in one shot
+			const scoredMap = scoreCandidates($, url, mergedNames);
 
-		// Flag schema hits
-		for (const n of ldSet) {
-			if (scored.has(n)) {
-				const r = scored.get(n);
-				r.score += 3;
-				r.reasons.push("schema_org");
-				r.schema = true;
+			for (const [name, info] of scoredMap.entries()) {
+				const hasStrongSignal = info.ext || info.detail || info.suffix || info.schema;
+
+				// NEW: only kill really bad negatives at page level.
+				// Mild/low scores flow through to the global aggregation.
+				if (info.score <= -5 && !hasStrongSignal) {
+					dropped.push({
+						name,
+						url,
+						reason: "failed_score_filter_strong_negative",
+						score: info.score,
+					});
+					continue;
+				}
+
+				if (!agg.has(name)) {
+					agg.set(name, {
+						totalScore: 0,
+						reasons: [],
+						urls: new Set(),
+						pages: new Set(),
+						flags: { ext: false, detail: false, suffix: false, schema: false },
+						snippets: [],
+					});
+				}
+				const rec = agg.get(name);
+				rec.totalScore += info.score;
+				for (const rs of info.reasons) rec.reasons.push(rs);
+				if (info.urls) for (const u of info.urls) rec.urls.add(u);
+				rec.pages.add(url);
+				rec.flags.ext = rec.flags.ext || !!info.ext;
+				rec.flags.detail = rec.flags.detail || !!info.detail;
+				rec.flags.suffix = rec.flags.suffix || !!info.suffix;
+				rec.flags.schema = rec.flags.schema || !!info.schema;
+				if (info.snippets) {
+					for (const sn of info.snippets) {
+						if (rec.snippets.length < 5) rec.snippets.push(sn);
+					}
+				}
+			}
+
+			// If this label is already saturated with candidates, bail early
+			if (agg.size >= MAX_CANDIDATES_PER_LABEL) {
+				console.log(`  [STOP] Reached MAX_CANDIDATES_PER_LABEL=${MAX_CANDIDATES_PER_LABEL} for ${hostname}, stopping label crawl.`);
+				break;
 			}
 		}
 
-		// Fold into global
-		for (const [name, info] of scored.entries()) {
-			if (!agg.has(name)) {
-				agg.set(name, {
-					totalScore: 0,
-					reasons: [],
-					urls: new Set(),
-					pages: new Set(),
-					flags: { ext: false, detail: false, suffix: false, schema: false },
-					snippets: [],
-				});
-			}
-			const rec = agg.get(name);
-			rec.totalScore += info.score;
-			for (const rs of info.reasons) rec.reasons.push(rs);
-			if (info.urls) for (const u of info.urls) rec.urls.add(u);
-			rec.pages.add(url);
-			rec.flags.ext = rec.flags.ext || !!info.ext;
-			rec.flags.detail = rec.flags.detail || !!info.detail;
-			rec.flags.suffix = rec.flags.suffix || !!info.suffix;
-			rec.flags.schema = rec.flags.schema || !!info.schema;
-			if (info.snippets?.length) {
-				for (const s of info.snippets) if (rec.snippets.length < 3) rec.snippets.push(s);
-			}
-		}
-
-		// BFS
-		if (depth < maxDepth) {
+		// Enqueue further links
+		if (depth < maxDepth && pagesCrawled < maxPages) {
 			const links = extractLinks($, url);
-			for (const link of links) if (!visited.has(link)) queue.push({ url: link, depth: depth + 1 });
+			for (const next of links) {
+				if (!sameHost(startUrl, next)) continue;
+				if (shouldIgnorePath(next)) continue;
+				if (visited.has(next) || enqueued.has(next)) continue;
+				enqueued.add(next);
+				queue.push({ url: next, depth: depth + 1 });
+			}
 		}
 	}
 
-	// Cross-page consolidation + strong-signal gate
+	// Collapse agg into a sorted list with final scores
 	const kept = [];
 	for (const [name, rec] of agg.entries()) {
 		const pageCount = rec.pages.size;
+		const strongSignal = rec.flags.ext || rec.flags.detail || rec.flags.suffix || rec.flags.schema;
 
-		// page frequency boost if not obvious noise
-		const lower = name.toLowerCase();
-		const isNoiseName = NOISE_EXACT.has(lower) || NOISE_STARTS.some((p) => lower.startsWith(p)) || GENERIC_NOUNS.has(lower);
-		const crossPageBoost = !isNoiseName && pageCount >= 2 ? 2 : 0;
+		const baseScore = rec.totalScore;
+		const diversityBoost = Math.log2(1 + pageCount);
 
-		let finalScore = rec.totalScore + crossPageBoost + (rec.flags.schema ? 1 : 0);
+		let finalScore = baseScore * diversityBoost;
+		if (!strongSignal) {
+			finalScore *= 0.4;
+		}
 
-		// STRONG SIGNAL GATE — must satisfy ONE:
-		const strongSignal =
-			rec.flags.suffix || // Inc/Ltd/etc
-			rec.flags.ext || // anchor to off-domain
-			rec.flags.schema || // schema.org says Organization/Brand
-			(finalScore >= SCORE_THRESHOLD && pageCount >= 2); // or repeated in dir-like context
-
-		const keep = strongSignal && finalScore >= SCORE_THRESHOLD;
-
-		if (keep) {
-			kept.push({
-				company: name,
+		if (finalScore < MIN_SCORE || (!strongSignal && finalScore < HARD_MIN_SCORE)) {
+			dropped.push({
+				name,
 				score: finalScore,
 				pagesSeen: pageCount,
-				evidence: {
-					urls: Array.from(rec.urls).slice(0, 5),
-					snippets: rec.snippets,
-					reasons: rec.reasons.slice(0, 10),
-				},
+				droppedBecause: "below_threshold",
+				sampleReasons: rec.reasons.slice(0, 5),
 			});
 		} else {
-			dropped.push({
+			kept.push({
 				company: name,
-				score: finalScore,
-				pagesSeen: pageCount,
-				droppedBecause: strongSignal ? "below_threshold" : "failed_strong_signal_gate",
-				sampleReasons: rec.reasons.slice(0, 5),
+				evidence: {
+					score: finalScore,
+					pagesSeen: pageCount,
+					urls: Array.from(rec.urls),
+					flags: rec.flags,
+					reasons: rec.reasons.slice(0, 10),
+					snippets: rec.snippets.slice(0, 5),
+				},
 			});
 		}
 	}
 
-	kept.sort((a, b) => b.score - a.score || a.company.localeCompare(b.company));
+	kept.sort((a, b) => b.evidence.score - a.evidence.score || a.company.localeCompare(b.company));
 	const keptTrimmed = kept.slice(0, PER_LABEL_KEEP);
 
 	return { pagesCrawled, kept: keptTrimmed, droppedSample: dropped.slice(0, 200) };
@@ -616,21 +710,34 @@ function mergeCompanyLabels(existingArr, labelId, keptWithEvidence) {
 	console.log(`Output → ${OUTPUT_PATH}`);
 	console.log(`Audit  → ${AUDIT_PATH}`);
 	console.log(
-		`Limits: pages/label=${MAX_PAGES}, depth=${MAX_DEPTH}, concurrency=${CONCURRENCY}, threshold=${SCORE_THRESHOLD}, clear=${CLEAR_OUTPUT}\n`
+		`Limits: pages/label=${MAX_PAGES}, depth=${MAX_DEPTH}, concurrency=${CONCURRENCY}, threshold=${SCORE_THRESHOLD}, clear=${CLEAR_OUTPUT}`
 	);
+	console.log(
+		`Timeouts: request=${REQUEST_TIMEOUT}ms, time_limit=${TIME_LIMIT_MINUTES}min, max_candidates_per_label=${MAX_CANDIDATES_PER_LABEL}`
+	);
+	console.log(`Flags: dry_run=${DRY_RUN}, clear_output=${CLEAR_OUTPUT}\n`);
 
 	const tasks = labels.map((label) =>
 		limit(async () => {
-			const { id, name, source_url } = label || {};
+			const { id, name, source_url, seed_urls } = label || {};
 			if (!id || !source_url) return;
+
+			const seeds = Array.isArray(seed_urls) ? seed_urls.filter(Boolean) : [];
 
 			console.log(`\n=== Label: ${name || id} (${id}) ===`);
 			console.log(`Start URL: ${source_url}`);
+			if (seeds.length) {
+				console.log("Seed URLs:");
+				for (const s of seeds) console.log(`  - ${s}`);
+			} else {
+				console.log("Seed URLs: (none)");
+			}
 
 			try {
 				const { pagesCrawled, kept, droppedSample } = await crawlLabel(source_url, {
 					maxPages: MAX_PAGES,
 					maxDepth: MAX_DEPTH,
+					seeds,
 				});
 
 				console.log(`Pages: ${pagesCrawled} | kept: ${kept.length} | dropped(sample): ${droppedSample.length}`);
@@ -642,9 +749,17 @@ function mergeCompanyLabels(existingArr, labelId, keptWithEvidence) {
 					await fs.writeFile(tmp, JSON.stringify(companyLabels, null, 2), "utf8");
 					await fs.rename(tmp, OUTPUT_PATH);
 					console.log(`Merged & wrote → ${OUTPUT_PATH}`);
+				} else if (kept.length === 0) {
+					console.log("No companies kept for this label.");
 				}
 
-				auditAll.push({ labelId: id, name, pagesCrawled, keptPreview: kept.slice(0, 10), droppedSample });
+				auditAll.push({
+					labelId: id,
+					name,
+					pagesCrawled,
+					keptPreview: kept.slice(0, 10),
+					droppedSample,
+				});
 			} catch (err) {
 				console.error(`Error crawling ${id}:`, err?.message || err);
 				auditAll.push({ labelId: id, error: String(err?.message || err) });
@@ -659,6 +774,7 @@ function mergeCompanyLabels(existingArr, labelId, keptWithEvidence) {
 		const tmpA = AUDIT_PATH + ".tmp";
 		await fs.writeFile(tmpA, JSON.stringify(auditAll, null, 2), "utf8");
 		await fs.rename(tmpA, AUDIT_PATH);
+		console.log(`Wrote audit → ${AUDIT_PATH}`);
 	} catch (e) {
 		console.error("Failed writing audit file:", e?.message || e);
 	}

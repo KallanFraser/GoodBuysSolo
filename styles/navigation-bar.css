@@ -1,0 +1,111 @@
+/* -------------------- NAV BAR SHELL -------------------- */
+
+#navigation-bar {
+	position: sticky;
+	top: 0;
+	z-index: 20;
+
+	width: 100%;
+	height: 4.5rem;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: 0 2.5rem; /* a bit smaller */
+
+	background: rgba(0, 0, 0, 0.65);
+	backdrop-filter: blur(10px);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* -------------------- LOGO -------------------- */
+
+.nav-logo {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	text-decoration: none;
+	color: #f5f5f5;
+}
+
+.nav-logo img {
+	height: 2.6rem;
+	width: auto; /* <-- no stretch */
+	object-fit: contain;
+	display: block;
+}
+
+.nav-logo-text {
+	font-size: 1.1rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+
+/* -------------------- LINKS -------------------- */
+
+.nav-links {
+	display: flex;
+	align-items: center;
+	gap: 1.75rem;
+}
+
+/* Reuse your class name */
+.navigation-bar-button {
+	position: relative;
+	color: #f5f5f5;
+	text-decoration: none;
+
+	font-size: 0.98rem;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+
+	display: inline-flex;
+	align-items: center;
+
+	padding-block: 0.15rem;
+
+	transition: transform 0.18s ease-out, color 0.18s ease-out;
+}
+
+/* subtle lift */
+.navigation-bar-button:hover {
+	transform: translateY(-1px);
+	color: #a5ffd3;
+}
+
+/* animated underline */
+.navigation-bar-button::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: -0.3rem;
+	width: 0;
+	height: 2px;
+	border-radius: 999px;
+
+	/* 🔽 updated to green → dark green → deeper green */
+	background: linear-gradient(90deg, #bbf7d0, #4ade80, #15803d);
+
+	transition: width 0.2s ease-out;
+}
+
+.navigation-bar-button:hover::after {
+	width: 100%;
+}
+
+/* -------------------- BASIC RESPONSIVE TWEAK -------------------- */
+
+@media (max-width: 768px) {
+	#navigation-bar {
+		padding: 0 1.25rem; /* tighter on mobile */
+	}
+
+	.nav-links {
+		gap: 0.75rem;
+		font-size: 0.9rem;
+		flex-wrap: wrap; /* let them wrap instead of sticking off-screen */
+	}
+}

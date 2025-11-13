@@ -147,4 +147,66 @@ export default [
 	"toner",
 	"shampoo",
 	"soap",
+
+	"add grayscale",
+	"add lightbackground",
+
+	"aga membership form",
+	"aga products",
+	"agw farmer services",
+	"agw policy and guidelines",
+
+	"amina's full story",
+	"todd's full story",
+	"yogeshbhai's full story",
+
+	"animal by-products statement",
+	"animal welfare approved faq",
+
+	"anker methodology",
+	"anker research institute",
+	"arc platform",
+
+	"b impact",
+	"baseline requirements",
+	"basic award criteria (pdf)",
+	"bpi membership",
+
+	"bangladesh",
+	"bangladesh crackdown",
+	"csddd",
+	"eastern europe",
+	"europe floor wage",
+	"nepal",
+	"pakistan",
+	"sri lanka",
+
+	"nike steals",
+	"sign the accord",
+
+	"compostable products in foodservice ordinances",
+	"consumer products",
+	"find certified products",
+
+	"check our faqs",
+	"click here",
+	"click here for membership hub",
+
+	"google privacy policy",
+	"green products standard",
+	"labeling faq",
+	"licensing & membership",
+	"products a-z",
+
+	"rapid results institute",
+	"research",
+
+	"resources and energy-efficient software products",
+	"slaughter guidelines for poultry",
+	"solar-powered products",
+
+	"ambassador council",
+	"director council",
+	"marine stewardship council",
+	"vegan trade council",
 ];
