@@ -8,7 +8,8 @@
 		"start": "next start",
 		"build:static": "next build",
 		"scrape:companies": "dotenv -e .env.scraper -- node ./scripts/scrape-company-labels/run.js",
-		"scrape:companies:dry": "DRY_RUN=1 npm run scrape:companies"
+		"scrape:companies:dry": "DRY_RUN=1 npm run scrape:companies",
+		"generate:ecolabels": "node ./scripts/scrape-eco-labels/generate-eco-labels.js"
 	},
 	"repository": {
 		"type": "git",
