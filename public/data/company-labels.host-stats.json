@@ -1,658 +1,452 @@
 {
-  "search.fsc.org": {
-    "host": "search.fsc.org",
-    "totalRequests": 300,
-    "successHtml": 300,
-    "nonHtmlOrEmpty": 0,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 2,
-      "404": 298
-    },
-    "lastStatus": 200,
-    "lastError": null,
-    "lastDurationMs": 4077,
-    "lastSeenAt": "2025-11-14T09:49:08.445Z"
-  },
   "www.bcorporation.net": {
     "host": "www.bcorporation.net",
-    "totalRequests": 435,
-    "successHtml": 435,
+    "totalRequests": 707,
+    "successHtml": 707,
     "nonHtmlOrEmpty": 0,
     "blockCount": 0,
     "errorCount": 0,
     "statusCounts": {
-      "200": 140,
-      "404": 295
+      "200": 400,
+      "404": 307
     },
     "lastStatus": 200,
     "lastError": null,
-    "lastDurationMs": 38,
-    "lastSeenAt": "2025-11-14T09:49:07.149Z"
-  },
-  "cleanclothes.org": {
-    "host": "cleanclothes.org",
-    "totalRequests": 327,
-    "successHtml": 324,
-    "nonHtmlOrEmpty": 3,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 28,
-      "404": 296,
-      "500": 3
-    },
-    "lastStatus": 200,
-    "lastError": null,
-    "lastDurationMs": 691,
-    "lastSeenAt": "2025-11-14T09:46:22.099Z"
-  },
-  "wrapcompliance.org": {
-    "host": "wrapcompliance.org",
-    "totalRequests": 439,
-    "successHtml": 439,
-    "nonHtmlOrEmpty": 0,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 140,
-      "404": 296,
-      "500": 3
-    },
-    "lastStatus": 200,
-    "lastError": null,
-    "lastDurationMs": 215,
-    "lastSeenAt": "2025-11-14T09:53:18.252Z"
-  },
-  "canopyplanet.org": {
-    "host": "canopyplanet.org",
-    "totalRequests": 386,
-    "successHtml": 386,
-    "nonHtmlOrEmpty": 0,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 88,
-      "404": 298
-    },
-    "lastStatus": 200,
-    "lastError": null,
-    "lastDurationMs": 27,
-    "lastSeenAt": "2025-11-14T09:46:10.910Z"
-  },
-  "global-standard.org": {
-    "host": "global-standard.org",
-    "totalRequests": 1,
-    "successHtml": 1,
-    "nonHtmlOrEmpty": 0,
-    "blockCount": 0,
-    "errorCount": 546,
-    "statusCounts": {
-      "200": 1
-    },
-    "lastStatus": 200,
-    "lastError": "Maximum number of redirects exceeded",
-    "lastDurationMs": 3512,
-    "lastSeenAt": "2025-11-14T10:19:18.759Z"
+    "lastDurationMs": 95,
+    "lastSeenAt": "2026-01-09T18:38:05.305Z"
   },
   "bettercotton.org": {
     "host": "bettercotton.org",
-    "totalRequests": 480,
-    "successHtml": 429,
-    "nonHtmlOrEmpty": 51,
+    "totalRequests": 693,
+    "successHtml": 689,
+    "nonHtmlOrEmpty": 4,
     "blockCount": 0,
-    "errorCount": 3,
+    "errorCount": 9,
     "statusCounts": {
-      "200": 191,
+      "200": 404,
       "404": 289
     },
     "lastStatus": 200,
     "lastError": "unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca",
-    "lastDurationMs": 233,
-    "lastSeenAt": "2025-11-14T09:56:22.495Z"
-  },
-  "textileexchange.org": {
-    "host": "textileexchange.org",
-    "totalRequests": 1702,
-    "successHtml": 1690,
-    "nonHtmlOrEmpty": 12,
-    "blockCount": 0,
-    "errorCount": 24,
-    "statusCounts": {
-      "200": 572,
-      "404": 1130
-    },
-    "lastStatus": 200,
-    "lastError": "Unsupported protocol webcal:",
-    "lastDurationMs": 107,
-    "lastSeenAt": "2025-11-14T10:13:36.843Z"
-  },
-  "www.fairtradecertified.org": {
-    "host": "www.fairtradecertified.org",
-    "totalRequests": 336,
-    "successHtml": 333,
-    "nonHtmlOrEmpty": 3,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 38,
-      "404": 298
-    },
-    "lastStatus": 200,
-    "lastError": null,
-    "lastDurationMs": 1741,
-    "lastSeenAt": "2025-11-14T09:45:00.801Z"
-  },
-  "www.rainforest-alliance.org": {
-    "host": "www.rainforest-alliance.org",
-    "totalRequests": 426,
-    "successHtml": 425,
-    "nonHtmlOrEmpty": 1,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 141,
-      "404": 285
-    },
-    "lastStatus": 200,
-    "lastError": null,
-    "lastDurationMs": 1318,
-    "lastSeenAt": "2025-11-14T09:55:57.297Z"
-  },
-  "www.bluesign.com": {
-    "host": "www.bluesign.com",
-    "totalRequests": 352,
-    "successHtml": 308,
-    "nonHtmlOrEmpty": 44,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 62,
-      "404": 290
-    },
-    "lastStatus": 200,
-    "lastError": null,
-    "lastDurationMs": 327,
-    "lastSeenAt": "2025-11-14T09:50:51.010Z"
+    "lastDurationMs": 394,
+    "lastSeenAt": "2026-01-09T18:41:52.985Z"
   },
   "www.soilassociation.org": {
     "host": "www.soilassociation.org",
-    "totalRequests": 441,
-    "successHtml": 437,
-    "nonHtmlOrEmpty": 4,
+    "totalRequests": 740,
+    "successHtml": 702,
+    "nonHtmlOrEmpty": 38,
     "blockCount": 0,
     "errorCount": 0,
     "statusCounts": {
-      "200": 144,
-      "404": 295,
-      "500": 2
-    },
-    "lastStatus": 200,
-    "lastError": null,
-    "lastDurationMs": 390,
-    "lastSeenAt": "2025-11-14T09:54:12.683Z"
-  },
-  "www.oeko-tex.com": {
-    "host": "www.oeko-tex.com",
-    "totalRequests": 974,
-    "successHtml": 722,
-    "nonHtmlOrEmpty": 252,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 378,
-      "404": 596
-    },
-    "lastStatus": 200,
-    "lastError": null,
-    "lastDurationMs": 246,
-    "lastSeenAt": "2025-11-14T10:07:26.707Z"
-  },
-  "c2ccertified.org": {
-    "host": "c2ccertified.org",
-    "totalRequests": 301,
-    "successHtml": 301,
-    "nonHtmlOrEmpty": 0,
-    "blockCount": 0,
-    "errorCount": 1,
-    "statusCounts": {
-      "200": 4,
-      "404": 297
-    },
-    "lastStatus": 200,
-    "lastError": "timeout of 15000ms exceeded",
-    "lastDurationMs": 1598,
-    "lastSeenAt": "2025-11-14T09:50:13.149Z"
-  },
-  "www.nordic-swan-ecolabel.org": {
-    "host": "www.nordic-swan-ecolabel.org",
-    "totalRequests": 465,
-    "successHtml": 388,
-    "nonHtmlOrEmpty": 77,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 167,
-      "404": 298
-    },
-    "lastStatus": 200,
-    "lastError": null,
-    "lastDurationMs": 43,
-    "lastSeenAt": "2025-11-14T10:01:06.000Z"
-  },
-  "www.discoverzq.com": {
-    "host": "www.discoverzq.com",
-    "totalRequests": 334,
-    "successHtml": 325,
-    "nonHtmlOrEmpty": 9,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 44,
-      "404": 290
-    },
-    "lastStatus": 200,
-    "lastError": null,
-    "lastDurationMs": 28,
-    "lastSeenAt": "2025-11-14T09:57:06.220Z"
-  },
-  "www.fairwear.org": {
-    "host": "www.fairwear.org",
-    "totalRequests": 140,
-    "successHtml": 140,
-    "nonHtmlOrEmpty": 0,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 140
-    },
-    "lastStatus": 200,
-    "lastError": null,
-    "lastDurationMs": 167,
-    "lastSeenAt": "2025-11-14T09:54:52.409Z"
-  },
-  "www.fairtrade.net": {
-    "host": "www.fairtrade.net",
-    "totalRequests": 367,
-    "successHtml": 351,
-    "nonHtmlOrEmpty": 16,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 65,
+      "200": 438,
       "404": 302
     },
     "lastStatus": 200,
     "lastError": null,
-    "lastDurationMs": 36,
-    "lastSeenAt": "2025-11-14T10:05:42.515Z"
+    "lastDurationMs": 343,
+    "lastSeenAt": "2026-01-09T18:42:39.687Z"
   },
-  "sa-intl.org": {
-    "host": "sa-intl.org",
-    "totalRequests": 449,
-    "successHtml": 436,
-    "nonHtmlOrEmpty": 13,
+  "www.oeko-tex.com": {
+    "host": "www.oeko-tex.com",
+    "totalRequests": 1505,
+    "successHtml": 1187,
+    "nonHtmlOrEmpty": 318,
     "blockCount": 0,
     "errorCount": 0,
     "statusCounts": {
-      "200": 153,
-      "404": 296
+      "200": 890,
+      "404": 615
     },
     "lastStatus": 200,
     "lastError": null,
-    "lastDurationMs": 125,
-    "lastSeenAt": "2025-11-14T10:10:49.599Z"
+    "lastDurationMs": 311,
+    "lastSeenAt": "2026-01-09T19:00:30.037Z"
   },
-  "www.carbontrust.com": {
-    "host": "www.carbontrust.com",
-    "totalRequests": 441,
-    "successHtml": 441,
-    "nonHtmlOrEmpty": 0,
-    "blockCount": 3,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 140,
-      "403": 3,
-      "404": 298
-    },
-    "lastStatus": 200,
-    "lastError": null,
-    "lastDurationMs": 294,
-    "lastSeenAt": "2025-11-14T10:14:53.820Z"
-  },
-  "www.climateimpact.com": {
-    "host": "www.climateimpact.com",
-    "totalRequests": 373,
-    "successHtml": 373,
+  "search.fsc.org": {
+    "host": "search.fsc.org",
+    "totalRequests": 304,
+    "successHtml": 304,
     "nonHtmlOrEmpty": 0,
     "blockCount": 0,
     "errorCount": 0,
     "statusCounts": {
-      "200": 76,
-      "404": 297
+      "200": 4,
+      "404": 300
     },
     "lastStatus": 200,
     "lastError": null,
-    "lastDurationMs": 834,
-    "lastSeenAt": "2025-11-14T10:11:41.305Z"
+    "lastDurationMs": 994,
+    "lastSeenAt": "2026-01-09T18:27:45.729Z"
   },
-  "www.ecolabelindex.com": {
-    "host": "www.ecolabelindex.com",
-    "totalRequests": 438,
-    "successHtml": 438,
+  "www.bluesign.com": {
+    "host": "www.bluesign.com",
+    "totalRequests": 336,
+    "successHtml": 336,
     "nonHtmlOrEmpty": 0,
     "blockCount": 0,
     "errorCount": 0,
     "statusCounts": {
-      "200": 140,
-      "404": 298
+      "200": 336
     },
     "lastStatus": 200,
     "lastError": null,
-    "lastDurationMs": 110,
-    "lastSeenAt": "2025-11-14T10:10:07.755Z"
+    "lastDurationMs": 11072,
+    "lastSeenAt": "2026-01-09T18:53:10.334Z"
   },
-  "crueltyfreeinternational.org": {
-    "host": "crueltyfreeinternational.org",
-    "totalRequests": 315,
-    "successHtml": 306,
+  "c2ccertified.org": {
+    "host": "c2ccertified.org",
+    "totalRequests": 494,
+    "successHtml": 494,
+    "nonHtmlOrEmpty": 0,
+    "blockCount": 0,
+    "errorCount": 1,
+    "statusCounts": {
+      "200": 187,
+      "404": 307
+    },
+    "lastStatus": 200,
+    "lastError": "timeout of 15000ms exceeded",
+    "lastDurationMs": 1212,
+    "lastSeenAt": "2026-01-09T18:37:39.535Z"
+  },
+  "cleanclothes.org": {
+    "host": "cleanclothes.org",
+    "totalRequests": 727,
+    "successHtml": 704,
+    "nonHtmlOrEmpty": 23,
+    "blockCount": 0,
+    "errorCount": 0,
+    "statusCounts": {
+      "200": 423,
+      "401": 2,
+      "404": 299,
+      "500": 3
+    },
+    "lastStatus": 200,
+    "lastError": null,
+    "lastDurationMs": 656,
+    "lastSeenAt": "2026-01-09T18:45:21.797Z"
+  },
+  "textileexchange.org": {
+    "host": "textileexchange.org",
+    "totalRequests": 2230,
+    "successHtml": 2214,
+    "nonHtmlOrEmpty": 16,
+    "blockCount": 0,
+    "errorCount": 33,
+    "statusCounts": {
+      "200": 1101,
+      "404": 1129
+    },
+    "lastStatus": 200,
+    "lastError": "Unsupported protocol webcal:",
+    "lastDurationMs": 2307,
+    "lastSeenAt": "2026-01-09T19:00:31.897Z"
+  },
+  "canopyplanet.org": {
+    "host": "canopyplanet.org",
+    "totalRequests": 501,
+    "successHtml": 501,
+    "nonHtmlOrEmpty": 0,
+    "blockCount": 0,
+    "errorCount": 0,
+    "statusCounts": {
+      "200": 201,
+      "404": 300
+    },
+    "lastStatus": 200,
+    "lastError": null,
+    "lastDurationMs": 952,
+    "lastSeenAt": "2026-01-09T18:33:01.892Z"
+  },
+  "www.nordic-swan-ecolabel.org": {
+    "host": "www.nordic-swan-ecolabel.org",
+    "totalRequests": 991,
+    "successHtml": 499,
+    "nonHtmlOrEmpty": 492,
+    "blockCount": 0,
+    "errorCount": 0,
+    "statusCounts": {
+      "200": 675,
+      "404": 316
+    },
+    "lastStatus": 200,
+    "lastError": null,
+    "lastDurationMs": 287,
+    "lastSeenAt": "2026-01-09T18:47:44.930Z"
+  },
+  "wrapcompliance.org": {
+    "host": "wrapcompliance.org",
+    "totalRequests": 744,
+    "successHtml": 720,
+    "nonHtmlOrEmpty": 24,
+    "blockCount": 0,
+    "errorCount": 0,
+    "statusCounts": {
+      "200": 424,
+      "404": 299,
+      "500": 18,
+      "502": 3
+    },
+    "lastStatus": 200,
+    "lastError": null,
+    "lastDurationMs": 927,
+    "lastSeenAt": "2026-01-09T18:49:36.363Z"
+  },
+  "www.discoverzq.com": {
+    "host": "www.discoverzq.com",
+    "totalRequests": 405,
+    "successHtml": 396,
     "nonHtmlOrEmpty": 9,
     "blockCount": 0,
     "errorCount": 0,
     "statusCounts": {
-      "200": 17,
+      "200": 112,
+      "404": 293
+    },
+    "lastStatus": 200,
+    "lastError": null,
+    "lastDurationMs": 196,
+    "lastSeenAt": "2026-01-09T18:28:31.166Z"
+  },
+  "global-standard.org": {
+    "host": "global-standard.org",
+    "totalRequests": 2,
+    "successHtml": 2,
+    "nonHtmlOrEmpty": 0,
+    "blockCount": 0,
+    "errorCount": 516,
+    "statusCounts": {
+      "200": 2
+    },
+    "lastStatus": 200,
+    "lastError": "Maximum number of redirects exceeded",
+    "lastDurationMs": 3943,
+    "lastSeenAt": "2026-01-09T19:00:31.457Z"
+  },
+  "www.fairtradecertified.org": {
+    "host": "www.fairtradecertified.org",
+    "totalRequests": 580,
+    "successHtml": 531,
+    "nonHtmlOrEmpty": 49,
+    "blockCount": 0,
+    "errorCount": 0,
+    "statusCounts": {
+      "200": 273,
+      "404": 307
+    },
+    "lastStatus": 200,
+    "lastError": null,
+    "lastDurationMs": 211,
+    "lastSeenAt": "2026-01-09T18:37:57.853Z"
+  },
+  "www.rainforest-alliance.org": {
+    "host": "www.rainforest-alliance.org",
+    "totalRequests": 688,
+    "successHtml": 687,
+    "nonHtmlOrEmpty": 1,
+    "blockCount": 0,
+    "errorCount": 0,
+    "statusCounts": {
+      "200": 401,
+      "404": 287
+    },
+    "lastStatus": 200,
+    "lastError": null,
+    "lastDurationMs": 1404,
+    "lastSeenAt": "2026-01-09T18:54:43.760Z"
+  },
+  "www.fairwear.org": {
+    "host": "www.fairwear.org",
+    "totalRequests": 302,
+    "successHtml": 302,
+    "nonHtmlOrEmpty": 0,
+    "blockCount": 0,
+    "errorCount": 0,
+    "statusCounts": {
+      "200": 302
+    },
+    "lastStatus": 200,
+    "lastError": null,
+    "lastDurationMs": 141,
+    "lastSeenAt": "2026-01-09T18:46:17.214Z"
+  },
+  "www.fairtrade.net": {
+    "host": "www.fairtrade.net",
+    "totalRequests": 703,
+    "successHtml": 658,
+    "nonHtmlOrEmpty": 45,
+    "blockCount": 0,
+    "errorCount": 0,
+    "statusCounts": {
+      "200": 401,
+      "404": 302
+    },
+    "lastStatus": 200,
+    "lastError": null,
+    "lastDurationMs": 126,
+    "lastSeenAt": "2026-01-09T19:00:30.401Z"
+  },
+  "sa-intl.org": {
+    "host": "sa-intl.org",
+    "totalRequests": 449,
+    "successHtml": 414,
+    "nonHtmlOrEmpty": 35,
+    "blockCount": 0,
+    "errorCount": 0,
+    "statusCounts": {
+      "200": 150,
+      "404": 298,
+      "500": 1
+    },
+    "lastStatus": 200,
+    "lastError": null,
+    "lastDurationMs": 2283,
+    "lastSeenAt": "2026-01-09T19:00:32.320Z"
+  },
+  "www.carbontrust.com": {
+    "host": "www.carbontrust.com",
+    "totalRequests": 473,
+    "successHtml": 468,
+    "nonHtmlOrEmpty": 5,
+    "blockCount": 6,
+    "errorCount": 0,
+    "statusCounts": {
+      "200": 167,
+      "403": 6,
+      "404": 300
+    },
+    "lastStatus": 200,
+    "lastError": null,
+    "lastDurationMs": 235,
+    "lastSeenAt": "2026-01-09T19:00:31.616Z"
+  },
+  "www.climateimpact.com": {
+    "host": "www.climateimpact.com",
+    "totalRequests": 389,
+    "successHtml": 389,
+    "nonHtmlOrEmpty": 0,
+    "blockCount": 0,
+    "errorCount": 0,
+    "statusCounts": {
+      "200": 91,
       "404": 298
     },
     "lastStatus": 200,
     "lastError": null,
-    "lastDurationMs": 455,
-    "lastSeenAt": "2025-11-14T10:07:25.461Z"
+    "lastDurationMs": 718,
+    "lastSeenAt": "2026-01-09T19:00:30.495Z"
+  },
+  "www.ecolabelindex.com": {
+    "host": "www.ecolabelindex.com",
+    "totalRequests": 490,
+    "successHtml": 490,
+    "nonHtmlOrEmpty": 0,
+    "blockCount": 0,
+    "errorCount": 0,
+    "statusCounts": {
+      "200": 190,
+      "404": 300
+    },
+    "lastStatus": 200,
+    "lastError": null,
+    "lastDurationMs": 195,
+    "lastSeenAt": "2026-01-09T19:00:31.071Z"
+  },
+  "crueltyfreeinternational.org": {
+    "host": "crueltyfreeinternational.org",
+    "totalRequests": 291,
+    "successHtml": 291,
+    "nonHtmlOrEmpty": 0,
+    "blockCount": 0,
+    "errorCount": 0,
+    "statusCounts": {
+      "200": 6,
+      "404": 285
+    },
+    "lastStatus": 404,
+    "lastError": null,
+    "lastDurationMs": 1053,
+    "lastSeenAt": "2026-01-09T19:00:30.532Z"
   },
   "www.naturallygrown.org": {
     "host": "www.naturallygrown.org",
-    "totalRequests": 424,
-    "successHtml": 422,
-    "nonHtmlOrEmpty": 2,
+    "totalRequests": 250,
+    "successHtml": 250,
+    "nonHtmlOrEmpty": 0,
     "blockCount": 0,
     "errorCount": 0,
     "statusCounts": {
-      "200": 142,
-      "404": 282
+      "200": 18,
+      "404": 232
     },
-    "lastStatus": 200,
+    "lastStatus": 404,
     "lastError": null,
-    "lastDurationMs": 134,
-    "lastSeenAt": "2025-11-14T10:14:03.087Z"
+    "lastDurationMs": 1025,
+    "lastSeenAt": "2026-01-09T19:00:32.457Z"
   },
   "organic.ams.usda.gov": {
     "host": "organic.ams.usda.gov",
-    "totalRequests": 299,
+    "totalRequests": 290,
     "successHtml": 1,
-    "nonHtmlOrEmpty": 298,
+    "nonHtmlOrEmpty": 289,
     "blockCount": 0,
     "errorCount": 0,
     "statusCounts": {
-      "200": 299
+      "200": 290
     },
     "lastStatus": 200,
     "lastError": null,
-    "lastDurationMs": 92,
-    "lastSeenAt": "2025-11-14T10:07:12.516Z"
+    "lastDurationMs": 214,
+    "lastSeenAt": "2026-01-09T19:00:31.008Z"
   },
   "auduboninternational.org": {
     "host": "auduboninternational.org",
-    "totalRequests": 328,
-    "successHtml": 314,
-    "nonHtmlOrEmpty": 14,
+    "totalRequests": 149,
+    "successHtml": 149,
+    "nonHtmlOrEmpty": 0,
     "blockCount": 0,
     "errorCount": 0,
     "statusCounts": {
-      "200": 29,
-      "404": 299
+      "200": 2,
+      "404": 147
     },
-    "lastStatus": 200,
+    "lastStatus": 404,
     "lastError": null,
-    "lastDurationMs": 266,
-    "lastSeenAt": "2025-11-14T10:13:13.345Z"
+    "lastDurationMs": 1401,
+    "lastSeenAt": "2026-01-09T19:00:32.287Z"
   },
   "www.bapcertification.org": {
     "host": "www.bapcertification.org",
-    "totalRequests": 408,
-    "successHtml": 310,
-    "nonHtmlOrEmpty": 98,
+    "totalRequests": 185,
+    "successHtml": 185,
+    "nonHtmlOrEmpty": 0,
     "blockCount": 0,
-    "errorCount": 0,
+    "errorCount": 1,
     "statusCounts": {
-      "200": 113,
-      "404": 295
+      "200": 5,
+      "404": 180
     },
-    "lastStatus": 200,
-    "lastError": null,
-    "lastDurationMs": 139,
-    "lastSeenAt": "2025-11-14T10:19:02.221Z"
+    "lastStatus": 404,
+    "lastError": "timeout of 15000ms exceeded",
+    "lastDurationMs": 177,
+    "lastSeenAt": "2026-01-09T19:00:29.933Z"
   },
   "vegan.org": {
     "host": "vegan.org",
-    "totalRequests": 311,
-    "successHtml": 311,
-    "nonHtmlOrEmpty": 0,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 28,
-      "404": 283
-    },
-    "lastStatus": 200,
-    "lastError": null,
-    "lastDurationMs": 489,
-    "lastSeenAt": "2025-11-14T10:19:06.302Z"
-  },
-  "agreenerworld.org": {
-    "host": "agreenerworld.org",
-    "totalRequests": 192,
-    "successHtml": 192,
-    "nonHtmlOrEmpty": 0,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 17,
-      "404": 175
-    },
-    "lastStatus": 404,
-    "lastError": null,
-    "lastDurationMs": 1309,
-    "lastSeenAt": "2025-11-14T10:19:05.861Z"
-  },
-  "www.energystar.gov": {
-    "host": "www.energystar.gov",
-    "totalRequests": 192,
-    "successHtml": 192,
-    "nonHtmlOrEmpty": 0,
-    "blockCount": 3,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 2,
-      "403": 3,
-      "404": 187
-    },
-    "lastStatus": 404,
-    "lastError": null,
-    "lastDurationMs": 512,
-    "lastSeenAt": "2025-11-14T10:19:07.133Z"
-  },
-  "certified.greenseal.org": {
-    "host": "certified.greenseal.org",
-    "totalRequests": 258,
-    "successHtml": 258,
-    "nonHtmlOrEmpty": 0,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 4,
-      "404": 254
-    },
-    "lastStatus": 404,
-    "lastError": null,
-    "lastDurationMs": 254,
-    "lastSeenAt": "2025-11-14T10:19:07.308Z"
-  },
-  "wildlifefriendly.org": {
-    "host": "wildlifefriendly.org",
-    "totalRequests": 122,
-    "successHtml": 30,
-    "nonHtmlOrEmpty": 92,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "404": 122
-    },
-    "lastStatus": 404,
-    "lastError": null,
-    "lastDurationMs": 149,
-    "lastSeenAt": "2025-11-14T10:19:05.777Z"
-  },
-  "nationalzoo.si.edu": {
-    "host": "nationalzoo.si.edu",
-    "totalRequests": 219,
-    "successHtml": 219,
-    "nonHtmlOrEmpty": 0,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 2,
-      "404": 217
-    },
-    "lastStatus": 404,
-    "lastError": null,
-    "lastDurationMs": 750,
-    "lastSeenAt": "2025-11-14T10:19:07.334Z"
-  },
-  "carbonfund.org": {
-    "host": "carbonfund.org",
-    "totalRequests": 140,
-    "successHtml": 140,
-    "nonHtmlOrEmpty": 0,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 140
-    },
-    "lastStatus": 200,
-    "lastError": null,
-    "lastDurationMs": 280,
-    "lastSeenAt": "2025-11-14T10:16:48.514Z"
-  },
-  "www.theclimateregistry.org": {
-    "host": "www.theclimateregistry.org",
-    "totalRequests": 150,
-    "successHtml": 150,
-    "nonHtmlOrEmpty": 0,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 8,
-      "404": 142
-    },
-    "lastStatus": 404,
-    "lastError": null,
-    "lastDurationMs": 956,
-    "lastSeenAt": "2025-11-14T10:19:07.603Z"
-  },
-  "www.usgbc.org": {
-    "host": "www.usgbc.org",
-    "totalRequests": 154,
-    "successHtml": 154,
-    "nonHtmlOrEmpty": 0,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 4,
-      "404": 150
-    },
-    "lastStatus": 404,
-    "lastError": null,
-    "lastDurationMs": 377,
-    "lastSeenAt": "2025-11-14T10:19:05.736Z"
-  },
-  "environmental-data.ec.europa.eu": {
-    "host": "environmental-data.ec.europa.eu",
     "totalRequests": 130,
     "successHtml": 130,
     "nonHtmlOrEmpty": 0,
     "blockCount": 0,
     "errorCount": 0,
     "statusCounts": {
-      "200": 1,
-      "404": 129
+      "200": 15,
+      "404": 115
     },
     "lastStatus": 404,
     "lastError": null,
-    "lastDurationMs": 671,
-    "lastSeenAt": "2025-11-14T10:19:06.272Z"
-  },
-  "euorganicproducts.eu": {
-    "host": "euorganicproducts.eu",
-    "totalRequests": 133,
-    "successHtml": 133,
-    "nonHtmlOrEmpty": 0,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 1,
-      "404": 132
-    },
-    "lastStatus": 404,
-    "lastError": null,
-    "lastDurationMs": 335,
-    "lastSeenAt": "2025-11-14T10:19:07.204Z"
-  },
-  "www.msc.org": {
-    "host": "www.msc.org",
-    "totalRequests": 104,
-    "successHtml": 104,
-    "nonHtmlOrEmpty": 0,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 4,
-      "404": 100
-    },
-    "lastStatus": 404,
-    "lastError": null,
-    "lastDurationMs": 574,
-    "lastSeenAt": "2025-11-14T10:19:07.528Z"
-  },
-  "asc-aqua.org": {
-    "host": "asc-aqua.org",
-    "totalRequests": 42,
-    "successHtml": 42,
-    "nonHtmlOrEmpty": 0,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 4,
-      "404": 38
-    },
-    "lastStatus": 404,
-    "lastError": null,
-    "lastDurationMs": 1308,
-    "lastSeenAt": "2025-11-14T10:19:06.930Z"
-  },
-  "pefc.org": {
-    "host": "pefc.org",
-    "totalRequests": 2,
-    "successHtml": 2,
-    "nonHtmlOrEmpty": 0,
-    "blockCount": 0,
-    "errorCount": 0,
-    "statusCounts": {
-      "200": 1,
-      "404": 1
-    },
-    "lastStatus": 404,
-    "lastError": null,
-    "lastDurationMs": 305,
-    "lastSeenAt": "2025-11-14T10:19:07.425Z"
+    "lastDurationMs": 1094,
+    "lastSeenAt": "2026-01-09T19:00:30.112Z"
   }
 }

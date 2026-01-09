@@ -6,32 +6,23 @@ import { ENV, THRESHOLDS, DEADLINE } from "./config.js";
 import DIRECTORY_HINTS from "./rules/directory-hints.js";
 
 import { delayFor, fetchHtml, getHostPenalty } from "./http.js";
-import {
-	stripNoisySections,
-	parseJsonLD,
-	extractLinks,
-	extractCompaniesGeneric,
-	extractCompaniesPerSite,
-	scoreCandidates,
-	shouldIgnorePath,
-	sameHost,
-} from "./heuristics.js";
-import { injectKnownCompaniesFromHistory, getKnownCompanySet } from "./known-companies.js";
+import { extractCompanies, stripNoisySections, shouldIgnorePath, sameHost } from "./heuristics.js";
 
 const { MAX_CANDIDATES_PER_LABEL } = ENV;
-const { MIN_SCORE, HARD_MIN_SCORE } = THRESHOLDS;
+const { MIN_SCORE } = THRESHOLDS;
 
 export async function crawlLabel(startUrl, { maxPages, maxDepth, seeds: extraSeeds }) {
 	const origin = new URL(startUrl).origin;
-	const hostname = new URL(startUrl).host;
+	// const hostname = new URL(startUrl).host; // No longer needed for site-specific configs
 
+	// 1. Build the seed set (startUrl + directory hints + extra seeds)
 	const seeds = new Set([startUrl]);
 	for (const hint of DIRECTORY_HINTS) {
 		try {
 			const u = new URL(hint, origin).toString();
 			if (!shouldIgnorePath(u)) seeds.add(u);
 		} catch {
-			// ignore bad URLs from hints
+			// ignore bad URLs
 		}
 	}
 
@@ -43,11 +34,12 @@ export async function crawlLabel(startUrl, { maxPages, maxDepth, seeds: extraSee
 				if (!sameHost(startUrl, u)) continue;
 				if (!shouldIgnorePath(u)) seeds.add(u);
 			} catch {
-				// ignore bad URLs from label seed_urls
+				// ignore
 			}
 		}
 	}
 
+	// 2. Initialize Queue
 	const queue = [];
 	const enqueued = new Set();
 
@@ -59,13 +51,14 @@ export async function crawlLabel(startUrl, { maxPages, maxDepth, seeds: extraSee
 	}
 
 	const visited = new Set();
-	const agg = new Map(); // name -> { totalScore, reasons[], urls Set, pages Set, flags, known, snippets }
+	const agg = new Map();
+	// agg structure: name -> { totalScore, pages: Set, snippets: [], reasons: [] }
+
 	const dropped = [];
 	let pagesCrawled = 0;
 	let cursor = 0;
 
-	const knownCompanySet = getKnownCompanySet();
-
+	// 3. Main Crawl Loop
 	while (cursor < queue.length && pagesCrawled < maxPages) {
 		if (Date.now() > DEADLINE) {
 			console.log("  [STOP] Global time limit reached, stopping crawl for this label.");
@@ -92,115 +85,83 @@ export async function crawlLabel(startUrl, { maxPages, maxDepth, seeds: extraSee
 
 		pagesCrawled++;
 		const $ = cheerio.load(html);
+
+		// Clean up junk before processing
 		stripNoisySections($, url);
 
-		const { orgs: ldOrgs, lists: ldList } = parseJsonLD($);
+		// --- NEW EXTRACTION LOGIC ---
+		// This now relies on the Matcher (Safe vs Ambiguous list)
+		const findings = extractCompanies($, url);
 
-		const ldSet = new Set([...ldOrgs, ...ldList]);
-
-		let names = extractCompaniesPerSite($, hostname);
-		if (!names || names.length === 0) {
-			names = extractCompaniesGeneric($);
-		}
-
-		let mergedNames = Array.from(new Set([...names, ...ldSet]));
-
-		mergedNames = injectKnownCompaniesFromHistory($, mergedNames);
-
-		if (mergedNames.length > 0) {
-			const scoredMap = scoreCandidates($, url, mergedNames, knownCompanySet);
-
-			for (const [name, info] of scoredMap.entries()) {
-				const hasStrongSignal = info.ext || info.detail || info.suffix || info.schema || info.known;
-
-				if (info.score < MIN_SCORE && !hasStrongSignal) {
-					dropped.push({
-						name,
-						url,
-						reason: "failed_score_filter",
-						score: info.score,
-					});
-					continue;
-				}
-
-				if (!agg.has(name)) {
-					agg.set(name, {
+		if (findings.length > 0) {
+			for (const { company, evidence } of findings) {
+				if (!agg.has(company)) {
+					agg.set(company, {
 						totalScore: 0,
-						reasons: [],
-						urls: new Set(),
 						pages: new Set(),
-						flags: {
-							ext: false,
-							detail: false,
-							suffix: false,
-							schema: false,
-						},
-						known: false,
 						snippets: [],
+						reasons: [],
 					});
 				}
 
-				const rec = agg.get(name);
-				rec.totalScore += info.score;
-				for (const rs of info.reasons) rec.reasons.push(rs);
-				if (info.urls) {
-					for (const u of info.urls) rec.urls.add(u);
-				}
+				const rec = agg.get(company);
+				rec.totalScore += evidence.score;
 				rec.pages.add(url);
-				rec.flags.ext = rec.flags.ext || !!info.ext;
-				rec.flags.detail = rec.flags.detail || !!info.detail;
-				rec.flags.suffix = rec.flags.suffix || !!info.suffix;
-				rec.flags.schema = rec.flags.schema || !!info.schema;
-				rec.known = rec.known || !!info.known;
 
-				if (info.snippets) {
-					for (const sn of info.snippets) {
-						if (rec.snippets.length < 5) {
-							rec.snippets.push(sn);
-						}
-					}
+				// Collect snippets (up to 5 max)
+				if (evidence.snippets && rec.snippets.length < 5) {
+					rec.snippets.push(...evidence.snippets.slice(0, 5 - rec.snippets.length));
 				}
-			}
-
-			if (agg.size >= MAX_CANDIDATES_PER_LABEL) {
-				console.log(`  [STOP] Reached MAX_CANDIDATES_PER_LABEL=${MAX_CANDIDATES_PER_LABEL} for ${hostname}, stopping label crawl.`);
-				break;
 			}
 		}
 
+		// Stop if we found way too many candidates (avoids memory leaks on massive directories)
+		if (agg.size >= MAX_CANDIDATES_PER_LABEL) {
+			console.log(`  [STOP] Reached MAX_CANDIDATES_PER_LABEL=${MAX_CANDIDATES_PER_LABEL}, stopping.`);
+			break;
+		}
+
+		// 4. Queue new links
 		if (depth < maxDepth && pagesCrawled < maxPages) {
-			const links = extractLinks($, url);
-			for (const next of links) {
-				if (!sameHost(startUrl, next)) continue;
-				if (shouldIgnorePath(next)) continue;
-				if (visited.has(next) || enqueued.has(next)) continue;
-				enqueued.add(next);
-				queue.push({ url: next, depth: depth + 1 });
-			}
+			$("a[href]").each((_, el) => {
+				const href = ($(el).attr("href") || "").trim();
+				if (!href || href.startsWith("#") || href.startsWith("javascript:")) return;
+
+				try {
+					const next = new URL(href, url).toString();
+					if (!sameHost(startUrl, next)) return;
+					if (shouldIgnorePath(next)) return;
+					if (visited.has(next) || enqueued.has(next)) return;
+
+					enqueued.add(next);
+					queue.push({ url: next, depth: depth + 1 });
+				} catch {
+					// ignore
+				}
+			});
 		}
 	}
 
+	// 5. Aggregate & Filter Results
 	const kept = [];
 
 	for (const [name, rec] of agg.entries()) {
 		const pageCount = rec.pages.size;
-		const strongSignal = rec.flags.ext || rec.flags.detail || rec.flags.suffix || rec.flags.schema || rec.known;
 
-		const baseScore = rec.totalScore;
+		// Diversity Boost: The more pages a company appears on, the more confident we are.
+		// We multiply the score by log2(pageCount + 1).
 		const diversityBoost = Math.log2(1 + pageCount);
+		const finalScore = rec.totalScore * diversityBoost;
 
-		let finalScore = baseScore * diversityBoost;
-		if (!strongSignal) {
-			finalScore *= 0.4;
-		}
-
-		if ((!rec.known && finalScore < MIN_SCORE) || (!strongSignal && finalScore < HARD_MIN_SCORE)) {
+		// Threshold Check
+		// Since we use a dictionary now, matches are high-confidence.
+		// However, we still filter out very weak signals (e.g. 1 mention in a paragraph).
+		if (finalScore < MIN_SCORE) {
 			dropped.push({
 				name,
 				score: finalScore,
 				pagesSeen: pageCount,
 				droppedBecause: "below_threshold",
-				sampleReasons: rec.reasons.slice(0, 5),
 			});
 		} else {
 			kept.push({
@@ -208,21 +169,21 @@ export async function crawlLabel(startUrl, { maxPages, maxDepth, seeds: extraSee
 				evidence: {
 					score: finalScore,
 					pagesSeen: pageCount,
-					urls: Array.from(rec.urls),
-					flags: rec.flags,
-					reasons: rec.reasons.slice(0, 10),
+					urls: Array.from(rec.pages), // Simplified: just keep page URLs
 					snippets: rec.snippets.slice(0, 5),
+					flags: { known: true }, // It matched our list, so it's "known"
 				},
 			});
 		}
 	}
 
+	// Sort best matches first
 	kept.sort((a, b) => b.evidence.score - a.evidence.score || a.company.localeCompare(b.company));
 
 	return {
 		pagesCrawled,
 		kept,
-		droppedSample: dropped.slice(0, 200),
+		droppedSample: dropped.slice(0, 50),
 		droppedCount: dropped.length,
 	};
 }

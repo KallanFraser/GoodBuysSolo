@@ -23,9 +23,9 @@ export const metadata = {
 		"responsible shopping",
 	],
 	icons: {
-		icon: "/images/GoodBOysLogo.png",
-		shortcut: "/images/GoodBOysLogo.png",
-		apple: "/images/GoodBOysLogo.png",
+		icon: "/images/GoodBuysLogo.png",
+		shortcut: "/images/GoodBuysLogo.png",
+		apple: "/images/GoodBuysLogo.png",
 	},
 	openGraph: {
 		title: "GoodBuys – Decode Eco Labels & Spot Greenwashing",
@@ -35,7 +35,7 @@ export const metadata = {
 		type: "website",
 		images: [
 			{
-				url: "/images/GoodBOysLogo.png",
+				url: "/images/GoodBuysLogo.png",
 				alt: "GoodBuys logo",
 			},
 		],
@@ -44,7 +44,7 @@ export const metadata = {
 		card: "summary",
 		title: "GoodBuys – Decode Eco Labels & Spot Greenwashing",
 		description: "GoodBuys helps you decode eco labels and see which brands truly stand behind sustainability claims.",
-		images: ["/images/GoodBOysLogo.png"],
+		images: ["/images/GoodBuysLogo.png"],
 	},
 	robots: {
 		index: true,
