@@ -79,7 +79,10 @@ async function main() {
 		limit(async () => {
 			const { id, name, seed_urls = [], source_url } = label;
 
-			const seeds = seed_urls && seed_urls.length > 0 ? seed_urls : source_url ? [source_url] : [];
+			const seeds =
+				seed_urls && seed_urls.length > 0 ? seed_urls
+				: source_url ? [source_url]
+				: [];
 
 			if (DEBUG) {
 				console.log(`\n[DEBUG] Starting label: ${id}`);
@@ -187,7 +190,7 @@ async function main() {
 			});
 
 			console.log(`[${id}] kept=${kept.length} dropped=${droppedCount} pages=${pagesCrawled}`);
-		})
+		}),
 	);
 
 	await Promise.all(tasks);

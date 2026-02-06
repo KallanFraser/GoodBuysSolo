@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import EcoLabelLogo from "../../components/EcoLabelLogo"; // 👈 import it
+import EcoLabelLogo from "../../components/EcoLabelLogo";
 import "../../styles/eco-labels.css";
 
 export default function EcoLabels() {
@@ -77,7 +77,7 @@ export default function EcoLabels() {
 				</section>
 
 				<section className="eco-grid-section">
-					{isLoading ? (
+					{isLoading ?
 						<div className="eco-grid eco-grid-skeleton">
 							{Array.from({ length: 6 }).map((_, idx) => (
 								<div key={idx} className="eco-card eco-card-skeleton">
@@ -90,7 +90,7 @@ export default function EcoLabels() {
 								</div>
 							))}
 						</div>
-					) : filteredLabels.length === 0 ? (
+					: filteredLabels.length === 0 ?
 						<p className="eco-empty">
 							No labels in this category yet. Try switching to{" "}
 							<button type="button" className="eco-empty-reset" onClick={() => setActiveCategory("All")}>
@@ -98,29 +98,31 @@ export default function EcoLabels() {
 							</button>
 							.
 						</p>
-					) : (
-						<div className="eco-grid">
+					:	<div className="eco-grid">
 							{filteredLabels.map((label) => {
+								// --- RIGOR LOGIC ---
 								const rigorScore = typeof label.rigor_score === "number" ? label.rigor_score : null;
+								const rigorReason = label.reason_for_rigor_score || "";
 
 								let rigorBand = "";
 								let rigorLabel = "";
+
 								if (rigorScore !== null) {
 									if (rigorScore >= 8) {
 										rigorBand = "high";
-										rigorLabel = "High rigor standard";
+										rigorLabel = "High Rigor";
 									} else if (rigorScore >= 6) {
 										rigorBand = "medium";
-										rigorLabel = "Moderate rigor standard";
+										rigorLabel = "Moderate Rigor";
 									} else {
 										rigorBand = "low";
-										rigorLabel = "Lower rigor standard";
+										rigorLabel = "Low Rigor";
 									}
 								}
 
 								return (
 									<article key={label.id || label.name} className="eco-card">
-										{/* ---------- LOGO USING COMPONENT ---------- */}
+										{/* ---------- LOGO ---------- */}
 										{label.image_name && (
 											<div className="eco-logo-wrap">
 												<EcoLabelLogo imageName={label.image_name} name={label.name} />
@@ -136,20 +138,28 @@ export default function EcoLabels() {
 													)}
 												</div>
 
+												{/* ---------- RIGOR SCORE ---------- */}
 												{rigorScore !== null && (
-													<div
-														className={
-															"eco-rigor-row " + (rigorBand ? `rigor-${rigorBand}` : "")
-														}
-													>
+													<div className={`eco-rigor-row rigor-${rigorBand}`}>
 														<span className="eco-rigor-dot" />
 														<div className="eco-rigor-text">
 															<span className="eco-rigor-score">
-																Rigor {rigorScore}
-																<span className="eco-rigor-max"> / 10</span>
+																{rigorScore}
+																<span className="eco-rigor-max">/10</span>
 															</span>
 															<span className="eco-rigor-level">{rigorLabel}</span>
 														</div>
+
+														{/* CUSTOM TOOLTIP POPUP */}
+														{rigorReason && (
+															<div className="eco-rigor-tooltip">
+																<div className="eco-tooltip-arrow" />
+																<strong className="eco-tooltip-title">
+																	Why this score?
+																</strong>
+																<p className="eco-tooltip-text">{rigorReason}</p>
+															</div>
+														)}
 													</div>
 												)}
 											</header>
@@ -164,7 +174,7 @@ export default function EcoLabels() {
 														rel="noopener noreferrer"
 														className="eco-card-link"
 													>
-														<span>View official standard</span>
+														<span>View Standard</span>
 														<span className="eco-card-link-arrow">↗</span>
 													</a>
 												)}
@@ -174,7 +184,7 @@ export default function EcoLabels() {
 								);
 							})}
 						</div>
-					)}
+					}
 				</section>
 			</div>
 		</main>
