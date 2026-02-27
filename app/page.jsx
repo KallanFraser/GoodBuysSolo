@@ -23,6 +23,9 @@ export default function Home() {
 					<Link href="/Search" className="primary-cta">
 						Start searching
 					</Link>
+					<Link href="/SearchProduct" className="secondary-cta">
+						Search products
+					</Link>
 					<Link href="/EcoLabels" className="ghost-cta">
 						Browse all labels
 					</Link>
