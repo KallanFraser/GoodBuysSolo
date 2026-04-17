@@ -1,6 +1,5 @@
 /** @format */
 
-import * as cheerio from "cheerio";
 import { matchCompany, initMatcher } from "./matcher.js";
 
 // Re-export these for backward compatibility if other files need them
@@ -22,7 +21,7 @@ export function cleanText(s) {
  * The new main entry point for extraction.
  * It iterates over the DOM and asks the Matcher: "Is this a company?"
  */
-export function extractCompanies($, urlStr) {
+export function extractCompanies($) {
 	// Ensure matcher is loaded
 	initMatcher();
 
@@ -33,11 +32,10 @@ export function extractCompanies($, urlStr) {
 
 		const existing = found.get(name) || { score: 0, sources: [] };
 
-		// Scoring Weights:
-		// H1/H2 = High Confidence
-		// LI/TD = Medium Confidence (lists)
-		// P/SPAN = Lower Confidence (unless standalone)
-
+		// Tag-weighted scoring: headings are deliberate brand references, list
+		// cells usually but not always, paragraphs/spans least. Weights are
+		// empirically tuned — see ARCHITECTURE.md §4 for the rationale and the
+		// rule that any change here should be justified by an audit diff.
 		let points = 10;
 		if (["h1", "h2", "title"].includes(elementTag)) points = 20;
 		if (["li", "th", "td"].includes(elementTag)) points = 15;
@@ -114,24 +112,15 @@ function parseJsonLD($) {
 	return Array.from(orgs);
 }
 
-// --- DEPRECATED / SHIM ---
-// These are kept so we don't break imports in `run.js` or `crawler.js` immediately.
-// We will simply redirect them or make them no-ops.
+// --- HELPERS ---
 
-export function looksLikeCompany(t) {
-	return false;
-}
-export function seedLabelNames(l) {}
-export function stripNoisySections($, url) {
-	// Basic cleanup still valid
+export function stripNoisySections($) {
 	$("script, style, noscript, iframe, svg").remove();
 }
-// We handle ignore paths in crawler.js, so just export the helper
+
 export function shouldIgnorePath(url) {
 	return /login|signin|cart|checkout|privacy|terms/.test(url);
 }
-
-// --- MISSING HELPERS (Add these to the bottom of heuristics.js) ---
 
 export function sameHost(a, b) {
 	try {

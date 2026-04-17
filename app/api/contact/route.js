@@ -153,8 +153,12 @@ export async function POST(request) {
 
 		entries.push(newEntry);
 
-		// Write out prettified JSON; you could switch to newline-delimited for huge logs
-		await fs.writeFile(FILE_PATH, JSON.stringify(entries, null, 2), "utf-8");
+		// Atomic via tmp + rename: a crash mid-write would otherwise leave the
+		// entries file truncated, corrupting every past submission. Matches the
+		// pattern used by the crawler pipelines.
+		const tmp = FILE_PATH + ".tmp";
+		await fs.writeFile(tmp, JSON.stringify(entries, null, 2), "utf-8");
+		await fs.rename(tmp, FILE_PATH);
 
 		return NextResponse.json({ ok: true }, { status: 200 });
 	} catch (err) {

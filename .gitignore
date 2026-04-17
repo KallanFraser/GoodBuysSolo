@@ -1,2 +1,13 @@
 node_modules
 .next
+goodbuys.db
+goodbuys.db-journal
+goodbuys.db-shm
+goodbuys.db-wal
+/data/formEntries.json
+/data/formEntries.json.tmp
+/public/data/news-preview.json
+/public/data/news-preview.json.tmp
+/public/data/news-preview.host-stats.json
+/public/data/news-preview.host-stats.json.tmp
+CLAUDE.md

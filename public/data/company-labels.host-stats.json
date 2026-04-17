@@ -2,111 +2,103 @@
   "www.discoverzq.com": {
     "success": 0,
     "errors": {
-      "404": 294
-    }
-  },
-  "c2ccertified.org": {
-    "success": 0,
-    "errors": {
-      "404": 338,
-      "Timeout": 4
-    }
-  },
-  "www.oeko-tex.com": {
-    "success": 0,
-    "errors": {
-      "404": 607,
-      "Timeout": 1
-    }
-  },
-  "cleanclothes.org": {
-    "success": 0,
-    "errors": {
-      "401": 1,
-      "404": 298,
-      "500": 1,
-      "Timeout": 1
-    }
-  },
-  "www.nordic-swan-ecolabel.org": {
-    "success": 0,
-    "errors": {
-      "404": 310
+      "404": 293
     }
   },
   "www.fairtradecertified.org": {
     "success": 0,
     "errors": {
-      "404": 301,
-      "Timeout": 7
+      "404": 301
+    }
+  },
+  "c2ccertified.org": {
+    "success": 0,
+    "errors": {
+      "404": 300
     }
   },
   "www.rainforest-alliance.org": {
     "success": 0,
     "errors": {
-      "404": 289,
-      "Timeout": 5
-    }
-  },
-  "www.soilassociation.org": {
-    "success": 0,
-    "errors": {
-      "404": 302
-    }
-  },
-  "canopyplanet.org": {
-    "success": 0,
-    "errors": {
-      "404": 300,
-      "Timeout": 1
+      "404": 287
     }
   },
   "wrapcompliance.org": {
     "success": 0,
     "errors": {
-      "404": 298,
-      "500": 5,
-      "Timeout": 3
+      "404": 299,
+      "500": 1
+    }
+  },
+  "www.nordic-swan-ecolabel.org": {
+    "success": 0,
+    "errors": {
+      "404": 309
+    }
+  },
+  "www.oeko-tex.com": {
+    "success": 0,
+    "errors": {
+      "404": 602
+    }
+  },
+  "cleanclothes.org": {
+    "success": 0,
+    "errors": {
+      "404": 297,
+      "500": 1
+    }
+  },
+  "www.soilassociation.org": {
+    "success": 0,
+    "errors": {
+      "404": 296,
+      "500": 1
     }
   },
   "www.bcorporation.net": {
     "success": 0,
     "errors": {
-      "404": 319,
-      "Timeout": 1
+      "404": 298
     }
   },
-  "bettercotton.org": {
+  "canopyplanet.org": {
     "success": 0,
     "errors": {
-      "404": 290,
-      "Timeout": 8
+      "404": 298
     }
   },
   "search.fsc.org": {
     "success": 0,
     "errors": {
-      "404": 299,
-      "Timeout": 1
+      "404": 300
     }
   },
-  "textileexchange.org": {
+  "bettercotton.org": {
     "success": 0,
     "errors": {
-      "404": 1099,
-      "Timeout": 42
-    }
-  },
-  "global-standard.org": {
-    "success": 0,
-    "errors": {
-      "Timeout": 165
+      "404": 270,
+      "Timeout": 3
     }
   },
   "www.bluesign.com": {
     "success": 0,
     "errors": {
-      "Timeout": 16
+      "404": 294,
+      "Timeout": 5
+    }
+  },
+  "textileexchange.org": {
+    "success": 0,
+    "errors": {
+      "404": 1121,
+      "Timeout": 5
+    }
+  },
+  "global-standard.org": {
+    "success": 0,
+    "errors": {
+      "Timeout": 212
     }
   },
   "www.fairtrade.net": {
@@ -130,8 +122,7 @@
   "www.climateimpact.com": {
     "success": 0,
     "errors": {
-      "404": 294,
-      "Timeout": 4
+      "404": 298
     }
   },
   "www.ecolabelindex.com": {
@@ -143,21 +134,133 @@
   "crueltyfreeinternational.org": {
     "success": 0,
     "errors": {
-      "403": 38,
-      "404": 54
+      "403": 19,
+      "404": 40
+    }
+  },
+  "www.naturallygrown.org": {
+    "success": 0,
+    "errors": {
+      "403": 8,
+      "404": 12
     }
   },
   "auduboninternational.org": {
     "success": 0,
     "errors": {
-      "404": 114
+      "404": 301,
+      "Timeout": 1
     }
   },
   "www.bapcertification.org": {
     "success": 0,
     "errors": {
-      "404": 62,
+      "404": 298
+    }
+  },
+  "vegan.org": {
+    "success": 0,
+    "errors": {
+      "404": 303
+    }
+  },
+  "agreenerworld.org": {
+    "success": 0,
+    "errors": {
+      "404": 184
+    }
+  },
+  "www.energystar.gov": {
+    "success": 0,
+    "errors": {
+      "403": 1,
+      "404": 298
+    }
+  },
+  "certified.greenseal.org": {
+    "success": 0,
+    "errors": {
+      "404": 297
+    }
+  },
+  "wildlifefriendly.org": {
+    "success": 0,
+    "errors": {
+      "404": 302
+    }
+  },
+  "nationalzoo.si.edu": {
+    "success": 0,
+    "errors": {
+      "404": 274
+    }
+  },
+  "www.theclimateregistry.org": {
+    "success": 0,
+    "errors": {
+      "404": 126
+    }
+  },
+  "www.usgbc.org": {
+    "success": 0,
+    "errors": {
+      "404": 130
+    }
+  },
+  "environmental-data.ec.europa.eu": {
+    "success": 0,
+    "errors": {
+      "404": 123
+    }
+  },
+  "euorganicproducts.eu": {
+    "success": 0,
+    "errors": {
+      "404": 131,
       "Timeout": 1
+    }
+  },
+  "www.msc.org": {
+    "success": 0,
+    "errors": {
+      "404": 121
+    }
+  },
+  "asc-aqua.org": {
+    "success": 0,
+    "errors": {
+      "404": 76
+    }
+  },
+  "pefc.org": {
+    "success": 0,
+    "errors": {
+      "404": 124
+    }
+  },
+  "rspo.org": {
+    "success": 0,
+    "errors": {
+      "404": 83
+    }
+  },
+  "www.nongmoproject.org": {
+    "success": 0,
+    "errors": {
+      "404": 62
+    }
+  },
+  "epeat.net": {
+    "success": 0,
+    "errors": {
+      "404": 56
+    }
+  },
+  "www.blauer-engel.de": {
+    "success": 0,
+    "errors": {
+      "403": 1,
+      "404": 66
     }
   }
 }

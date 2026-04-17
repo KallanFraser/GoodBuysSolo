@@ -3,7 +3,7 @@
 // Manually curated list of company / brand names.
 // Add/remove as you want. These get treated as "known companies" in the scraper.
 
-const MANUAL_KNOWN_COMPANIES = [
+const MAIN_COMPANIES = [
 	// --- Outdoor / Apparel / Footwear ---
 	"Patagonia",
 	"The North Face",
@@ -231,7 +231,9 @@ const MANUAL_KNOWN_COMPANIES = [
 	"Hugo Boss",
 	"Under Armour",
 	"Lululemon",
-	"Champion",
+	// Removed "Champion" — see KNOWN_ISSUES.md (false-positive cohort;
+	// matches dominated by "Brand Champion" marketing copy, ~1.1k score
+	// across 6 labels).
 	"Columbia",
 	"Le Coq Sportif",
 
@@ -242,8 +244,8 @@ const MANUAL_KNOWN_COMPANIES = [
 	"Discover",
 	"PayPal",
 	"Stripe",
-	"Square",
-	"Block",
+	// "Square" and "Block" live only in AMBIGUOUS_BRAND_DOCS at the bottom
+	// of this file (also in FORCE_AMBIGUOUS in matcher.js).
 	"Chase",
 	"Bank of America",
 	"Wells Fargo",
@@ -278,7 +280,9 @@ const MANUAL_KNOWN_COMPANIES = [
 	// --- Eco / Sustainability-adjacent brands you already saw ---
 	"Gallant International",
 	"Mightly",
-	"FAIR",
+	// Removed "FAIR" — see KNOWN_ISSUES.md (false-positive incident; the
+	// lowercased form collides with "Fair Trade Certified" / "Fair Wear" /
+	// "Fair for Life" ecolabel names and accumulated ~560k score across 22 labels).
 	"ace&jig",
 	"Roark",
 	"Senda Athletics",
@@ -393,7 +397,9 @@ const MANUAL_KNOWN_COMPANIES = [
 	"Progressive",
 	"Liberty Mutual",
 	"Travelers",
-	"Nationwide",
+	// Removed "Nationwide" — see KNOWN_ISSUES.md (false-positive cohort;
+	// matches dominated by the adverb usage ("destabilizing projects
+	// nationwide"), ~3.5k score across 5 labels).
 	"USAA",
 	"Fidelity Investments",
 	"Vanguard",
@@ -436,7 +442,9 @@ const MANUAL_KNOWN_COMPANIES = [
 	"Canon USA",
 
 	// --- Ride-share / micromobility / maps ---
-	"Bird",
+	// Removed "Bird" — see KNOWN_ISSUES.md (lowercased form collides with
+	// "Bird Friendly (Smithsonian)" ecolabel name; every output match was
+	// against "Forest and Bird", "Migratory Bird Center", or a person surname).
 	"Lime",
 	"Spin",
 	"Tier Mobility",
@@ -451,7 +459,6 @@ const MANUAL_KNOWN_COMPANIES = [
 	"ASOS",
 	"Boohoo",
 	"SHEIN",
-	"Everlane",
 	"Warby Parker",
 	"GlassesUSA",
 	"Ray-Ban",
@@ -566,9 +573,7 @@ const MANUAL_KNOWN_COMPANIES = [
 	// --- More apparel / DTC / outdoor-ish ---
 	"Carhartt",
 	"Dickies",
-	"Champion",
 	"Fila",
-	"Under Armour",
 	"L.L.Bean",
 	"Eddie Bauer",
 	"Canada Goose",
@@ -686,7 +691,9 @@ const MANUAL_KNOWN_COMPANIES = [
 	"IKEA Family",
 	"Muji",
 	"Flying Tiger Copenhagen",
-	"Habitat",
+	// Removed "Habitat" — see KNOWN_ISSUES.md (false-positive cohort;
+	// matches dominated by ecological noun usage ("core habitat for..."),
+	// ~3k score across 7 labels).
 	"Dunelm",
 	"Williams-Sonoma",
 	"Restoration Hardware",
@@ -699,7 +706,9 @@ const MANUAL_KNOWN_COMPANIES = [
 	"Arm & Hammer Pet",
 	"Temptations",
 	"Greenies",
-	"Kong",
+	// Removed "Kong" — see KNOWN_ISSUES.md (false-positive cohort;
+	// matches dominated by "Hong Kong" substring, ~6.5k score across
+	// 6 labels).
 	"Chuckit!",
 	"Friskies",
 	"Meow Mix",
@@ -796,7 +805,6 @@ const MANUAL_KNOWN_COMPANIES = [
 
 	// --- Coop / ethical / fair trade-ish retailers ---
 	"Co-op UK",
-	"Mountain Equipment Co-op",
 	"Food Co-op",
 	"Natural Grocers by Vitamin Cottage",
 	"Park Slope Food Coop",
@@ -804,7 +812,8 @@ const MANUAL_KNOWN_COMPANIES = [
 	// --- More apparel / streetwear / sneakers ---
 	"Off-White",
 	"Stüssy",
-	"Supreme",
+	// "Supreme" lives only in AMBIGUOUS_BRAND_DOCS at the bottom of this file
+	// (also in FORCE_AMBIGUOUS in matcher.js).
 	"Palace Skateboards",
 	"Bape",
 	"Kith",
@@ -934,7 +943,6 @@ const MANUAL_KNOWN_COMPANIES = [
 	"Tag Heuer",
 
 	// --- Local / indie coffee & chains that often appear in partner lists ---
-	"Philz Coffee",
 	"Joe Coffee Company",
 	"Blue Bottle",
 	"Verve Coffee Roasters",
@@ -1023,59 +1031,28 @@ const MANUAL_KNOWN_COMPANIES = [
 	"Spinneys",
 	"Choithrams",
 
-	"Patagonia",
-	"The North Face",
-	"Columbia Sportswear",
-	"Arc'teryx",
-	"Ben & Jerry's",
-	"Whole Foods Market",
-	"Trader Joe's",
-	"Nike",
-	"Adidas",
-	"Reebok",
-	"New Balance",
-	"Lululemon",
-	"Eileen Fisher",
-	"Dr. Martens",
-	"Birkenstock",
-	"Warby Parker",
-	"Allbirds",
-	"Everlane",
-	"Bombas",
-	"Glossier",
-	"Sephora",
-	"Ulta Beauty",
-	"Wayfair",
-	"Pottery Barn",
-	"West Elm",
-	"Crate & Barrel",
-	"IKEA",
-	"Starbucks",
-	"Dunkin'",
-	"Peet's Coffee",
-	"Nestlé",
-	"Danone",
-	"Unilever",
-	"Procter & Gamble",
+	// NOTE: "PepsiCo", "Mondelez", "Lindt" were only present in the old
+	// duplicate block that lived here; preserved above in the main sections
+	// where they belong. Everything else was a dupe (Set deduplicates on load).
 	"PepsiCo",
-	"Coca-Cola",
-	"General Mills",
-	"Kellogg's",
-	"Kraft Heinz",
 	"Mondelez",
-	"Mars",
-	"Hershey",
-	"Ferrero",
 	"Lindt",
+];
 
-	// --- AMBIGUOUS BRANDS (Common Words) ---
-	// These will work because matcher.js checks context!
-	"Gap", // Will match <h1>Gap</h1>, will ignore "mind the gap"
-	"Target", // Will match <li>Target</li>, will ignore "our target is"
-	"Apple", // Will match <title>Apple</title>, will ignore "apple pie"
+// --- AMBIGUOUS BRANDS (Common Words) ---
+// Every entry below MUST also exist in FORCE_AMBIGUOUS in matcher.js. A startup
+// assertion in matcher.js verifies this subset relationship and throws if it drifts.
+// Each brand here is only matched by the recogniser via exact-match (e.g.
+// <h1>Gap</h1>), never substring (e.g. "mind the gap" is ignored). Adding a
+// brand here without the matcher.js companion entry is a bug.
+// See KNOWN_ISSUES.md for the false-positive class this protects against.
+export const AMBIGUOUS_BRAND_DOCS = [
+	"Gap",
+	"Target",
+	"Apple",
 	"Coach",
 	"Guess",
-	"Puma", // Technically an animal, but rare enough to be safe usually
+	"Puma",
 	"Supreme",
 	"Square",
 	"Block",
@@ -1083,5 +1060,7 @@ const MANUAL_KNOWN_COMPANIES = [
 	"Simple",
 	"Honest",
 ];
+
+const MANUAL_KNOWN_COMPANIES = [...MAIN_COMPANIES, ...AMBIGUOUS_BRAND_DOCS];
 
 export default MANUAL_KNOWN_COMPANIES;

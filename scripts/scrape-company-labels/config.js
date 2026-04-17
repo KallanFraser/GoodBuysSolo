@@ -25,7 +25,7 @@ function envFlag(name) {
 
 export const ENV = {
 	MAX_PAGES: parseInt(process.env.MAX_PAGES || "100", 10),
-	MAX_DEPTH: parseInt(process.env.MAX_DEPTH || "3", 10), // VERIFIED FIX: Uses MAX_DEPTH
+	MAX_DEPTH: parseInt(process.env.MAX_DEPTH || "3", 10),
 	CONCURRENCY: parseInt(process.env.CONCURRENCY || "24", 10),
 	BASE_DELAY_MS: parseInt(process.env.BASE_DELAY_MS || "900", 10),
 	JITTER_MS: parseInt(process.env.JITTER_MS || "700", 10),
@@ -34,7 +34,6 @@ export const ENV = {
 	RETRIES: 3,
 	DRY_RUN: envFlag("DRY_RUN"),
 	SCORE_THRESHOLD: parseInt(process.env.SCORE_THRESHOLD || "7", 10),
-	PER_LABEL_KEEP: parseInt(process.env.PER_LABEL_KEEP || "500", 10),
 	CLEAR_OUTPUT: envFlag("CLEAR_OUTPUT"),
 
 	TIME_LIMIT_MINUTES: parseInt(process.env.TIME_LIMIT_MINUTES || "30", 10),

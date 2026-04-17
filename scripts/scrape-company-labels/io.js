@@ -16,8 +16,10 @@ export async function loadJson(p, fallback) {
 	}
 }
 
-// Merge existing company-labels with freshly kept results
-export function mergeCompanyLabels(existingArr = [], keptWithEvidence = [], options = {}) {
+// Merge existing company-labels with freshly kept results. Candidate volume is
+// gated upstream by MAX_CANDIDATES_PER_LABEL + SCORE_THRESHOLD in the crawler;
+// no second-layer cap here by design.
+export function mergeCompanyLabels(existingArr = [], keptWithEvidence = []) {
 	const byCompany = new Map();
 
 	// 1) Seed from existing array
@@ -85,7 +87,8 @@ export async function writeCompanyLabels(companyLabels) {
 	console.log(`Merged & wrote → ${OUTPUT_PATH}`);
 }
 
-// NEW: write audit file safely (always via tmp + rename)
+// Atomic via tmp + rename: a corrupted audit file breaks run-to-run diffing
+// and silently kills our ability to validate future matcher changes.
 export async function writeAudit(auditAll) {
 	if (!Array.isArray(auditAll)) {
 		console.warn("[writeAudit] auditAll was not an array, coercing to empty array");
@@ -100,7 +103,6 @@ export async function writeAudit(auditAll) {
 	console.log(`Audit → ${AUDIT_PATH}`);
 }
 
-// NEW: write host stats
 export async function writeHostStats(hostStats) {
 	if (!hostStats || typeof hostStats !== "object") return;
 	await fs.mkdir(path.dirname(HOST_STATS_PATH), { recursive: true });

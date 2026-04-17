@@ -49,7 +49,7 @@ export async function GET(request) {
 				try {
 					const urlObj = new URL(link);
 					domain = urlObj.hostname.replace("www.", "").split(".")[0];
-				} catch (e) {
+				} catch {
 					domain = "";
 				}
 

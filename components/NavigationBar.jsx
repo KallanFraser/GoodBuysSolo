@@ -38,6 +38,9 @@ export default function NavigationBar() {
 				<Link href="/Search" className="navigation-bar-button" onClick={handleClose}>
 					Search
 				</Link>
+				<Link href="/News" className="navigation-bar-button" onClick={handleClose}>
+					News
+				</Link>
 				<Link href="/About" className="navigation-bar-button" onClick={handleClose}>
 					About
 				</Link>

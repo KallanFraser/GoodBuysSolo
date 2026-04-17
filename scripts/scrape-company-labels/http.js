@@ -26,7 +26,12 @@ export async function fetchHtml(url, retryCount = 0) {
 			},
 		});
 
-		// FIX: Safety check to avoid NaN if host isn't in map yet
+		// Decay penalty only for hosts that already have one. Hosts that have
+		// never errored don't get an entry — keeps the map compact. Decay
+		// rate is -0.5 per success, compound rate is +2 per 429 (below), so
+		// a single rate-limit costs ~4 clean fetches to fully recover. The
+		// 4:1 asymmetry biases the crawler toward caution on hosts that
+		// have pushed back recently.
 		if (hostPenalties.has(host)) {
 			const current = hostPenalties.get(host) || 0;
 			hostPenalties.set(host, Math.max(0, current - 0.5));

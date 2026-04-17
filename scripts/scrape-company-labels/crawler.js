@@ -52,9 +52,9 @@ export async function crawlLabel(startUrl, { maxPages, maxDepth }) {
 
 		pagesCrawled++;
 		const $ = cheerio.load(html);
-		stripNoisySections($, url);
+		stripNoisySections($);
 
-		const findings = extractCompanies($, url);
+		const findings = extractCompanies($);
 		for (const { company, evidence } of findings) {
 			if (!agg.has(company)) {
 				agg.set(company, { totalScore: 0, pages: new Set(), snippets: [] });
@@ -83,6 +83,10 @@ export async function crawlLabel(startUrl, { maxPages, maxDepth }) {
 
 	const kept = Array.from(agg.entries())
 		.map(([name, rec]) => {
+			// Log-frequency boost: a mention across many pages of the same
+			// label is signal; a single-page hit is usually noise. log2 keeps
+			// one page from dominating the score — doubling page count adds
+			// ~1x, not 2x.
 			const score = rec.totalScore * Math.log2(1 + rec.pages.size);
 			return { company: name, score, pagesSeen: rec.pages.size, rec };
 		})
@@ -101,7 +105,7 @@ export async function crawlLabel(startUrl, { maxPages, maxDepth }) {
 	return {
 		pagesCrawled,
 		kept,
-		droppedSample: dropped.slice(0, 50), // FIX: Restored this to prevent run.js crash
+		droppedSample: dropped.slice(0, 50),
 		droppedCount: dropped.length,
 	};
 }

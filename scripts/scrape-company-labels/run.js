@@ -1,18 +1,18 @@
 /** @format */
 
 import pLimit from "p-limit";
-import fs from "fs/promises";
 
 import { PATHS, ENV } from "./config.js";
 import { loadJson, mergeCompanyLabels, writeCompanyLabels, writeHostStats, writeAudit } from "./io.js";
 
-import { isPlausibleCompanyRow, seedLabelNames } from "./heuristics.js";
-import { bootstrapKnownCompanies } from "./known-companies.js";
+import { isPlausibleCompanyRow } from "./heuristics.js";
+import { initMatcher } from "./matcher.js";
 import { crawlLabel } from "./crawler.js";
 import { getHostStatsSnapshot } from "./http.js";
+import { initDatabase, seedLabelsTable, exportToDatabase } from "./db.js";
 
 const { LABELS_PATH, OUTPUT_PATH, AUDIT_PATH } = PATHS;
-const { MAX_PAGES, MAX_DEPTH, CONCURRENCY, SCORE_THRESHOLD, PER_LABEL_KEEP, CLEAR_OUTPUT, DRY_RUN } = ENV;
+const { MAX_PAGES, MAX_DEPTH, CONCURRENCY, SCORE_THRESHOLD, CLEAR_OUTPUT, DRY_RUN } = ENV;
 
 // flip to true if you want extra logs
 const DEBUG = false;
@@ -23,7 +23,7 @@ async function main() {
 	console.log("=======================================");
 
 	// --------------------------
-	// 1. Load labels.json
+	// 1. Load labels.json and init DB
 	// --------------------------
 	const labels = await loadJson(LABELS_PATH);
 	if (!Array.isArray(labels) || labels.length === 0) {
@@ -31,8 +31,13 @@ async function main() {
 		return;
 	}
 
-	// Seed label names into heuristics (so label names never look like companies)
-	seedLabelNames(labels);
+	// We initialize the database and seed the static labels
+	initDatabase();
+	seedLabelsTable(labels);
+
+	// Initialise the matcher with the current label set so the collision guard
+	// runs before any crawl starts. See KNOWN_ISSUES.md for the failure mode.
+	initMatcher({ labelNames: labels.map((l) => l.name).filter(Boolean) });
 
 	// --------------------------
 	// 2. Load existing company-labels
@@ -55,17 +60,12 @@ async function main() {
 		}
 	}
 
-	// Known-company boosting (reuse previously found companies)
-	if (!CLEAR_OUTPUT && existingCompanyLabels.length) {
-		bootstrapKnownCompanies(existingCompanyLabels);
-	}
-
 	let companyLabels = CLEAR_OUTPUT ? [] : existingCompanyLabels;
 	const auditAll = [];
 
 	console.log(`Loaded ${labels.length} labels from ${LABELS_PATH}`);
-	console.log(`Output → ${OUTPUT_PATH}`);
-	console.log(`Audit  → ${AUDIT_PATH}`);
+	console.log(`Output -> ${OUTPUT_PATH}`);
+	console.log(`Audit  -> ${AUDIT_PATH}`);
 	console.log(`CLEAR_OUTPUT=${CLEAR_OUTPUT} DRY_RUN=${DRY_RUN}`);
 	console.log(`MAX_PAGES=${MAX_PAGES} MAX_DEPTH=${MAX_DEPTH} CONCURRENCY=${CONCURRENCY} SCORE_THRESHOLD=${SCORE_THRESHOLD}`);
 	console.log("");
@@ -91,7 +91,7 @@ async function main() {
 
 			const startUrl = seeds[0] || source_url;
 			if (!startUrl) {
-				console.warn(`[${id}] Skipping label – no valid seed/source URL.`);
+				console.warn(`[${id}] Skipping label - no valid seed/source URL.`);
 				return;
 			}
 
@@ -134,9 +134,7 @@ async function main() {
 					};
 				});
 
-				companyLabels = mergeCompanyLabels(companyLabels, keptForThisLabel, {
-					perLabelLimit: PER_LABEL_KEEP,
-				});
+				companyLabels = mergeCompanyLabels(companyLabels, keptForThisLabel);
 			}
 
 			// Build audit entry using existing company-labels data as a baseline
@@ -160,7 +158,7 @@ async function main() {
 				}
 			}
 
-			// Always push an audit row – even if nothing was dropped – so the file
+			// Always push an audit row - even if nothing was dropped - so the file
 			// never looks "empty" for labels we actually touched.
 			auditAll.push({
 				label: id,
@@ -200,18 +198,33 @@ async function main() {
 	// --------------------------
 	console.log("\nWriting outputs...");
 	if (DRY_RUN) {
-		console.log("[DRY_RUN] Skipping writes to company-labels.json and audit.");
+		console.log("[DRY_RUN] Skipping writes to company-labels.json, audit, and database.");
 	} else {
-		await writeCompanyLabels(companyLabels);
-		await writeAudit(auditAll);
+		// Each write is isolated so one failure doesn't lose the other outputs.
+		// A 30-minute crawl is expensive to repeat — partial output + audit beats
+		// a clean error and zero artifacts.
+		await tryWrite("company-labels.json", () => writeCompanyLabels(companyLabels));
+		await tryWrite("audit.json", () => writeAudit(auditAll));
+		await tryWrite("sqlite export", () => {
+			exportToDatabase(companyLabels);
+			console.log("Exported data to SQLite database.");
+		});
 	}
 
-	// Host stats for debugging rate limits / 403s
+	// Host stats always written — even a failed run is diagnostic data.
 	const hostStats = getHostStatsSnapshot();
-	await writeHostStats(hostStats);
+	await tryWrite("host-stats.json", () => writeHostStats(hostStats));
 
-	console.log("Done ✔");
+	console.log("Done");
 	console.log("=======================================");
+}
+
+async function tryWrite(label, fn) {
+	try {
+		await fn();
+	} catch (err) {
+		console.error(`[run] FAIL write ${label}: ${err.message || err}`);
+	}
 }
 
 main().catch((err) => {

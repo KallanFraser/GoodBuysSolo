@@ -213,7 +213,7 @@ export default function Search() {
 							{ecoLabels.length > 0 && (
 								<div className="search-labels-grid">
 									{ecoLabels.map((label) => {
-										const imagePath = label.image_name ? `/images/ecolabels/${label.image_name}` : null;
+										const imagePath = label.image_name ? `/images/ecolabels/resizedVersions/${label.image_name}` : null;
 										const rigorScore = typeof label.rigor_score === "number" ? label.rigor_score : null;
 
 										let rigorBand = "";

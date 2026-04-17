@@ -187,7 +187,7 @@
 	gap: 1.1rem;
 	min-height: 190px;
 
-	/* NEW: z-index management so tooltips float properly over other cards */
+	/* z-index management so tooltips float properly over other cards */
 	z-index: 1;
 	transition:
 		transform 0.2s ease,
@@ -212,7 +212,7 @@
 	box-shadow:
 		0 20px 52px rgba(0, 0, 0, 1),
 		0 0 26px rgba(22, 163, 74, 0.45);
-	/* NEW: Bring card to front on hover so its tooltip isn't hidden */
+	/* Bring card to front on hover so its tooltip isn't hidden */
 	z-index: 10;
 }
 
