@@ -15,6 +15,7 @@ import FEEDS from "./rules/feeds.js";
 import { ENV, PATHS } from "./config.js";
 import { fetchFeed } from "./fetch.js";
 import { parseFeed } from "./parse.js";
+import { fetchOecdComplaints } from "./fetch-oecd-complaints.js";
 import { initMatcher, matchArticle } from "./matcher.js";
 import { writePreview, writeHostStats } from "./io.js";
 import { getHostStatsSnapshot } from "../scrape-company-labels/http.js";
@@ -38,20 +39,37 @@ async function main() {
 		limit(async () => {
 			const started = Date.now();
 			try {
-				const xml = await fetchFeed(feed.url);
-				const elapsed = Date.now() - started;
-				if (!xml) {
-					console.error(`[${feed.id}] FAIL — fetch returned null (see host-stats)`);
-					results.push({ feed, ok: false, error: "empty-response", elapsed });
-					return;
-				}
-				const head = xml.slice(0, 500);
-				const looksLikeXml = /^\s*<\?xml/.test(head) || /^\s*<(rss|feed)\b/i.test(head);
+				let articles = [];
+				let feedMeta = null;
+				let parseError = null;
+				let xml = "";
 
-				const { articles, feedMeta, error: parseError } = parseFeed(xml, {
-					outletId: feed.id,
-					outletName: feed.name,
-				});
+				if (feed.kind === "oecd-complaints") {
+					const extracted = await fetchOecdComplaints({
+						url: feed.url,
+						outletId: feed.id,
+						outletName: feed.name,
+					});
+					articles = extracted.articles || [];
+					feedMeta = extracted.feedMeta || null;
+					parseError = extracted.error || null;
+				} else {
+					xml = await fetchFeed(feed.url);
+					if (!xml) {
+						console.error(`[${feed.id}] FAIL — fetch returned null (see host-stats)`);
+						results.push({ feed, ok: false, error: "empty-response", elapsed: Date.now() - started });
+						return;
+					}
+					const { articles: parsed, feedMeta: parsedMeta, error } = parseFeed(xml, {
+						outletId: feed.id,
+						outletName: feed.name,
+					});
+					articles = parsed;
+					feedMeta = parsedMeta;
+					parseError = error || null;
+				}
+
+				const elapsed = Date.now() - started;
 				if (parseError) {
 					console.error(`[${feed.id}] parse-error: ${parseError}`);
 					results.push({ feed, ok: false, error: `parse: ${parseError}`, elapsed });
@@ -64,9 +82,12 @@ async function main() {
 				// Match each article.
 				const annotated = capped.map((a) => ({ ...a, matches: matchArticle(a) }));
 				const matchedCount = annotated.filter((a) => a.matches.length).length;
+				const head = String(xml || "").slice(0, 500);
+				const looksLikeXml =
+					feed.kind === "oecd-complaints" || /^\s*<\?xml/.test(head) || /^\s*<(rss|feed)\b/i.test(head);
 
 				console.log(
-					`[${feed.id}] ok — ${xml.length.toLocaleString()} bytes in ${elapsed}ms, parsed ${capped.length}/${articles.length} items, ` +
+					`[${feed.id}] ok — ${xml.length ? `${xml.length.toLocaleString()} bytes, ` : ""}in ${elapsed}ms, parsed ${capped.length}/${articles.length} items, ` +
 						`${matchedCount} matched${looksLikeXml ? "" : "   WARN: no xml prologue"}`,
 				);
 				results.push({ feed, ok: true, bytes: xml.length, elapsed, articles: annotated, feedMeta });

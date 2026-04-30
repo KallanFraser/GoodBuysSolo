@@ -5,6 +5,13 @@
 // Add new feeds by appending; don't reorder (id is the stable key, not position).
 
 const FEEDS = [
+	{ id: "eeoc", name: "EEOC Newsroom", url: "https://www.eeoc.gov/rss/newsroom" },
+	{
+		id: "oecdwatch",
+		name: "OECD Watch Complaints",
+		url: "https://www.oecdwatch.org/complaints-database/",
+		kind: "oecd-complaints",
+	},
 	{ id: "edie", name: "Edie", url: "https://www.edie.net/feed/" },
 	{ id: "triplepundit", name: "Triple Pundit", url: "https://www.triplepundit.com/feed/" },
 	{ id: "trellis", name: "Trellis", url: "https://trellis.net/feed/" },

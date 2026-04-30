@@ -48,10 +48,13 @@ export function parseFeed(xml, { outletId, outletName } = {}) {
 
 function parseRss2(channel, { outletId, outletName }) {
 	const items = Array.isArray(channel.item) ? channel.item : [];
-	const articles = items.map((item) => normaliseRssItem(item, { outletId, outletName })).filter(Boolean);
+	const feedBaseUrl = firstString(channel.link) || null;
+	const articles = items
+		.map((item) => normaliseRssItem(item, { outletId, outletName, feedBaseUrl }))
+		.filter(Boolean);
 	return {
 		articles,
-		feedMeta: { title: stripText(channel.title), link: firstString(channel.link) },
+		feedMeta: { title: stripText(channel.title), link: feedBaseUrl },
 	};
 }
 
@@ -64,9 +67,10 @@ function parseAtom(feed, { outletId, outletName }) {
 	};
 }
 
-function normaliseRssItem(item, { outletId, outletName }) {
-	const url = firstString(item.link);
-	const title = stripText(item.title);
+function normaliseRssItem(item, { outletId, outletName, feedBaseUrl }) {
+	const { text: extractedTitle, href: extractedHref } = extractRssTitle(item.title, feedBaseUrl);
+	const url = firstString(item.link) || extractedHref || guidToString(item.guid);
+	const title = extractedTitle || stripText(item.title);
 	if (!url && !title) return null;
 
 	const summary = stripHtml(item.description || item["content:encoded"] || "");
@@ -146,6 +150,48 @@ function guidToString(g) {
 	if (typeof g === "string") return g;
 	if (typeof g === "object") return g["#text"] || null;
 	return null;
+}
+
+function extractRssTitle(titleNode, feedBaseUrl) {
+	if (!titleNode) return { text: "", href: null };
+	if (typeof titleNode === "string") {
+		return { text: decodeEntities(titleNode).trim(), href: null };
+	}
+	if (Array.isArray(titleNode)) {
+		for (const n of titleNode) {
+			const got = extractRssTitle(n, feedBaseUrl);
+			if (got.text || got.href) return got;
+		}
+		return { text: "", href: null };
+	}
+	if (typeof titleNode === "object") {
+		if (titleNode.a) {
+			const anchor = Array.isArray(titleNode.a) ? titleNode.a[0] : titleNode.a;
+			const href = absolutizeMaybe(
+				typeof anchor === "string" ? null : anchor?.["@_href"] || null,
+				feedBaseUrl,
+			);
+			const text = decodeEntities(
+				typeof anchor === "string" ? anchor : anchor?.["#text"] || "",
+			).trim();
+			return { text, href };
+		}
+		for (const v of Object.values(titleNode)) {
+			const got = extractRssTitle(v, feedBaseUrl);
+			if (got.text || got.href) return got;
+		}
+	}
+	return { text: "", href: null };
+}
+
+function absolutizeMaybe(url, baseUrl) {
+	if (!url || typeof url !== "string") return null;
+	try {
+		if (baseUrl) return new URL(url, baseUrl).toString();
+		return new URL(url).toString();
+	} catch {
+		return null;
+	}
 }
 
 function parseDate(d) {
