@@ -4,16 +4,20 @@ import companyLabelsData from "../../../src/data/company-labels.json";
 import labelsData from "../../../src/data/labels.json";
 
 // 1. PRE-COMPUTE LOOKUP MAPS
-const labelMap = new Map(labelsData.map((l) => [l.id, l]));
+const labelMap = new Map(
+	(Array.isArray(labelsData) ? labelsData : []).map((l) => [l.id, l]),
+);
 
 // Normalize helper
 const normalize = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, "");
 
 const companyMap = new Map();
-companyLabelsData.forEach((entry) => {
-	const key = normalize(entry.company);
-	companyMap.set(key, entry);
-});
+if (Array.isArray(companyLabelsData)) {
+	companyLabelsData.forEach((entry) => {
+		const key = normalize(entry.company);
+		companyMap.set(key, entry);
+	});
+}
 
 export async function GET(request) {
 	const { searchParams } = new URL(request.url);
