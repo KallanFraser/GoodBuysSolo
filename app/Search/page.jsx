@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import RigorScoreDisplay from "../../components/RigorScoreDisplay";
 import "../../styles/search.css";
 
 export default function Search() {
@@ -214,22 +215,6 @@ export default function Search() {
 								<div className="search-labels-grid">
 									{ecoLabels.map((label) => {
 										const imagePath = label.image_name ? `/images/ecolabels/resizedVersions/${label.image_name}` : null;
-										const rigorScore = typeof label.rigor_score === "number" ? label.rigor_score : null;
-
-										let rigorBand = "";
-										let rigorLabel = "";
-										if (rigorScore !== null) {
-											if (rigorScore >= 8) {
-												rigorBand = "high";
-												rigorLabel = "High rigor standard";
-											} else if (rigorScore >= 6) {
-												rigorBand = "medium";
-												rigorLabel = "Moderate rigor standard";
-											} else {
-												rigorBand = "low";
-												rigorLabel = "Lower rigor standard";
-											}
-										}
 
 										return (
 											<div key={label.id} className="search-label-card">
@@ -256,27 +241,7 @@ export default function Search() {
 														<p className="search-label-description">{label.description}</p>
 													)}
 
-													{rigorScore !== null && (
-														<div
-															className={`search-label-rigor-row ${
-																rigorBand ? `rigor-${rigorBand}` : ""
-															}`}
-														>
-															<span className="search-label-rigor-dot" />
-															<div className="search-label-rigor-text">
-																<span className="search-label-rigor-score">
-																	Rigor {rigorScore}
-																	<span className="search-label-rigor-max">
-																		{" "}
-																		/ 10
-																	</span>
-																</span>
-																<span className="search-label-rigor-level">
-																	{rigorLabel}
-																</span>
-															</div>
-														</div>
-													)}
+													<RigorScoreDisplay label={label} variant="search" />
 												</div>
 											</div>
 										);

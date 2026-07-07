@@ -1,813 +1,1822 @@
 [
-	{
-		"id": "fair-trade",
-		"name": "Fair Trade Certified",
-		"category": "Labor",
-		"description": "Standards around fair wages, safe working conditions, and community development funds.",
-		"source_url": "https://www.fairtradecertified.org/",
-		"seed_urls": ["https://www.fairtradecertified.org/our-community/shop-fair-trade/"],
-		"rigor_score": 8,
-		"image_name": "fair-trade.png",
-		"reason_for_rigor_score": "While highly recognizable and audited, Fair Trade USA split from the global Fairtrade International body to allow certification of larger plantations (vs. small co-ops). It also uses a 'mass balance' system for cocoa and sugar, meaning the physical product you buy may not contain the specific fair trade ingredients sourced, reducing traceability rigor compared to the strict segregation models of other labels."
-	},
-	{
-		"id": "rainforest-alliance",
-		"name": "Rainforest Alliance",
-		"category": "Environment",
-		"description": "Focuses on biodiversity conservation and sustainable livelihoods in agriculture and forestry.",
-		"source_url": "https://www.rainforest-alliance.org/",
-		"seed_urls": [
-			"https://www.rainforest-alliance.org/find-certified/",
-			"https://www.rainforest-alliance.org/business/certification/certificate-search-and-public-summaries/"
-		],
-		"rigor_score": 7,
-		"image_name": "rainforest-alliance.png",
-		"reason_for_rigor_score": "Rainforest Alliance (merged with UTZ) is excellent for promoting biodiversity and yield improvements, but it is often criticized for lacking a guaranteed 'minimum price' for farmers—a key safety net provided by Fairtrade. Its social criteria are considered less stringent than its environmental ones, and it allows for mixing certified and non-certified beans (mass balance) in some supply chains."
-	},
-	{
-		"id": "b-corp",
-		"name": "B Corp Certification",
-		"category": "Governance",
-		"description": "Certifies companies meeting high standards of social and environmental performance, accountability, and transparency.",
-		"source_url": "https://www.bcorporation.net/",
-		"seed_urls": ["https://www.bcorporation.net/en-us/find-a-b-corp/"],
-		"rigor_score": 8,
-		"image_name": "b-corp.png",
-		"reason_for_rigor_score": "The B Impact Assessment is comprehensive and difficult to pass, covering governance, workers, and environment. However, the score is an aggregate; a company can score poorly on environmental impact but make up for it in governance. Additionally, it certifies the *company*, not the *product*, meaning a B Corp can still sell environmentally harmful products if their internal operations are socially responsible."
-	},
-	{
-		"id": "gots",
-		"name": "GOTS (Global Organic Textile Standard)",
-		"category": "Textiles",
-		"description": "Organic fiber standard covering ecological and social criteria.",
-		"source_url": "https://global-standard.org/",
-		"seed_urls": [
-			"https://global-standard.org/find-suppliers-shops-and-inputs",
-			"https://global-standard.org/find-suppliers-shops-and-inputs/certified-suppliers/database/search"
-		],
-		"rigor_score": 8,
-		"image_name": "gots.png",
-		"reason_for_rigor_score": "GOTS is widely considered the platinum standard for textiles because it regulates the *entire* supply chain. Unlike OCS (which tracks fiber only), GOTS bans toxic processing chemicals (bleaches, dyes), mandates water treatment, and enforces social standards in factories. It requires at least 70% organic fiber and strict segregation, making it highly rigorous."
-	},
-	{
-		"id": "fsc",
-		"name": "FSC",
-		"category": "Forestry",
-		"description": "Responsible forest management for wood/paper products.",
-		"source_url": "https://fsc.org/",
-		"seed_urls": ["https://search.fsc.org/"],
-		"rigor_score": 7,
-		"image_name": "fsc.png",
-		"reason_for_rigor_score": "FSC is the most credible forestry label, ensuring indigenous rights and prohibiting GMO trees. However, it faces criticism for its 'FSC Mix' label, which allows certified wood to be mixed with 'Controlled Wood' (non-certified wood that avoids the worst abuses but isn't fully sustainable). This loophole lowers its overall rigor compared to a 100% sustainable chain of custody."
-	},
-	{
-		"id": "oeko-tex",
-		"name": "OEKO-TEX Standard 100",
-		"category": "Chemicals",
-		"description": "Tests textiles for harmful substances.",
-		"source_url": "https://www.oeko-tex.com/",
-		"seed_urls": ["https://www.oeko-tex.com/en/buying-guide", "https://www.oeko-tex.com/en/oeko-tex-directory"],
-		"rigor_score": 6,
-		"image_name": "oeko-tex.png",
-		"reason_for_rigor_score": "This label is highly rigorous for *consumer safety* (testing for heavy metals and carcinogens), but it is often misunderstood as an 'organic' or 'eco-friendly' label. It does not certify that the fiber was grown organically, nor does it address factory working conditions or wastewater pollution. Its limited scope (product safety only) limits its overall eco-rigor."
-	},
-	{
-		"id": "cradle-to-cradle",
-		"name": "Cradle to Cradle",
-		"category": "Circularity",
-		"description": "Multi-attribute product standard focusing on circular design and material health.",
-		"source_url": "https://c2ccertified.org/",
-		"seed_urls": ["https://c2ccertified.org/certified-products"],
-		"rigor_score": 8,
-		"image_name": "cradle-to-cradle.png",
-		"reason_for_rigor_score": "Cradle to Cradle (C2C) is scientifically rigorous, requiring deep chemical analysis of every ingredient to ensure 'material health' and recyclability. Achieving the higher levels (Gold/Platinum) is extremely difficult as it mandates 100% renewable energy use and water stewardship. It is one of the few labels that addresses the entire life cycle and circularity."
-	},
-	{
-		"id": "clean-clothes-campaign",
-		"name": "Clean Clothes Campaign",
-		"category": "Labor",
-		"description": "Advocacy network focused on improving working conditions in the global garment industry.",
-		"source_url": "https://cleanclothes.org/",
-		"seed_urls": ["https://cleanclothes.org/"],
-		"rigor_score": 5,
-		"image_name": "clean-clothes-campaign.png",
-		"reason_for_rigor_score": "Clean Clothes Campaign is a highly respected advocacy and watchdog network, but it is *not* a product certification that consumers can find on a tag to verify a specific item. Its value lies in exposing bad practices rather than certifying good ones, making it low-utility as a 'shopper's guide' label, though its investigative rigor is high."
-	},
-	{
-		"id": "canopy-style",
-		"name": "CanopyStyle",
-		"category": "Forestry",
-		"description": "Works with brands to eliminate ancient and endangered forest fiber from viscose and other cellulosic textiles.",
-		"source_url": "https://canopyplanet.org/campaigns/canopystyle/",
-		"seed_urls": ["https://canopyplanet.org/campaigns/canopystyle/"],
-		"rigor_score": 5,
-		"image_name": "canopy-style.png",
-		"reason_for_rigor_score": "CanopyStyle is a B2B audit and commitment program rather than a consumer-facing product label. While it is effective at pressuring brands to clean up viscose supply chains (stopping sourcing from ancient forests), it does not provide a trackable label on individual garments for consumers to verify compliance."
-	},
-	{
-		"id": "better-cotton",
-		"name": "Better Cotton (BCI)",
-		"category": "Agriculture",
-		"description": "Focuses on improving cotton farming globally with better environmental and social outcomes.",
-		"source_url": "https://bettercotton.org/",
-		"seed_urls": ["https://bettercotton.org/membership/find-members/"],
-		"rigor_score": 6,
-		"image_name": "better-cotton.png",
-		"reason_for_rigor_score": "BCI operates on a 'Mass Balance' system, which is its major weakness in terms of rigor. A brand can buy BCI credits, but the physical cotton in the shirt might be conventional cotton. While BCI does good work training farmers to use less water and pesticide, the lack of physical traceability and the allowance of GMOs makes it less rigorous than organic certifications."
-	},
-	{
-		"id": "bluesign",
-		"name": "bluesign",
-		"category": "Chemicals/Materials",
-		"description": "Manages input streams in textile supply chains to remove harmful substances and optimize resource use.",
-		"source_url": "https://www.bluesign.com/",
-		"seed_urls": ["https://www.bluesign.com/"],
-		"rigor_score": 8,
-		"image_name": "bluesign.png",
-		"reason_for_rigor_score": "Bluesign is highly rigorous because it controls the 'input stream'—meaning it stops toxic chemicals from entering the factory in the first place, rather than just testing the final product. It audits complex chemical suppliers and dye houses, addressing air and water emissions that other labels miss."
-	},
-	{
-		"id": "soil-association-organic",
-		"name": "Soil Association Organic",
-		"category": "Agriculture/Food/Beauty",
-		"description": "UK-based organic standards for food, farming, and personal care.",
-		"source_url": "https://www.soilassociation.org/",
-		"seed_urls": ["https://www.soilassociation.org/take-action/organic-living/beauty-wellbeing/our-certified-brands/"],
-		"rigor_score": 7,
-		"image_name": "soil-association-organic.png",
-		"reason_for_rigor_score": "The Soil Association has standards that are often stricter than the legal EU/UK organic minimums, particularly regarding animal welfare and biodiversity conservation. However, like all organic standards, it focuses on the farm level and does not heavily regulate the carbon footprint of transport or packaging."
-	},
-	{
-		"id": "wrap",
-		"name": "WRAP",
-		"category": "Labor/Factory",
-		"description": "Worldwide Responsible Accredited Production – certifies factories for responsible labor and compliance practices.",
-		"source_url": "https://wrapcompliance.org/en/",
-		"seed_urls": ["https://wrapcompliance.org/en/certification/facility-monitor-list/"],
-		"rigor_score": 6,
-		"image_name": "wrap.png",
-		"reason_for_rigor_score": "WRAP is a widely used factory certification, but it is often criticized by labor rights groups for being industry-influenced and having less transparency than SA8000. It relies heavily on announced audits, which can allow factories to 'clean up' before inspectors arrive, reducing the ability to detect genuine day-to-day violations."
-	},
-	{
-		"id": "rws",
-		"name": "Responsible Wool Standard (RWS)",
-		"category": "Animal Welfare",
-		"description": "Ensures wool comes from farms with high animal welfare and land management standards.",
-		"source_url": "https://textileexchange.org/standards/responsible-wool/",
-		"seed_urls": ["https://textileexchange.org/standards/responsible-wool/", "https://textileexchange.org/find-certified-company/"],
-		"rigor_score": 7,
-		"image_name": "rws.png",
-		"reason_for_rigor_score": "RWS is a strong standard that strictly prohibits 'mulesing' (a painful procedure for sheep) and requires sustainable land management plans. It tracks material from farm to final product. Its rigor is solid, though it focuses primarily on the farm stage and does not cover the environmental impact of wool processing (scouring/dyeing)."
-	},
-	{
-		"id": "nordic-swan",
-		"name": "Nordic Swan Ecolabel",
-		"category": "Multi-Category",
-		"description": "Official Nordic ecolabel with strict criteria across product categories.",
-		"source_url": "https://www.nordic-swan-ecolabel.org/",
-		"seed_urls": ["https://www.nordic-swan-ecolabel.org/building-products-portal/"],
-		"rigor_score": 8,
-		"image_name": "nordic-swan.png",
-		"reason_for_rigor_score": "This is a 'Type 1' ISO ecolabel, meaning it is third-party verified, multi-attribute, and covers the entire life cycle. It sets strict limits on energy use, chemical toxicity, and durability. It is one of the most trusted government-backed labels because criteria are regularly tightened to ensure only the top ~20% of products qualify."
-	},
-	{
-		"id": "zq-merino",
-		"name": "ZQ Merino",
-		"category": "Animal Welfare",
-		"description": "Standard for merino wool that covers animal welfare, environmental care, and social responsibility.",
-		"source_url": "https://www.discoverzq.com/",
-		"seed_urls": ["https://www.discoverzq.com/"],
-		"rigor_score": 6,
-		"image_name": "zq-merino.png",
-		"reason_for_rigor_score": "ZQ Merino is a robust grower program that ensures no mulesing and free-range grazing. However, it is a private brand standard (owned by the New Zealand Merino Company) rather than a neutral third-party NGO standard like RWS, which creates a slight conflict of interest in self-promotion vs. independent auditing."
-	},
-	{
-		"id": "responsible-down-standard",
-		"name": "Responsible Down Standard (RDS)",
-		"category": "Animal Welfare",
-		"description": "Ensures down and feathers come from animals that have not been subjected to unnecessary harm.",
-		"source_url": "https://textileexchange.org/standards/responsible-down/",
-		"seed_urls": ["https://textileexchange.org/standards/responsible-down/", "https://textileexchange.org/find-certified-company/"],
-		"rigor_score": 7,
-		"image_name": "responsible-down-standard.png",
-		"reason_for_rigor_score": "RDS effectively eliminated live-plucking and force-feeding from certified supply chains, which were major industry issues. It requires chain-of-custody verification. However, it permits 'parallel production' (farms can have certified and non-certified birds), which adds a layer of risk, though the chain of custody tracking mitigates this."
-	},
-	{
-		"id": "global-recycled-standard",
-		"name": "Global Recycled Standard (GRS)",
-		"category": "Recycled Materials",
-		"description": "Tracks recycled content and social/environmental practices in supply chains.",
-		"source_url": "https://textileexchange.org/standards/global-recycled-standard/",
-		"seed_urls": ["https://textileexchange.org/standards/global-recycled-standard/", "https://textileexchange.org/find-certified-company/"],
-		"rigor_score": 7,
-		"image_name": "global-recycled-standard.png",
-		"reason_for_rigor_score": "GRS validates the exact percentage of recycled content (minimum 20%) and, crucially, adds social and chemical requirements for the processing facilities. This makes it far more rigorous than the lower-tier 'Recycled Claim Standard' (RCS), which only tracks quantity. However, it does not verify *where* the waste came from originally (e.g., ocean plastic vs. industrial scrap)."
-	},
-	{
-		"id": "organic-content-standard",
-		"name": "Organic Content Standard (OCS)",
-		"category": "Textiles",
-		"description": "Verifies organic content in final products without broader social criteria.",
-		"source_url": "https://textileexchange.org/standards/organic-content-standard/",
-		"seed_urls": ["https://textileexchange.org/standards/organic-content-standard/", "https://textileexchange.org/find-certified-company/"],
-		"rigor_score": 5,
-		"image_name": "organic-content-standard.png",
-		"reason_for_rigor_score": "OCS is strictly a chain-of-custody standard. It proves that organic cotton entered the supply chain and ended up in the shirt. It does *not* forbid the use of toxic chemicals during dyeing, nor does it check for child labor in the factories. It is often used by brands that want to claim 'organic' without meeting the strict processing costs of GOTS."
-	},
-	{
-		"id": "made-in-green",
-		"name": "MADE IN GREEN by OEKO-TEX",
-		"category": "Textiles",
-		"description": "Traceable product label for textiles made in environmentally friendly and socially responsible facilities.",
-		"source_url": "https://www.oeko-tex.com/en/our-standards/made-in-green-by-oeko-tex",
-		"seed_urls": ["https://www.oeko-tex.com/en/our-standards/made-in-green-by-oeko-tex", "https://www.oeko-tex.com/en/label-check"],
-		"rigor_score": 8,
-		"image_name": "made-in-green.png",
-		"reason_for_rigor_score": "This is Oeko-Tex's 'Platinum' level. Unlike Standard 100 (safety only), MADE IN GREEN requires the product to be safe *and* produced in factories that meet the 'STeP' audit for environmental management and social responsibility. It also offers a QR code for consumer traceability, offering high transparency."
-	},
-	{
-		"id": "fair-wear",
-		"name": "Fair Wear",
-		"category": "Labor",
-		"description": "Focuses on improving workplace conditions in garment factories.",
-		"source_url": "https://www.fairwear.org/",
-		"seed_urls": ["https://www.fairwear.org/"],
-		"rigor_score": 8,
-		"image_name": "fair-wear.png",
-		"reason_for_rigor_score": "Fair Wear is unique because it judges the *brand's purchasing practices*, not just the factory. It recognizes that low prices from brands force factories to cut corners. It requires brands to show they are working toward living wages. Its audits are high-quality and include off-site worker interviews, making it more rigorous than standard checklist audits."
-	},
-	{
-		"id": "fairtrade-international",
-		"name": "Fairtrade International (FLO)",
-		"category": "Labor/Agriculture",
-		"description": "Global standard-setting body for Fairtrade certification.",
-		"source_url": "https://www.fairtrade.net/",
-		"seed_urls": [
-			"https://www.fairtrade.net/en/products/Fairtrade_products.html",
-			"https://www.fairtrade.net/en/about/overview-of-fairtrade-producers.html",
-			"https://www.flocert.net/fairtrade-customer-search/"
-		],
-		"rigor_score": 8,
-		"image_name": "fairtrade-international.png",
-		"reason_for_rigor_score": "This is the original gold standard for fair trade. It mandates a 'Minimum Price' (to cover costs of sustainable production) and a 'Fairtrade Premium' (extra money for community use). It is strictly audited by FLOCERT. Its only 'flaw' is the allowance of mass balance for some commodities like cocoa/sugar to achieve scale, but it remains the most worker-centric label."
-	},
-	{
-		"id": "sa8000",
-		"name": "SA8000",
-		"category": "Labor",
-		"description": "Social accountability standard for decent working conditions.",
-		"source_url": "https://sa-intl.org/programs/sa8000/",
-		"seed_urls": ["https://sa-intl.org/programs/sa8000/"],
-		"rigor_score": 8,
-		"image_name": "sa8000.png",
-		"reason_for_rigor_score": "SA8000 is one of the most rigorous social certifications for factories. It is based on UN and ILO conventions and sets hard performance metrics (not just policies) on issues like overtime, child labor, and health & safety. It requires regular surveillance audits, though it is a B2B certification that consumers rarely see on a final product tag."
-	},
-	{
-		"id": "carbon-trust-footprint",
-		"name": "Carbon Trust Footprint",
-		"category": "Carbon",
-		"description": "Labels products with their carbon footprint and reductions.",
-		"source_url": "https://www.carbontrust.com/",
-		"seed_urls": ["https://www.carbontrust.com/what-we-do/carbon-footprint-labelling", "https://label.carbontrust.com/"],
-		"rigor_score": 6,
-		"image_name": "carbon-trust-footprint.png",
-		"reason_for_rigor_score": "The Carbon Trust methodology (PAS 2050) is excellent and scientific. However, the label itself can be confusing: a 'CO2 Measured' label just means they calculated the footprint, not that they reduced it or that it is low. Only the 'CO2 Reducing' or 'Carbon Neutral' variants imply environmental action, so the rigor depends entirely on the specific sub-text of the label."
-	},
-	{
-		"id": "carbon-neutral-product",
-		"name": "Carbon Neutral Product (Climate Impact Partners)",
-		"category": "Carbon",
-		"description": "Signifies products with measured and offset carbon footprints.",
-		"source_url": "https://www.climateimpact.com/",
-		"seed_urls": ["https://www.climateimpact.com/"],
-		"rigor_score": 5,
-		"image_name": "carbon-neutral-product.png",
-		"reason_for_rigor_score": "Carbon neutrality is increasingly controversial. This label relies on 'offsetting' emissions (buying credits) rather than necessarily eliminating them. Since the quality of carbon offsets varies wildly (some forest protection projects have been found to be ineffective), a label based primarily on offsets is less rigorous than one requiring absolute emission reductions."
-	},
-	{
-		"id": "carbon-care-certified",
-		"name": "Carbon Care Certified",
-		"category": "Carbon",
-		"description": "Label for organisations and products meeting certain carbon management standards.",
-		"source_url": "https://www.ecolabelindex.com/ecolabel/carbon-care-certification",
-		"seed_urls": [
-			"https://www.ecolabelindex.com/ecolabel/carbon-care-certification",
-			"https://www.climatefinanceasia.com/capabilities/carboncare-labels/"
-		],
-		"rigor_score": 6,
-		"image_name": "carbon-care-certified.png",
-		"reason_for_rigor_score": "This is a smaller regional label (often seen in Asia/Hong Kong) focusing on measurement and reduction. While it follows ISO standards, it lacks the global transparency and widespread third-party scrutiny of larger bodies like the Carbon Trust or Gold Standard. It is a valid verification but carries less weight internationally."
-	},
-	{
-		"id": "leaping-bunny",
-		"name": "Leaping Bunny (Cruelty Free International)",
-		"category": "Animal Testing",
-		"description": "Global standard for cruelty-free cosmetics, personal care, and household products.",
-		"source_url": "https://crueltyfreeinternational.org/LeapingBunny",
-		"seed_urls": ["https://crueltyfreeinternational.org/leapingbunny"],
-		"rigor_score": 7,
-		"image_name": "leaping-bunny.png",
-		"reason_for_rigor_score": "Leaping Bunny is the most rigorous cruelty-free standard because it requires an audit of the *entire* supply chain, including raw material suppliers, to ensure no animal testing occurred after a fixed cut-off date. This is far superior to PETA's 'Beauty Without Bunnies', which often relies on a simple pledge of trust from the brand without independent supply chain audits."
-	},
-	{
-		"id": "certified-naturally-grown",
-		"name": "Certified Naturally Grown",
-		"category": "Agriculture",
-		"description": "Peer-review based certification for small-scale farmers and beekeepers using ecological methods.",
-		"source_url": "https://www.naturallygrown.org/",
-		"seed_urls": ["https://www.naturallygrown.org/directory-of-certified-producers/", "https://www.naturallygrown.org/farms-and-apiaries/"],
-		"rigor_score": 6,
-		"image_name": "certified-naturally-grown.png",
-		"reason_for_rigor_score": "CNG was created as a lower-cost alternative to USDA Organic for small farmers. The standards are identical to USDA Organic (no synthetic pesticides/GMOs), but the verification is 'peer-reviewed' (farmers inspecting other farmers) rather than audited by a USDA-accredited agent. While the intent is pure, the lack of independent third-party oversight lowers the formal rigor score."
-	},
-	{
-		"id": "usda-organic",
-		"name": "USDA Organic",
-		"category": "Agriculture",
-		"description": "US National Organic Program seal for food and agriculture.",
-		"source_url": "https://www.usda.gov/topics/organic",
-		"seed_urls": ["https://organic.ams.usda.gov/integrity/", "https://www.usda.gov/topics/organic"],
-		"rigor_score": 7,
-		"image_name": "usda-organic.png",
-		"reason_for_rigor_score": "USDA Organic is backed by federal law, making it highly reliable for avoiding GMOs, synthetic pesticides, and antibiotics. However, it allows for hydroponics (growing without soil), which divides the organic community, and its animal welfare requirements are often criticized as being too loose (e.g., 'outdoor access' can be a small concrete porch)."
-	},
-	{
-		"id": "audubon-international",
-		"name": "Audubon International",
-		"category": "Landscapes/Recreation",
-		"description": "Certifies golf courses, resorts, and communities for environmental management.",
-		"source_url": "https://auduboninternational.org/",
-		"seed_urls": ["https://auduboninternational.org/"],
-		"rigor_score": 5,
-		"image_name": "audubon-international.png",
-		"reason_for_rigor_score": "Not to be confused with the National Audubon Society (the bird advocacy group), Audubon International certifies golf courses. While it encourages reduced water and chemical use, it is criticized for certifying courses that still heavily utilize pesticides and water in sensitive habitats. It acts more as a 'best management practice' guide than a strict ecological shield."
-	},
-	{
-		"id": "bap",
-		"name": "Best Aquaculture Practices (BAP)",
-		"category": "Aquaculture",
-		"description": "Certifies seafood farms, hatcheries, feed mills, and processing plants for environmental and social responsibility.",
-		"source_url": "https://www.bapcertification.org/",
-		"seed_urls": ["https://www.bapcertification.org/"],
-		"rigor_score": 7,
-		"image_name": "bap.png",
-		"reason_for_rigor_score": "BAP is unique because it can certify the entire production chain (hatchery, feed mill, farm, processing). It has decent standards for effluent (water pollution) and social welfare. However, it is industry-led (GAA) and is often considered slightly less stringent on environmental impact limits than the ASC (Aquaculture Stewardship Council)."
-	},
-	{
-		"id": "certified-vegan",
-		"name": "Certified Vegan",
-		"category": "Vegan",
-		"description": "Logo indicating products free of animal ingredients and testing.",
-		"source_url": "https://vegan.org/",
-		"seed_urls": ["https://vegan.org/certified-products/", "https://vegan.org/companies-using-our-logo/"],
-		"rigor_score": 6,
-		"image_name": "certified-vegan.png",
-		"reason_for_rigor_score": "This label accurately verifies that a product contains no animal inputs. However, 'Vegan' does not mean 'Eco-friendly.' A vegan product can be made of 100% virgin plastic, made in a sweatshop, or grown with heavy pesticides. The rigor is high for the *ingredient list*, but low for overall *sustainability*."
-	},
-	{
-		"id": "animal-welfare-approved",
-		"name": "Animal Welfare Approved (AGW)",
-		"category": "Animal Welfare",
-		"description": "High-welfare, pasture-based livestock certification by A Greener World.",
-		"source_url": "https://agreenerworld.org/certifications/animal-welfare-approved/",
-		"seed_urls": ["https://agreenerworld.org/"],
-		"rigor_score": 9,
-		"image_name": "animal-welfare-approved.png",
-		"reason_for_rigor_score": "Widely considered the strictest animal welfare label in North America. It requires continuous access to pasture (not just 'outdoors'), forbids feedlots, and prohibits beak trimming/tail docking. It audits every single farm (no group certifications), ensuring the highest level of rigor for ethical meat/dairy."
-	},
-	{
-		"id": "energy-star",
-		"name": "ENERGY STAR",
-		"category": "Energy",
-		"description": "US EPA label for energy-efficient products and buildings.",
-		"source_url": "https://www.energystar.gov/",
-		"seed_urls": ["https://www.energystar.gov/productfinder/"],
-		"rigor_score": 7,
-		"image_name": "energy-star.png",
-		"reason_for_rigor_score": "Managed by the EPA, this is a highly credible standard for energy efficiency. It relies on standardized lab testing. However, the rigor is 'binary' (pass/fail) and the bar is sometimes set so that a large portion of the market can pass, rather than just the top tier. It also does not address how the product was *made* (materials, toxicity), only how it *runs*."
-	},
-	{
-		"id": "green-seal",
-		"name": "Green Seal",
-		"category": "Environmental Performance",
-		"description": "Multi-attribute environmental certification for products and services.",
-		"source_url": "https://www.greenseal.org/",
-		"seed_urls": ["https://certified.greenseal.org/"],
-		"rigor_score": 8,
-		"image_name": "green-seal.png",
-		"reason_for_rigor_score": "Green Seal is a 'Type 1' ecolabel (like Nordic Swan) that evaluates the full life cycle of a product. It has strict prohibitions on carcinogens, reproductive toxins, and VOCs. It requires on-site audits and annual compliance monitoring, making it one of the most trustworthy multi-attribute labels in the US market."
-	},
-	{
-		"id": "wildlife-friendly",
-		"name": "Wildlife Friendly",
-		"category": "Biodiversity",
-		"description": "Certifies products and enterprises that protect wildlife and habitats.",
-		"source_url": "https://wildlifefriendly.org/",
-		"seed_urls": ["https://wildlifefriendly.org/buy-wild/"],
-		"rigor_score": 6,
-		"image_name": "wildlife-friendly.png",
-		"reason_for_rigor_score": "This certification targets niche conservation goals (e.g., protecting cheetahs or elephants). While the on-the-ground conservation work is excellent, the certification process is often project-based and less standardized than global industrial certifications like FSC or Rainforest Alliance, making it harder to compare rigor across different products."
-	},
-	{
-		"id": "bird-friendly-coffee",
-		"name": "Bird Friendly (Smithsonian)",
-		"category": "Biodiversity/Agriculture",
-		"description": "Coffee certification ensuring shade-grown, biodiversity-supporting farms.",
-		"source_url": "https://nationalzoo.si.edu/migratory-birds/bird-friendly",
-		"seed_urls": [
-			"https://nationalzoo.si.edu/migratory-birds/buy-bird-friendly-coffee-online",
-			"https://nationalzoo.si.edu/migratory-birds/where-buy-bird-friendly-coffee"
-		],
-		"rigor_score": 8,
-		"image_name": "bird-friendly-coffee.png",
-		"reason_for_rigor_score": "Considered the gold standard for shade-grown coffee. It is stricter than Rainforest Alliance because it *requires* organic certification as a prerequisite AND mandates specific canopy heights and foliage cover to ensure genuine habitat for migratory birds. It is scientifically backed by the Smithsonian."
-	},
-	{
-		"id": "carbonfree",
-		"name": "Carbonfree",
-		"category": "Carbon/Offsets",
-		"description": "Indicates that a product’s carbon emissions have been measured and offset.",
-		"source_url": "https://carbonfund.org/",
-		"seed_urls": ["https://carbonfund.org/carbonfree-programs/", "https://carbonfund.org/"],
-		"rigor_score": 6,
-		"image_name": "carbonfree.png",
-		"reason_for_rigor_score": "Similar to other offset-based labels, this certifies that a product's footprint was neutralized via carbon credits. While Carbonfund.org uses third-party verified projects, the label does not strictly require the manufacturer to reduce their own emissions before offsetting, which is the preferred hierarchy in climate science."
-	},
-	{
-		"id": "climate-registered",
-		"name": "Climate Registered (The Climate Registry)",
-		"category": "Carbon/Reporting",
-		"description": "Recognizes organizations for measuring, reporting, and reducing greenhouse gas emissions.",
-		"source_url": "https://www.theclimateregistry.org/",
-		"seed_urls": ["https://www.theclimateregistry.org/"],
-		"rigor_score": 6,
-		"image_name": "climate-registered.png",
-		"reason_for_rigor_score": "This is a transparency and reporting verification. It proves that a company has accurately measured and publicly reported its carbon footprint according to strict protocols. It promotes accountability, but it is not a performance standard—you can be 'Climate Registered' and still have high emissions, as long as you report them accurately."
-	},
-	{
-		"id": "leed",
-		"name": "LEED",
-		"category": "Buildings",
-		"description": "Green building certification system by the U.S. Green Building Council.",
-		"source_url": "https://www.usgbc.org/leed",
-		"seed_urls": ["https://www.usgbc.org/leed", "https://www.usgbc.org/projects"],
-		"rigor_score": 8,
-		"image_name": "leed.png",
-		"reason_for_rigor_score": "LEED is the global heavyweight for green buildings. It uses a point system (Certified, Silver, Gold, Platinum) covering energy, water, materials, and air quality. While criticized in the past for allowing points for easy fixes (like bike racks) while ignoring energy efficiency, updated versions (v4/v4.1) rely more on actual performance data, restoring its high rigor."
-	},
-	{
-		"id": "eu-ecolabel",
-		"name": "EU Ecolabel",
-		"category": "Multi-Category",
-		"description": "Official European Union environmental label for products and services with reduced life-cycle impact.",
-		"source_url": "https://environment.ec.europa.eu/topics/circular-economy/eu-ecolabel_en",
-		"seed_urls": [
-			"https://environmental-data.ec.europa.eu/ecolabel/product_list.html",
-			"https://environment.ec.europa.eu/app/ecolabel-product-catalogue"
-		],
-		"rigor_score": 8,
-		"image_name": "eu-ecolabel.png",
-		"reason_for_rigor_score": "The 'Flower' is the official voluntary label of the EU. It sets tough limits on hazardous substances, durability, and reparability. Because it is government-managed and harmonized across member states, it avoids the conflicts of interest found in private for-profit labels. Criteria are developed by scientists and NGOs."
-	},
-	{
-		"id": "eu-organic",
-		"name": "EU Organic Logo",
-		"category": "Agriculture",
-		"description": "European Union logo for certified organic food and farming, with strict rules on production, labeling, and origin.",
-		"source_url": "https://agriculture.ec.europa.eu/farming/organic-farming/organic-logo_en",
-		"seed_urls": ["https://euorganicproducts.eu/"],
-		"rigor_score": 8,
-		"image_name": "eu-organic.png",
-		"reason_for_rigor_score": "EU Organic is one of the world's most strictly enforced organic standards. It bans GMOs and synthetic pesticides and requires annual inspections. Unlike the US, the EU is generally more cautious about allowing 'hydroponic' (soil-less) systems to be labeled organic, viewing soil health as a central tenet of the philosophy."
-	},
-	{
-		"id": "msc",
-		"name": "Marine Stewardship Council (MSC)",
-		"category": "Seafood",
-		"description": "Global label for wild-caught seafood from sustainably managed fisheries.",
-		"source_url": "https://www.msc.org/",
-		"seed_urls": ["https://www.msc.org/en-us/what-you-can-do/where-to-buy-msc-certified-sustainable-seafood"],
-		"rigor_score": 8,
-		"image_name": "msc.png",
-		"reason_for_rigor_score": "MSC is the dominant standard for wild fisheries, evaluating stock health, environmental impact, and management. While it has faced criticism for certifying some large industrial fisheries with bycatch issues, it remains the most transparent and scientifically peer-reviewed seafood standard, with a rigorous chain of custody to prevent fish fraud."
-	},
-	{
-		"id": "asc",
-		"name": "Aquaculture Stewardship Council (ASC)",
-		"category": "Aquaculture",
-		"description": "Label for farmed seafood that meets strict environmental and social standards.",
-		"source_url": "https://asc-aqua.org/",
-		"seed_urls": ["https://asc-aqua.org/find-a-product/", "https://asc-aqua.org/find-a-supplier/"],
-		"rigor_score": 7,
-		"image_name": "asc.png",
-		"reason_for_rigor_score": "ASC (co-founded by WWF) is the rigorous counterpart to MSC but for *farmed* fish. It has strict limits on antibiotic use, water pollution, and fish escapes (which can damage wild genetics). It is generally viewed as tougher than BAP, but the inherent environmental challenges of carnivorous fish farming (salmon) limit the 'absolute' sustainability score."
-	},
-	{
-		"id": "pefc",
-		"name": "PEFC",
-		"category": "Forestry",
-		"description": "Global umbrella system endorsing national forest certification schemes for sustainable forest management.",
-		"source_url": "https://www.pefc.org/",
-		"seed_urls": ["https://pefc.org/find-certified"],
-		"rigor_score": 5,
-		"image_name": "pefc.png",
-		"reason_for_rigor_score": "PEFC acts as an umbrella organization that endorses national standards (e.g., SFI in the US). Critics argue this allows for weaker regional standards to get a 'global' stamp of approval. It is generally considered more industry-friendly and less stringent on indigenous rights and old-growth protection compared to FSC."
-	},
-	{
-		"id": "rspo",
-		"name": "RSPO Certified Sustainable Palm Oil",
-		"category": "Agriculture/Commodities",
-		"description": "Label for products using certified sustainable palm oil meeting RSPO principles and criteria.",
-		"source_url": "https://rspo.org/",
-		"seed_urls": ["https://rspo.org/as-an-organisation/our-trademark/products-with-rspo-label/"],
-		"rigor_score": 5,
-		"image_name": "rspo.png",
-		"reason_for_rigor_score": "RSPO is widely criticized for its weak enforcement and reliance on 'Mass Balance' and 'Book and Claim' supply chain models. This means companies can support sustainable palm oil financially while still physically using oil from deforested areas. It has struggled to effectively stop deforestation in Indonesia and Malaysia despite its claims."
-	},
-	{
-		"id": "non-gmo-project",
-		"name": "Non-GMO Project Verified",
-		"category": "Agriculture/Food",
-		"description": "North America’s leading third-party verification for avoiding genetically modified organisms in food and products.",
-		"source_url": "https://www.nongmoproject.org/",
-		"seed_urls": ["https://www.nongmoproject.org/find-non-gmo/"],
-		"rigor_score": 7,
-		"image_name": "non-gmo-project.png",
-		"reason_for_rigor_score": "This label is extremely effective at one thing: verifying the absence of GMOs through DNA testing and supply chain audits. Rigor is high for that specific attribute. However, 'Non-GMO' does not mean 'pesticide-free' or 'sustainable.' A crop can be non-GMO but still be sprayed with toxic synthetic herbicides."
-	},
-	{
-		"id": "blue-angel",
-		"name": "Blue Angel",
-		"category": "Multi-Category",
-		"description": "German federal government ecolabel for a wide range of low-impact non-food products and services.",
-		"source_url": "https://www.blauer-engel.de/en",
-		"seed_urls": ["https://www.blauer-engel.de/en/products"],
-		"rigor_score": 8,
-		"image_name": "blue-angel.png",
-		"reason_for_rigor_score": "The world's oldest ecolabel (Germany). It is government-run and sets high bars for recyclability, noise, and chemical safety, particularly for paper, electronics, and construction materials. Its criteria are updated every 3-4 years to keep pace with technology, maintaining its status as a 'best-in-class' indicator."
-	},
-	{
-		"id": "epeat",
-		"name": "EPEAT",
-		"category": "Electronics",
-		"description": "Global Type 1 ecolabel for electronics measuring environmental and social impacts from design to end-of-life.",
-		"source_url": "https://epeat.net/",
-		"seed_urls": ["https://epeat.net/"],
-		"rigor_score": 7,
-		"image_name": "epeat.png",
-		"reason_for_rigor_score": "EPEAT is the standard for institutional buying of green IT (computers, monitors). It uses a tiered system (Bronze/Silver/Gold). While rigorous on energy and recyclability, it relies partially on manufacturer declaration (with random spot checks) rather than 100% pre-market third-party testing, which introduces some reliance on corporate honesty."
-	},
-	{
-		"id": "tco-certified",
-		"name": "TCO Certified",
-		"category": "Electronics",
-		"description": "Comprehensive sustainability certification for IT products, covering social and environmental criteria with independent verification.",
-		"source_url": "https://tcocertified.com/",
-		"seed_urls": ["https://tcocertified.com/product-finder/"],
-		"rigor_score": 7,
-		"image_name": "tco-certified.png",
-		"reason_for_rigor_score": "TCO (Swedish) is often viewed as slightly stricter than EPEAT on social responsibility, requiring audits of final assembly factories for worker rights. It also has tough criteria for 'ergonomics' and chemical safety. It requires independent verification before the certificate is issued, adding a layer of trust."
-	},
-	{
-		"id": "green-e-energy",
-		"name": "Green-e Energy",
-		"category": "Energy",
-		"description": "Certification for renewable electricity and related products ensuring verified, high-standard clean energy.",
-		"source_url": "https://www.green-e.org/programs/energy",
-		"seed_urls": ["https://www.green-e.org/certified-resources"],
-		"rigor_score": 7,
-		"image_name": "green-e-energy.png",
-		"reason_for_rigor_score": "Green-e verifies that renewable energy credits (RECs) are not double-counted (sold to two different people). It ensures the energy is 'new' (generated recently). It is a rigorous accounting standard for the intangible renewable energy market, essentially preventing fraud in green power sales."
-	},
-	{
-		"id": "watersense",
-		"name": "WaterSense",
-		"category": "Water/Energy",
-		"description": "US EPA label for water-efficient plumbing fixtures and products that use at least 20% less water while performing as well as standard models.",
-		"source_url": "https://www.epa.gov/watersense",
-		"seed_urls": ["https://www.epa.gov/watersense/watersense-label"],
-		"rigor_score": 7,
-		"image_name": "watersense.png",
-		"reason_for_rigor_score": "Like Energy Star, this is an EPA program. It certifies that toilets/faucets use at least 20% less water than the federal standard. Crucially, it also tests for *performance* (so low-flow toilets actually flush). It is rigorous, third-party tested, and simple: it delivers exactly what it promises—water savings."
-	},
-	{
-		"id": "breeam",
-		"name": "BREEAM",
-		"category": "Buildings",
-		"description": "The world's leading science-based suite of validation and certification systems for sustainable built environment. A major global alternative/competitor to LEED.",
-		"source_url": "https://bregroup.com/products/breeam/",
-		"seed_urls": ["https://bregroup.com/products/breeam/"],
-		"rigor_score": 8,
-		"image_name": "breaam.png",
-		"reason_for_rigor_score": "Originating in the UK, BREEAM is older and often considered more technically prescriptive than LEED. It uses licensed independent assessors (rather than just design team submissions) to verify compliance, which some argue leads to more rigorous onsite verification of the building's actual performance."
-	},
-	{
-		"id": "sfi",
-		"name": "Sustainable Forestry Initiative (SFI)",
-		"category": "Forestry",
-		"description": "A major North American standard for sustainable forest management. Along with FSC and PEFC, it is one of the 'Big Three' forestry labels.",
-		"source_url": "https://forests.org/",
-		"seed_urls": ["https://forests.org/"],
-		"rigor_score": 6,
-		"image_name": "sustainable-forestry-initiative.png",
-		"reason_for_rigor_score": "SFI was originally launched by the timber industry. While it has improved significantly over the years to separate from its industry roots, environmental groups still consider it less rigorous than FSC because it allows for more intensive practices (like larger clearcuts) and has weaker protection for indigenous land rights."
-	},
-	{
-		"id": "greenguard",
-		"name": "GREENGUARD / GREENGUARD Gold",
-		"category": "Indoor Health",
-		"description": "Certifies products (furniture, flooring, paint) for low chemical emissions (VOCs). 'Gold' is the standard often required for schools and healthcare.",
-		"source_url": "https://www.ul.com/resources/ul-greenguard-certification",
-		"seed_urls": ["https://www.ul.com/resources/ul-greenguard-certification"],
-		"rigor_score": 7,
-		"image_name": "greenguard.png",
-		"reason_for_rigor_score": "Managed by UL (Underwriters Laboratories), this is a science-based test for Volatile Organic Compounds (VOCs). It involves placing the product in a dynamic environmental chamber to measure off-gassing. It is rigorous for *air quality* (health), but it does not measure other eco-factors like recycled content or manufacturing energy."
-	},
-	{
-		"id": "friend-of-the-sea",
-		"name": "Friend of the Sea",
-		"category": "Seafood",
-		"description": "A leading global standard for sustainable seafood and aquaculture. It is the primary competitor to MSC/ASC and certifies a massive volume of global tonnage.",
-		"source_url": "https://friendofthesea.org/",
-		"seed_urls": ["https://friendofthesea.org/"],
-		"rigor_score": 6,
-		"image_name": "friend-of-sea.png",
-		"reason_for_rigor_score": "Friend of the Sea certifies both wild and farmed fish. It is generally cheaper and faster for fisheries to obtain than MSC, which has led to criticism that its audit threshold is lower. It relies on national data rather than independent stock assessments in some cases, making it less robust than the MSC/ASC gold standards."
-	},
-	{
-		"id": "ok-compost",
-		"name": "OK Compost (TÜV AUSTRIA)",
-		"category": "Packaging/Waste",
-		"description": "The dominant European/Global verification for industrial and home compostability. Essential for the bioplastics and packaging sectors.",
-		"source_url": "https://www.tuv-at.be/green-marks/official-certifications/ok-compost/",
-		"seed_urls": ["https://www.tuv-at.be/green-marks/official-certifications/ok-compost/"],
-		"rigor_score": 8,
-		"image_name": "ok-compost.png",
-		"reason_for_rigor_score": "This certification (by TÜV Austria) is based on strict lab tests (EN 13432). It proves that the material will *actually* disintegrate in an industrial composting facility within a set timeframe without leaving toxic residue. The 'Home' variant is even stricter, requiring breakdown in lower-temperature garden heaps."
-	},
-	{
-		"id": "demeter",
-		"name": "Demeter Biodynamic",
-		"category": "Agriculture",
-		"description": "The oldest and strictest organic certification in the world. It goes beyond standard organic (EU/USDA) to verify Biodynamic farming methods.",
-		"source_url": "https://demeter.net/",
-		"seed_urls": ["https://demeter.net/"],
-		"rigor_score": 9,
-		"image_name": "demeter.png",
-		"reason_for_rigor_score": "Demeter goes far beyond organic. It views the farm as a closed-loop living organism. It requires minimal external inputs (most compost/feed must be produced on-farm) and mandates biodiversity reserves (10% of land). It is arguably the most holistic and difficult agricultural standard to achieve."
-	},
-	{
-		"id": "blue-flag",
-		"name": "Blue Flag",
-		"category": "Tourism/Nature",
-		"description": "One of the world’s most recognized voluntary awards for beaches, marinas, and sustainable boating tourism operators.",
-		"source_url": "https://www.blueflag.global/",
-		"seed_urls": ["https://www.blueflag.global/"],
-		"rigor_score": 7,
-		"image_name": "blue-flag.png",
-		"reason_for_rigor_score": "Blue Flag beaches must meet strict water quality standards (regularly tested for E. coli etc.) and have environmental education programs. The withdrawal of the flag for non-compliance happens often, showing active enforcement. It is a reliable indicator of a clean, well-managed coastal environment."
-	},
-	{
-		"id": "fair-for-life",
-		"name": "Fair for Life",
-		"category": "Labor/Trade",
-		"description": "A rigorous fair trade standard covering the entire supply chain. Used by major ethical brands (e.g., Dr. Bronner's) distinct from the 'Fair Trade Certified' label.",
-		"source_url": "https://www.fairforlife.org/",
-		"seed_urls": ["https://www.fairforlife.org/"],
-		"rigor_score": 8,
-		"image_name": "fair-for-life.png",
-		"reason_for_rigor_score": "Fair for Life is known for being more flexible yet holistic than traditional Fairtrade. It can certify entire companies, not just specific commodities, and applies fair trade principles to domestic (Global North) production, not just South-North trade. Its audits cover the entire supply chain and corporate responsibility."
-	},
-	{
-		"id": "ecologo",
-		"name": "ECOLOGO",
-		"category": "Multi-Category",
-		"description": "A prominent North American ecolabel (managed by UL) certifying products for reduced environmental impact across their lifecycle.",
-		"source_url": "https://www.ul.com/resources/ecologo-certification-program",
-		"seed_urls": ["https://www.ul.com/resources/ecologo-certification-program"],
-		"rigor_score": 7,
-		"image_name": "ecologo.png",
-		"reason_for_rigor_score": "ECOLOGO is a Type 1 ISO ecolabel similar to Green Seal. It sets multi-attribute standards for products ranging from hand sanitizer to mobile phones. It is highly credible and science-based, managed by UL, but it is slightly less ubiquitous in the consumer mind than Energy Star or USDA Organic."
-	},
-	{
-		"id": "dolphin-safe",
-		"name": "Dolphin Safe",
-		"category": "Seafood",
-		"description": "One of the most ubiquitous consumer labels on canned tuna, managed by the Earth Island Institute to ensure fishing methods do not harm dolphins.",
-		"source_url": "https://www.earthisland.org/dolphin_safe_tuna_monitor/",
-		"seed_urls": ["https://www.earthisland.org/dolphin_safe_tuna_monitor/"],
-		"rigor_score": 5,
-		"image_name": "dolphin-safe.png",
-		"reason_for_rigor_score": "While successful in reducing dolphin deaths, this label is criticized because 'Dolphin Safe' does not mean 'sustainable.' You can catch tuna using methods that destroy coral reefs or catch turtles/sharks (bycatch), and as long as no dolphins were chased, it gets the label. It is a single-issue label that ignores broader ocean health."
-	},
-	{
-		"id": "green-globe",
-		"name": "Green Globe",
-		"category": "Tourism",
-		"description": "The premier global certification for sustainable tourism, covering hotels, resorts, and conference centers. A massive gap in your current 'Tourism' category.",
-		"source_url": "https://greenglobe.com/",
-		"seed_urls": ["https://greenglobe.com/"],
-		"rigor_score": 7,
-		"image_name": "green-globe.png",
-		"reason_for_rigor_score": "Green Globe is based on global sustainable tourism criteria (GSTC). It requires member hotels to demonstrate compliance with over 40 criteria, including energy saving, cultural heritage protection, and social policy. Independent auditors verify compliance, and the certificate must be renewed annually."
-	},
-	{
-		"id": "goodweave",
-		"name": "GoodWeave",
-		"category": "Textiles/Labor",
-		"description": "The definitive label for eliminating child labor in the carpet and rug industry. Highly recognized in the home goods sector.",
-		"source_url": "https://goodweave.org/",
-		"seed_urls": ["https://goodweave.org/"],
-		"rigor_score": 8,
-		"image_name": "good-weave.png",
-		"reason_for_rigor_score": "GoodWeave goes beyond auditing; it actively rescues children found working in carpet factories and provides them with education. Its auditors do unannounced inspections in the deeply decentralized rug industry (often inside homes). This hands-on, rescue-oriented approach gives it immense moral rigor."
-	},
-	{
-		"id": "natrue",
-		"name": "NaTrue",
-		"category": "Cosmetics",
-		"description": "A major international standard for natural and organic cosmetics, particularly dominant in Europe. It competes directly with COSMOS/Soil Association.",
-		"source_url": "https://www.natrue.org/",
-		"seed_urls": ["https://www.natrue.org/"],
-		"rigor_score": 8,
-		"image_name": "natrue.png",
-		"reason_for_rigor_score": "NaTrue is exceptionally strict about 'naturalness.' It does not allow petrochemicals, silicones, or synthetic fragrances. Unlike some 'natural' labels that allow a lot of chemical modification, NaTrue has strict limits on how natural ingredients can be processed, ensuring the end product is genuinely close to nature."
-	},
-	{
-		"id": "usda-biobased",
-		"name": "USDA Certified Biobased",
-		"category": "Materials",
-		"description": "A US government label verifying the percentage of renewable biological ingredients in products (cleaners, packaging, insulation).",
-		"source_url": "https://www.biopreferred.gov/",
-		"seed_urls": ["https://www.biopreferred.gov/BioPreferred/"],
-		"rigor_score": 6,
-		"image_name": "usda-certified-biobased.png",
-		"reason_for_rigor_score": "This label is rigorous in its measurement (using radiocarbon dating to verify bio-content), but it can be confusing. A product can be 'Certified Biobased' but still be non-biodegradable (e.g., bio-based plastic that lasts forever) or toxic. It measures *source*, not *fate* or *toxicity*."
-	},
-	{
-		"id": "floorscore",
-		"name": "FloorScore",
-		"category": "Building Materials",
-		"description": "The most recognized indoor air quality standard specifically for hard surface flooring materials. It is widely required for LEED/BREEAM projects.",
-		"source_url": "https://www.scsglobalservices.com/services/floorscore",
-		"seed_urls": ["https://www.scsglobalservices.com/services/floorscore"],
-		"rigor_score": 6,
-		"image_name": "floorscore.png",
-		"reason_for_rigor_score": "FloorScore tests for 35 distinct VOCs (chemicals that evaporate into air). It is essential for indoor air quality compliance in green buildings. However, like GreenGuard, it focuses only on air emissions and does not address whether the flooring was made from sustainable wood or recycled materials."
-	},
-	{
-		"id": "terracycle",
-		"name": "TerraCycle",
-		"category": "Recycling/Waste",
-		"description": "While technically a recycling platform, their logo on packaging is widely recognized by consumers as a mark that the packaging is recyclable through their programs.",
-		"source_url": "https://www.terracycle.com/",
-		"seed_urls": ["https://www.terracycle.com/"],
-		"rigor_score": 5,
-		"image_name": "terracycle.png",
-		"reason_for_rigor_score": "TerraCycle provides a solution for hard-to-recycle waste (like toothpaste tubes), which is great. However, the logo on a package simply means a program *exists*, not that the recycling is easy or local. Consumers often have to mail the waste in. It is often criticized as giving brands a 'pass' for producing disposable plastic packaging."
-	},
-	{
-		"id": "cotton-made-in-africa",
-		"name": "Cotton Made in Africa (CmiA)",
-		"category": "Textiles",
-		"description": "One of the world's largest standards for sustainable cotton, focusing on smallholder farmers in Africa. A major peer to Better Cotton (BCI).",
-		"source_url": "https://cottonmadeinafrica.org/",
-		"seed_urls": ["https://cottonmadeinafrica.org/"],
-		"rigor_score": 6,
-		"image_name": "cotton-made-in-africa.png",
-		"reason_for_rigor_score": "CmiA focuses on rain-fed cotton (no irrigation) and supports smallholder farmers. However, like BCI, it uses a 'Mass Balance' system for the supply chain, meaning the CmiA label on a shirt does not guarantee CmiA cotton is physically inside it. It excludes GMOs (unlike BCI), giving it a slight edge in agricultural rigor."
-	},
-	{
-		"id": "gold-standard",
-		"name": "Gold Standard",
-		"category": "Carbon/Climate",
-		"description": "Founded by WWF, this is widely considered the most rigorous standard for carbon offset projects, requiring them to also contribute to UN Sustainable Development Goals.",
-		"source_url": "https://www.goldstandard.org/",
-		"seed_urls": ["https://www.goldstandard.org/"],
-		"rigor_score": 9,
-		"image_name": "gold-standard.png",
-		"reason_for_rigor_score": "This is the benchmark for high-quality carbon credits. Unlike cheaper standards (like VCS), Gold Standard requires projects to prove 'additionality' (the project wouldn't have happened without the funds) and demonstrate contributions to local communities (UN SDGs). It strictly avoids double-counting and has the highest transparency."
-	},
-	{
-		"id": "ecocert",
-		"name": "Ecocert",
-		"category": "Cosmetics/Home",
-		"description": "A globally ubiquitous French certification mark found on organic cosmetics, detergents, and textiles. It often verifies compliance with the COSMOS standard.",
-		"source_url": "https://www.ecocert.com/en",
-		"seed_urls": ["https://www.ecocert.com/en/home"],
-		"rigor_score": 8,
-		"image_name": "ecocert.png",
-		"reason_for_rigor_score": "Ecocert is a rigorous inspection body. For cosmetics (under the COSMOS standard), it mandates that 95% of plant ingredients be organic and strictly limits synthetic preservatives (like parabens). It audits processing facilities twice a year, ensuring that the 'Organic' claim on your shampoo is genuine and not greenwashing."
-	},
-	{
-		"id": "green-key",
-		"name": "Green Key",
-		"category": "Tourism",
-		"description": "A leading international eco-label for tourism facilities (hotels, campsites, restaurants), rivaling Green Globe in global recognition.",
-		"source_url": "https://www.greenkey.global/",
-		"seed_urls": ["https://www.greenkey.global/"],
-		"rigor_score": 7,
-		"image_name": "greenkey.png",
-		"reason_for_rigor_score": "Green Key is managed by the Foundation for Environmental Education (FEE). Establishments must meet strict criteria on water, waste, and energy. It requires regular onsite audits (first year, then every three years). While rigorous, it is voluntary and somewhat less technically demanding than the building-focused LEED, focusing more on operations."
-	}
+  {
+    "id": "fair-trade",
+    "name": "Fair Trade Certified",
+    "category": "Labor",
+    "description": "Standards around fair wages, safe working conditions, and community development funds.",
+    "source_url": "https://www.fairtradecertified.org/",
+    "seed_urls": [
+      "https://www.fairtradecertified.org/our-community/shop-fair-trade/"
+    ],
+    "image_name": "fair-trade.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Producer organizations and supply-chain actors undergo periodic announced third-party audits, but cocoa and sugar are tracked via mass balance, so the physical product need not contain the sourced fair trade ingredient."
+      },
+      "standard_scope": {
+        "score": 6,
+        "reason": "Criteria concentrate on the producer/farm tier (wages, conditions, community premium and some environmental rules) and do not extend to downstream manufacturing or the full product lifecycle."
+      },
+      "governance_trust": {
+        "score": 9,
+        "reason": "Fair Trade USA is an ISEAL Code Compliant member, though its 2011 split from Fairtrade International to certify large plantations remains a governance criticism."
+      }
+    }
+  },
+  {
+    "id": "rainforest-alliance",
+    "name": "Rainforest Alliance",
+    "category": "Environment",
+    "description": "Focuses on biodiversity conservation and sustainable livelihoods in agriculture and forestry.",
+    "source_url": "https://www.rainforest-alliance.org/",
+    "seed_urls": [
+      "https://www.rainforest-alliance.org/find-certified/",
+      "https://www.rainforest-alliance.org/business/certification/certificate-search-and-public-summaries/"
+    ],
+    "image_name": "rainforest-alliance.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Risk-based, largely announced third-party farm audits are required, but the program permits mass balance for cocoa, weakening physical traceability of certified beans."
+      },
+      "standard_scope": {
+        "score": 7,
+        "reason": "Standard covers environmental and social criteria at the farm/forestry tier; it lacks the guaranteed minimum price of Fairtrade and is generally weaker on social than environmental requirements."
+      },
+      "governance_trust": {
+        "score": 10,
+        "reason": "ISEAL Code Compliant member (merged with UTZ in 2018) operating as an established international nonprofit."
+      }
+    }
+  },
+  {
+    "id": "b-corp",
+    "name": "B Corp Certification",
+    "category": "Governance",
+    "description": "Certifies companies meeting high standards of social and environmental performance, accountability, and transparency.",
+    "source_url": "https://www.bcorporation.net/",
+    "seed_urls": [
+      "https://www.bcorporation.net/en-us/find-a-b-corp/"
+    ],
+    "image_name": "b-corp.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 4,
+        "reason": "Certification rests on the largely self-reported B Impact Assessment, with B Lab document review and only randomized/limited site verification rather than mandatory onsite audits."
+      },
+      "standard_scope": {
+        "score": 6,
+        "reason": "Assessment spans governance, workers, community, environment and customers, but it certifies the whole company rather than any product, so a B Corp may still sell high-impact goods."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "Administered by B Lab, an independent and reputable nonprofit, but it is not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "gots",
+    "name": "GOTS (Global Organic Textile Standard)",
+    "category": "Textiles",
+    "description": "Organic fiber standard covering ecological and social criteria.",
+    "source_url": "https://global-standard.org/",
+    "seed_urls": [
+      "https://global-standard.org/find-suppliers-shops-and-inputs",
+      "https://global-standard.org/find-suppliers-shops-and-inputs/certified-suppliers/database/search"
+    ],
+    "image_name": "gots.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 10,
+        "reason": "Mandatory annual onsite inspections of every processing facility by accredited third-party bodies, with the frequency of unannounced audits increased across the supply chain under Version 8.0."
+      },
+      "standard_scope": {
+        "score": 10,
+        "reason": "Covers the full post-harvest value chain (spinning, dyeing, manufacturing, trade) with bans on hazardous chemicals, mandatory wastewater treatment, social criteria, and new circularity provisions."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "Managed by the independent nonprofit Global Standard gGmbH; it is an ISEAL Community Member but has not yet completed ISEAL Code Compliant evaluation."
+      }
+    }
+  },
+  {
+    "id": "fsc",
+    "name": "FSC",
+    "category": "Forestry",
+    "description": "Responsible forest management for wood/paper products.",
+    "source_url": "https://fsc.org/",
+    "seed_urls": [
+      "https://search.fsc.org/"
+    ],
+    "image_name": "fsc.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Annual third-party audits accredited via Assurance Services International, covering forest management and chain of custody."
+      },
+      "standard_scope": {
+        "score": 7,
+        "reason": "Strong on responsible forest management and indigenous rights, but the 'FSC Mix' category lets certified fiber be blended with non-certified Controlled Wood, leaving a traceability gap."
+      },
+      "governance_trust": {
+        "score": 10,
+        "reason": "ISEAL Code Compliant member and the most widely recognized international forestry standard."
+      }
+    }
+  },
+  {
+    "id": "oeko-tex",
+    "name": "OEKO-TEX Standard 100",
+    "category": "Chemicals",
+    "description": "Tests textiles for harmful substances.",
+    "source_url": "https://www.oeko-tex.com/",
+    "seed_urls": [
+      "https://www.oeko-tex.com/en/buying-guide",
+      "https://www.oeko-tex.com/en/oeko-tex-directory"
+    ],
+    "image_name": "oeko-tex.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Based on rigorous accredited laboratory testing of finished products for harmful substances, repeated annually, though it is product-test driven rather than full supply-chain auditing."
+      },
+      "standard_scope": {
+        "score": 3,
+        "reason": "Single-attribute consumer-safety label: it verifies the absence of harmful chemical residues but does not address organic fiber, factory labor, or wastewater pollution."
+      },
+      "governance_trust": {
+        "score": 4,
+        "reason": "Run by the OEKO-TEX Association, a consortium of textile testing and research institutes, rather than an ISEAL-affiliated multi-stakeholder body."
+      }
+    }
+  },
+  {
+    "id": "cradle-to-cradle",
+    "name": "Cradle to Cradle",
+    "category": "Circularity",
+    "description": "Multi-attribute product standard focusing on circular design and material health.",
+    "source_url": "https://c2ccertified.org/",
+    "seed_urls": [
+      "https://c2ccertified.org/certified-products"
+    ],
+    "image_name": "cradle-to-cradle.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Accredited assessors verify products against the standard using deep chemical analysis and supporting documentation, combining desk review with facility evidence."
+      },
+      "standard_scope": {
+        "score": 9,
+        "reason": "Multi-attribute, lifecycle-oriented standard spanning material health, product circularity, renewable energy, water stewardship and social fairness."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "Owned by the Cradle to Cradle Products Innovation Institute, an independent and reputable nonprofit that is not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "clean-clothes-campaign",
+    "name": "Clean Clothes Campaign",
+    "category": "Labor",
+    "description": "Advocacy network focused on improving working conditions in the global garment industry.",
+    "source_url": "https://cleanclothes.org/",
+    "seed_urls": [
+      "https://cleanclothes.org/"
+    ],
+    "image_name": "clean-clothes-campaign.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 2,
+        "reason": "Not a certification scheme; it is an advocacy and watchdog network that conducts investigations rather than auditing or verifying individual products."
+      },
+      "standard_scope": {
+        "score": 4,
+        "reason": "Focused on garment-industry labor rights and working conditions; it exposes abuses but does not assess environmental impact or the wider product lifecycle."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "An independent, reputable multi-stakeholder labor-rights coalition, but not a standards body or ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "canopy-style",
+    "name": "CanopyStyle",
+    "category": "Forestry",
+    "description": "Works with brands to eliminate ancient and endangered forest fiber from viscose and other cellulosic textiles.",
+    "source_url": "https://canopyplanet.org/campaigns/canopystyle/",
+    "seed_urls": [
+      "https://canopyplanet.org/campaigns/canopystyle/"
+    ],
+    "image_name": "canopy-style.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 5,
+        "reason": "Relies on third-party CanopyStyle audits of cellulosic producers and the annual Hot Button ranking, but verification is at the producer level, not on individual finished garments."
+      },
+      "standard_scope": {
+        "score": 4,
+        "reason": "Narrow single-issue focus on keeping ancient and endangered forest fiber out of viscose and rayon, ignoring broader social and environmental impacts."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "Led by Canopy, a reputable environmental NGO; it is a B2B initiative rather than an ISEAL-accredited certification."
+      }
+    }
+  },
+  {
+    "id": "better-cotton",
+    "name": "Better Cotton (BCI)",
+    "category": "Agriculture",
+    "description": "Focuses on improving cotton farming globally with better environmental and social outcomes.",
+    "source_url": "https://bettercotton.org/",
+    "seed_urls": [
+      "https://bettercotton.org/membership/find-members/"
+    ],
+    "image_name": "better-cotton.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 6,
+        "reason": "Farm-level second- and third-party assessments are used, but a mass-balance chain of custody means the BCI cotton in a product is often physically conventional cotton."
+      },
+      "standard_scope": {
+        "score": 6,
+        "reason": "Improves water use, pesticide reduction and labor at the cotton-farm tier, but allows GMOs and lacks physical traceability of the fiber."
+      },
+      "governance_trust": {
+        "score": 9,
+        "reason": "Better Cotton Initiative is an ISEAL Code Compliant member, though its membership base is heavily industry-weighted."
+      }
+    }
+  },
+  {
+    "id": "bluesign",
+    "name": "bluesign",
+    "category": "Chemicals/Materials",
+    "description": "Manages input streams in textile supply chains to remove harmful substances and optimize resource use.",
+    "source_url": "https://www.bluesign.com/",
+    "seed_urls": [
+      "https://www.bluesign.com/"
+    ],
+    "image_name": "bluesign.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "System partners undergo onsite company assessments of input chemistry, manufacturing processes and emissions, verified by bluesign auditors."
+      },
+      "standard_scope": {
+        "score": 7,
+        "reason": "Strong control of input chemistry, worker safety and resource use across textile manufacturing, but it does not certify raw-fiber cultivation or the full social supply chain."
+      },
+      "governance_trust": {
+        "score": 4,
+        "reason": "Operated by bluesign technologies (part of the commercial SGS group) rather than an ISEAL multi-stakeholder body."
+      }
+    }
+  },
+  {
+    "id": "soil-association-organic",
+    "name": "Soil Association Organic",
+    "category": "Agriculture/Food/Beauty",
+    "description": "UK-based organic standards for food, farming, and personal care.",
+    "source_url": "https://www.soilassociation.org/",
+    "seed_urls": [
+      "https://www.soilassociation.org/take-action/organic-living/beauty-wellbeing/our-certified-brands/"
+    ],
+    "image_name": "soil-association-organic.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Mandatory annual onsite inspections by the Soil Association's accredited certification arm, with additional risk-based visits."
+      },
+      "standard_scope": {
+        "score": 8,
+        "reason": "Broad organic standard spanning farming, food, health and beauty and textiles, covering production through processing."
+      },
+      "governance_trust": {
+        "score": 6,
+        "reason": "Soil Association is a long-established, highly reputable independent charity and a founder of the organic movement, operating to ISO/ISEAL good-practice norms."
+      }
+    }
+  },
+  {
+    "id": "wrap",
+    "name": "WRAP",
+    "category": "Labor/Factory",
+    "description": "Worldwide Responsible Accredited Production – certifies factories for responsible labor and compliance practices.",
+    "source_url": "https://wrapcompliance.org/en/",
+    "seed_urls": [
+      "https://wrapcompliance.org/en/certification/facility-monitor-list/"
+    ],
+    "image_name": "wrap.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 6,
+        "reason": "Factory certification involves onsite social-compliance audits, but these are typically announced and built around facility self-assessment."
+      },
+      "standard_scope": {
+        "score": 7,
+        "reason": "Covers labor, health, safety and some environmental and customs/security criteria at the manufacturing/factory tier, with no raw-material coverage."
+      },
+      "governance_trust": {
+        "score": 4,
+        "reason": "Worldwide Responsible Accredited Production is an apparel-industry-originated nonprofit and not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "rws",
+    "name": "Responsible Wool Standard (RWS)",
+    "category": "Animal Welfare",
+    "description": "Ensures wool comes from farms with high animal welfare and land management standards.",
+    "source_url": "https://textileexchange.org/standards/responsible-wool/",
+    "seed_urls": [
+      "https://textileexchange.org/standards/responsible-wool/",
+      "https://textileexchange.org/find-certified-company/"
+    ],
+    "image_name": "rws.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Third-party onsite audits of farms plus chain-of-custody certification through accredited certification bodies."
+      },
+      "standard_scope": {
+        "score": 7,
+        "reason": "Addresses sheep welfare, land management and social criteria from farm through chain of custody, but is limited to the wool fiber."
+      },
+      "governance_trust": {
+        "score": 9,
+        "reason": "Owned by Textile Exchange, an ISEAL Code Compliant standard-setter."
+      }
+    }
+  },
+  {
+    "id": "nordic-swan",
+    "name": "Nordic Swan Ecolabel",
+    "category": "Multi-Category",
+    "description": "Official Nordic ecolabel with strict criteria across product categories.",
+    "source_url": "https://www.nordic-swan-ecolabel.org/",
+    "seed_urls": [
+      "https://www.nordic-swan-ecolabel.org/building-products-portal/"
+    ],
+    "image_name": "nordic-swan.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Compliance is verified by the official Nordic ecolabelling bodies through documentation, laboratory testing and onsite checks."
+      },
+      "standard_scope": {
+        "score": 9,
+        "reason": "An ISO 14024 Type I ecolabel with lifecycle-based criteria across many product categories, from raw materials to disposal."
+      },
+      "governance_trust": {
+        "score": 6,
+        "reason": "The official ecolabel of the Nordic Council of Ministers, a credible governmental body, though not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "zq-merino",
+    "name": "ZQ Merino",
+    "category": "Animal Welfare",
+    "description": "Standard for merino wool that covers animal welfare, environmental care, and social responsibility.",
+    "source_url": "https://www.discoverzq.com/",
+    "seed_urls": [
+      "https://www.discoverzq.com/"
+    ],
+    "image_name": "zq-merino.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Accredited onsite farm audits verify grower compliance with welfare and environmental requirements."
+      },
+      "standard_scope": {
+        "score": 6,
+        "reason": "Covers animal welfare, environmental and social criteria at the wool-grower tier, but is limited to a single fiber and the upstream supply chain."
+      },
+      "governance_trust": {
+        "score": 3,
+        "reason": "Owned and run by The New Zealand Merino Company, a commercial enterprise, creating a potential conflict of interest."
+      }
+    }
+  },
+  {
+    "id": "responsible-down-standard",
+    "name": "Responsible Down Standard (RDS)",
+    "category": "Animal Welfare",
+    "description": "Ensures down and feathers come from animals that have not been subjected to unnecessary harm.",
+    "source_url": "https://textileexchange.org/standards/responsible-down/",
+    "seed_urls": [
+      "https://textileexchange.org/standards/responsible-down/",
+      "https://textileexchange.org/find-certified-company/"
+    ],
+    "image_name": "responsible-down-standard.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Third-party onsite audits run from farm through processing, with chain-of-custody verification."
+      },
+      "standard_scope": {
+        "score": 6,
+        "reason": "Targets animal welfare (no live-plucking or force-feeding) and traceability for down and feathers, a narrow material-specific scope."
+      },
+      "governance_trust": {
+        "score": 9,
+        "reason": "Owned by Textile Exchange, an ISEAL Code Compliant standard-setter."
+      }
+    }
+  },
+  {
+    "id": "global-recycled-standard",
+    "name": "Global Recycled Standard (GRS)",
+    "category": "Recycled Materials",
+    "description": "Tracks recycled content and social/environmental practices in supply chains.",
+    "source_url": "https://textileexchange.org/standards/global-recycled-standard/",
+    "seed_urls": [
+      "https://textileexchange.org/standards/global-recycled-standard/",
+      "https://textileexchange.org/find-certified-company/"
+    ],
+    "image_name": "global-recycled-standard.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Every actor in the supply chain undergoes third-party onsite audits, with transaction-certificate tracking of recycled inputs."
+      },
+      "standard_scope": {
+        "score": 8,
+        "reason": "Covers recycled content plus environmental, chemical and social criteria across the whole supply chain, from collection to final product."
+      },
+      "governance_trust": {
+        "score": 9,
+        "reason": "Owned by Textile Exchange, an ISEAL Code Compliant standard-setter."
+      }
+    }
+  },
+  {
+    "id": "organic-content-standard",
+    "name": "Organic Content Standard (OCS)",
+    "category": "Textiles",
+    "description": "Verifies organic content in final products without broader social criteria.",
+    "source_url": "https://textileexchange.org/standards/organic-content-standard/",
+    "seed_urls": [
+      "https://textileexchange.org/standards/organic-content-standard/",
+      "https://textileexchange.org/find-certified-company/"
+    ],
+    "image_name": "organic-content-standard.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Accredited third-party chain-of-custody audits verify the presence and amount of organic material, but verification is content-tracking rather than process auditing."
+      },
+      "standard_scope": {
+        "score": 3,
+        "reason": "Verifies organic fiber content and traceability only; unlike GOTS it imposes no chemical, processing, wastewater or social requirements."
+      },
+      "governance_trust": {
+        "score": 9,
+        "reason": "Owned by Textile Exchange, an ISEAL Code Compliant standard-setter."
+      }
+    }
+  },
+  {
+    "id": "made-in-green",
+    "name": "MADE IN GREEN by OEKO-TEX",
+    "category": "Textiles",
+    "description": "Traceable product label for textiles made in environmentally friendly and socially responsible facilities.",
+    "source_url": "https://www.oeko-tex.com/en/our-standards/made-in-green-by-oeko-tex",
+    "seed_urls": [
+      "https://www.oeko-tex.com/en/our-standards/made-in-green-by-oeko-tex",
+      "https://www.oeko-tex.com/en/label-check"
+    ],
+    "image_name": "made-in-green.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Combines accredited laboratory testing for harmful substances with onsite STeP facility audits, plus an end-to-end traceable product ID."
+      },
+      "standard_scope": {
+        "score": 7,
+        "reason": "Covers product chemical safety together with environmentally and socially responsible production facilities, but not raw-fiber cultivation."
+      },
+      "governance_trust": {
+        "score": 4,
+        "reason": "Issued by the OEKO-TEX Association, a textile testing and research consortium rather than an ISEAL body."
+      }
+    }
+  },
+  {
+    "id": "fair-wear",
+    "name": "Fair Wear",
+    "category": "Labor",
+    "description": "Focuses on improving workplace conditions in garment factories.",
+    "source_url": "https://www.fairwear.org/",
+    "seed_urls": [
+      "https://www.fairwear.org/"
+    ],
+    "image_name": "fair-wear.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Combines onsite factory audits with annual brand performance checks under a shared-responsibility model that probes purchasing practices."
+      },
+      "standard_scope": {
+        "score": 7,
+        "reason": "Focuses on labor standards and working conditions in the garment cut-make-trim tier, not raw materials or environmental impact."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "Fair Wear Foundation is an independent, well-regarded multi-stakeholder labor initiative, though not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "fairtrade-international",
+    "name": "Fairtrade International (FLO)",
+    "category": "Labor/Agriculture",
+    "description": "Global standard-setting body for Fairtrade certification.",
+    "source_url": "https://www.fairtrade.net/",
+    "seed_urls": [
+      "https://www.fairtrade.net/en/products/Fairtrade_products.html",
+      "https://www.fairtrade.net/en/about/overview-of-fairtrade-producers.html",
+      "https://www.flocert.net/fairtrade-customer-search/"
+    ],
+    "image_name": "fairtrade-international.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Certification and audits are carried out by FLOCERT to ISO 17065, combining announced and some unannounced visits, with mass balance permitted for certain commodities."
+      },
+      "standard_scope": {
+        "score": 7,
+        "reason": "Centered on producer-tier labor, environmental criteria and the Fairtrade Minimum Price and Premium, rather than the full downstream product lifecycle."
+      },
+      "governance_trust": {
+        "score": 10,
+        "reason": "Fairtrade International is an ISEAL Code Compliant member and a founder of the modern fair-trade movement."
+      }
+    }
+  },
+  {
+    "id": "sa8000",
+    "name": "SA8000",
+    "category": "Labor",
+    "description": "Social accountability standard for decent working conditions.",
+    "source_url": "https://sa-intl.org/programs/sa8000/",
+    "seed_urls": [
+      "https://sa-intl.org/programs/sa8000/"
+    ],
+    "image_name": "sa8000.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Independent onsite audits accredited by SAAS include confidential worker interviews and periodic surveillance visits."
+      },
+      "standard_scope": {
+        "score": 6,
+        "reason": "A workplace social standard covering labor rights, health and safety and management systems at a single facility, with no environmental or product-lifecycle scope."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "Developed by Social Accountability International, a reputable independent nonprofit, with accreditation by SAAS, though not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "carbon-trust-footprint",
+    "name": "Carbon Trust Footprint",
+    "category": "Carbon",
+    "description": "Labels products with their carbon footprint and reductions.",
+    "source_url": "https://www.carbontrust.com/",
+    "seed_urls": [
+      "https://www.carbontrust.com/what-we-do/carbon-footprint-labelling",
+      "https://label.carbontrust.com/"
+    ],
+    "image_name": "carbon-trust-footprint.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 6,
+        "reason": "The Carbon Trust independently assesses and certifies company-provided emissions data, primarily through technical review of measured figures rather than onsite audit."
+      },
+      "standard_scope": {
+        "score": 4,
+        "reason": "A single-attribute carbon/GHG footprint measurement that can apply to a product or organization but ignores wider environmental and social impacts."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "The Carbon Trust is an independent, reputable expert body and social enterprise, but not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "carbon-neutral-product",
+    "name": "Carbon Neutral Product (Climate Impact Partners)",
+    "category": "Carbon",
+    "description": "Signifies products with measured and offset carbon footprints.",
+    "source_url": "https://www.climateimpact.com/",
+    "seed_urls": [
+      "https://www.climateimpact.com/"
+    ],
+    "image_name": "carbon-neutral-product.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 5,
+        "reason": "Claims follow the CarbonNeutral Protocol, pairing a footprint assessment with verified offset purchases, but the underlying activity data is often self-declared."
+      },
+      "standard_scope": {
+        "score": 4,
+        "reason": "Addresses only carbon neutrality achieved largely through offsets, a single attribute widely criticized for over-reliance on offsetting."
+      },
+      "governance_trust": {
+        "score": 3,
+        "reason": "Administered by Climate Impact Partners, a commercial firm that also sells the carbon offsets underpinning the claim, a clear conflict of interest."
+      }
+    }
+  },
+  {
+    "id": "carbon-care-certified",
+    "name": "Carbon Care Certified",
+    "category": "Carbon",
+    "description": "Label for organisations and products meeting certain carbon management standards.",
+    "source_url": "https://www.ecolabelindex.com/ecolabel/carbon-care-certification",
+    "seed_urls": [
+      "https://www.ecolabelindex.com/ecolabel/carbon-care-certification",
+      "https://www.climatefinanceasia.com/capabilities/carboncare-labels/"
+    ],
+    "image_name": "carbon-care-certified.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 5,
+        "reason": "Carbon reduction and neutrality claims are checked through document and data review, with reliance on purchased offsets."
+      },
+      "standard_scope": {
+        "score": 4,
+        "reason": "Single-attribute carbon management and neutrality scope, not broader sustainability impacts."
+      },
+      "governance_trust": {
+        "score": 4,
+        "reason": "Operated by Carbon Care InnoLab / Carbon Care Asia, a smaller regional organization rather than an ISEAL multi-stakeholder body."
+      }
+    }
+  },
+  {
+    "id": "leaping-bunny",
+    "name": "Leaping Bunny (Cruelty Free International)",
+    "category": "Animal Testing",
+    "description": "Global standard for cruelty-free cosmetics, personal care, and household products.",
+    "source_url": "https://crueltyfreeinternational.org/LeapingBunny",
+    "seed_urls": [
+      "https://crueltyfreeinternational.org/leapingbunny"
+    ],
+    "image_name": "leaping-bunny.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Requires a supplier monitoring system and independent third-party audits of company and supplier no-animal-testing commitments."
+      },
+      "standard_scope": {
+        "score": 3,
+        "reason": "Single-attribute cruelty-free standard covering the absence of animal testing only, with no assessment of ingredients, environment or labor."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "Operated by Cruelty Free International, a reputable independent animal-welfare NGO."
+      }
+    }
+  },
+  {
+    "id": "certified-naturally-grown",
+    "name": "Certified Naturally Grown",
+    "category": "Agriculture",
+    "description": "Peer-review based certification for small-scale farmers and beekeepers using ecological methods.",
+    "source_url": "https://www.naturallygrown.org/",
+    "seed_urls": [
+      "https://www.naturallygrown.org/directory-of-certified-producers/",
+      "https://www.naturallygrown.org/farms-and-apiaries/"
+    ],
+    "image_name": "certified-naturally-grown.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 5,
+        "reason": "Uses a participatory guarantee system in which farmers peer-inspect one another, rather than accredited independent third-party audits."
+      },
+      "standard_scope": {
+        "score": 6,
+        "reason": "Applies organic-equivalent production practices (no synthetic inputs) at the farm tier for produce, livestock and apiaries."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "Run by a grassroots nonprofit modeled on the USDA organic rules; reputable but small and not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "usda-organic",
+    "name": "USDA Organic",
+    "category": "Agriculture",
+    "description": "US National Organic Program seal for food and agriculture.",
+    "source_url": "https://www.usda.gov/topics/organic",
+    "seed_urls": [
+      "https://organic.ams.usda.gov/integrity/",
+      "https://www.usda.gov/topics/organic"
+    ],
+    "image_name": "usda-organic.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Mandatory annual onsite inspections by USDA-accredited certifying agents, supplemented by risk-based unannounced visits and residue testing."
+      },
+      "standard_scope": {
+        "score": 7,
+        "reason": "Regulates farm production and handling (no synthetic pesticides or GMOs) through processing, but does not cover labor or full lifecycle impacts."
+      },
+      "governance_trust": {
+        "score": 7,
+        "reason": "The USDA National Organic Program is a government-backed regulatory standard with legal enforcement authority."
+      }
+    }
+  },
+  {
+    "id": "audubon-international",
+    "name": "Audubon International",
+    "category": "Landscapes/Recreation",
+    "description": "Certifies golf courses, resorts, and communities for environmental management.",
+    "source_url": "https://auduboninternational.org/",
+    "seed_urls": [
+      "https://auduboninternational.org/"
+    ],
+    "image_name": "audubon-international.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 6,
+        "reason": "Certification of golf courses and managed landscapes uses onsite visits and documentation review on a periodic, somewhat paperwork-heavy basis."
+      },
+      "standard_scope": {
+        "score": 6,
+        "reason": "Covers environmental management of a site (wildlife habitat, water and chemical use), focused on land and recreation properties."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "Audubon International is an independent nonprofit (separate from the National Audubon Society); reputable but niche and not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "bap",
+    "name": "Best Aquaculture Practices (BAP)",
+    "category": "Aquaculture",
+    "description": "Certifies seafood farms, hatcheries, feed mills, and processing plants for environmental and social responsibility.",
+    "source_url": "https://www.bapcertification.org/",
+    "seed_urls": [
+      "https://www.bapcertification.org/"
+    ],
+    "image_name": "bap.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Accredited third-party onsite audits cover hatcheries, farms, feed mills and processing plants."
+      },
+      "standard_scope": {
+        "score": 8,
+        "reason": "Multi-tier aquaculture standard addressing environment, social responsibility, food safety and traceability across the production chain."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "Owned by the Global Seafood Alliance, an industry-founded association; GSSI-recognized but carrying potential industry-influence concerns."
+      }
+    }
+  },
+  {
+    "id": "certified-vegan",
+    "name": "Certified Vegan",
+    "category": "Vegan",
+    "description": "Logo indicating products free of animal ingredients and testing.",
+    "source_url": "https://vegan.org/",
+    "seed_urls": [
+      "https://vegan.org/certified-products/",
+      "https://vegan.org/companies-using-our-logo/"
+    ],
+    "image_name": "certified-vegan.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 4,
+        "reason": "Relies primarily on manufacturer documentation and supplier attestations reviewed by the certifier, rather than onsite audits."
+      },
+      "standard_scope": {
+        "score": 3,
+        "reason": "Single-attribute standard confirming the absence of animal ingredients and animal testing, with no environmental or labor criteria."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "Administered by the Vegan Awareness Foundation (Vegan.org), a small but reputable nonprofit."
+      }
+    }
+  },
+  {
+    "id": "animal-welfare-approved",
+    "name": "Animal Welfare Approved (AGW)",
+    "category": "Animal Welfare",
+    "description": "High-welfare, pasture-based livestock certification by A Greener World.",
+    "source_url": "https://agreenerworld.org/certifications/animal-welfare-approved/",
+    "seed_urls": [
+      "https://agreenerworld.org/"
+    ],
+    "image_name": "animal-welfare-approved.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 9,
+        "reason": "Among the most rigorous welfare labels, requiring annual onsite audits of pasture-based farms by A Greener World's own trained auditors."
+      },
+      "standard_scope": {
+        "score": 7,
+        "reason": "Deep coverage of animal welfare and associated environmental criteria at the independent-farm tier, focused on high-welfare husbandry."
+      },
+      "governance_trust": {
+        "score": 6,
+        "reason": "A Greener World is an independent, highly regarded nonprofit certifier, though not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "energy-star",
+    "name": "ENERGY STAR",
+    "category": "Energy",
+    "description": "US EPA label for energy-efficient products and buildings.",
+    "source_url": "https://www.energystar.gov/",
+    "seed_urls": [
+      "https://www.energystar.gov/productfinder/"
+    ],
+    "image_name": "energy-star.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Since 2011 products must be third-party certified through EPA-recognized laboratories, with ongoing verification testing."
+      },
+      "standard_scope": {
+        "score": 4,
+        "reason": "Single-attribute label rating energy efficiency during product use, with no coverage of manufacturing, materials or end-of-life."
+      },
+      "governance_trust": {
+        "score": 7,
+        "reason": "A US EPA/DOE government program with strong institutional credibility."
+      }
+    }
+  },
+  {
+    "id": "green-seal",
+    "name": "Green Seal",
+    "category": "Environmental Performance",
+    "description": "Multi-attribute environmental certification for products and services.",
+    "source_url": "https://www.greenseal.org/",
+    "seed_urls": [
+      "https://certified.greenseal.org/"
+    ],
+    "image_name": "green-seal.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Third-party certification combines product performance testing with onsite plant audits."
+      },
+      "standard_scope": {
+        "score": 8,
+        "reason": "ISO Type I lifecycle-based standards evaluating raw materials, manufacturing, use and disposal across product categories."
+      },
+      "governance_trust": {
+        "score": 6,
+        "reason": "Green Seal is an independent, reputable nonprofit ecolabel operator, though not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "wildlife-friendly",
+    "name": "Wildlife Friendly",
+    "category": "Biodiversity",
+    "description": "Certifies products and enterprises that protect wildlife and habitats.",
+    "source_url": "https://wildlifefriendly.org/",
+    "seed_urls": [
+      "https://wildlifefriendly.org/buy-wild/"
+    ],
+    "image_name": "wildlife-friendly.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 6,
+        "reason": "Enterprises are verified against wildlife-friendly production criteria through third-party review, but rigor and audit frequency vary by program."
+      },
+      "standard_scope": {
+        "score": 5,
+        "reason": "Focused on biodiversity and wildlife coexistence tied to production landscapes, a relatively narrow conservation attribute."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "The Wildlife Friendly Enterprise Network is a reputable conservation nonprofit, but small and not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "bird-friendly-coffee",
+    "name": "Bird Friendly (Smithsonian)",
+    "category": "Biodiversity/Agriculture",
+    "description": "Coffee certification ensuring shade-grown, biodiversity-supporting farms.",
+    "source_url": "https://nationalzoo.si.edu/migratory-birds/bird-friendly",
+    "seed_urls": [
+      "https://nationalzoo.si.edu/migratory-birds/buy-bird-friendly-coffee-online",
+      "https://nationalzoo.si.edu/migratory-birds/where-buy-bird-friendly-coffee"
+    ],
+    "image_name": "bird-friendly-coffee.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Requires existing organic certification plus a Smithsonian shade-criteria inspection, layering a habitat audit onto an accredited organic audit."
+      },
+      "standard_scope": {
+        "score": 7,
+        "reason": "Combines shade-grown habitat protection with organic production at the coffee-farm tier; strong on biodiversity but limited to one crop."
+      },
+      "governance_trust": {
+        "score": 7,
+        "reason": "Administered by the Smithsonian Migratory Bird Center, a highly credible scientific research institution."
+      }
+    }
+  },
+  {
+    "id": "carbonfree",
+    "name": "Carbonfree",
+    "category": "Carbon/Offsets",
+    "description": "Indicates that a product’s carbon emissions have been measured and offset.",
+    "source_url": "https://carbonfund.org/",
+    "seed_urls": [
+      "https://carbonfund.org/carbonfree-programs/",
+      "https://carbonfund.org/"
+    ],
+    "image_name": "carbonfree.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 5,
+        "reason": "Pairs a footprint assessment with offset purchases; the certification is largely document-based and offset-dependent."
+      },
+      "standard_scope": {
+        "score": 4,
+        "reason": "Single-attribute carbon-offsetting scope only."
+      },
+      "governance_trust": {
+        "score": 4,
+        "reason": "Run by the Carbonfund.org Foundation, a nonprofit that also sells offsets, creating a potential conflict of interest."
+      }
+    }
+  },
+  {
+    "id": "climate-registered",
+    "name": "Climate Registered (The Climate Registry)",
+    "category": "Carbon/Reporting",
+    "description": "Recognizes organizations for measuring, reporting, and reducing greenhouse gas emissions.",
+    "source_url": "https://www.theclimateregistry.org/",
+    "seed_urls": [
+      "https://www.theclimateregistry.org/"
+    ],
+    "image_name": "climate-registered.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Greenhouse-gas inventories must be independently verified by accredited third-party verification bodies before recognition."
+      },
+      "standard_scope": {
+        "score": 4,
+        "reason": "A single-attribute emissions accounting and disclosure program rather than a broad sustainability standard."
+      },
+      "governance_trust": {
+        "score": 6,
+        "reason": "The Climate Registry is a nonprofit collaboration of North American governments, a credible but reporting-focused body."
+      }
+    }
+  },
+  {
+    "id": "leed",
+    "name": "LEED",
+    "category": "Buildings",
+    "description": "Green building certification system by the U.S. Green Building Council.",
+    "source_url": "https://www.usgbc.org/leed",
+    "seed_urls": [
+      "https://www.usgbc.org/leed",
+      "https://www.usgbc.org/projects"
+    ],
+    "image_name": "leed.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 6,
+        "reason": "Certification by GBCI is based on documentation review and credit verification, with limited commissioning checks rather than comprehensive onsite auditing."
+      },
+      "standard_scope": {
+        "score": 8,
+        "reason": "Whole-building, lifecycle-oriented rating spanning site, water, energy, materials and indoor environmental quality."
+      },
+      "governance_trust": {
+        "score": 6,
+        "reason": "Developed by USGBC and certified by GBCI, an independent and globally recognized nonprofit system, but not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "eu-ecolabel",
+    "name": "EU Ecolabel",
+    "category": "Multi-Category",
+    "description": "Official European Union environmental label for products and services with reduced life-cycle impact.",
+    "source_url": "https://environment.ec.europa.eu/topics/circular-economy/eu-ecolabel_en",
+    "seed_urls": [
+      "https://environmental-data.ec.europa.eu/ecolabel/product_list.html",
+      "https://environment.ec.europa.eu/app/ecolabel-product-catalogue"
+    ],
+    "image_name": "eu-ecolabel.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Compliance is verified by independent national Competent Bodies through laboratory testing and documentary and onsite checks."
+      },
+      "standard_scope": {
+        "score": 9,
+        "reason": "An ISO Type I lifecycle-based ecolabel with criteria from raw materials to disposal, tailored per product group."
+      },
+      "governance_trust": {
+        "score": 7,
+        "reason": "The official ecolabel of the European Commission, a governmental regulatory authority."
+      }
+    }
+  },
+  {
+    "id": "eu-organic",
+    "name": "EU Organic Logo",
+    "category": "Agriculture",
+    "description": "European Union logo for certified organic food and farming, with strict rules on production, labeling, and origin.",
+    "source_url": "https://agriculture.ec.europa.eu/farming/organic-farming/organic-logo_en",
+    "seed_urls": [
+      "https://euorganicproducts.eu/"
+    ],
+    "image_name": "eu-organic.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Mandatory annual onsite inspections by accredited control bodies under EU regulation, including unannounced and residue-based checks."
+      },
+      "standard_scope": {
+        "score": 7,
+        "reason": "Regulates organic agriculture and processing from farm to product, but does not extend to labor or wider lifecycle impacts."
+      },
+      "governance_trust": {
+        "score": 7,
+        "reason": "Backed by binding EU regulation and official control bodies, giving it strong governmental authority."
+      }
+    }
+  },
+  {
+    "id": "msc",
+    "name": "Marine Stewardship Council (MSC)",
+    "category": "Seafood",
+    "description": "Global label for wild-caught seafood from sustainably managed fisheries.",
+    "source_url": "https://www.msc.org/",
+    "seed_urls": [
+      "https://www.msc.org/en-us/what-you-can-do/where-to-buy-msc-certified-sustainable-seafood"
+    ],
+    "image_name": "msc.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Fisheries undergo independent third-party assessment against the standard, with chain-of-custody audits for downstream actors."
+      },
+      "standard_scope": {
+        "score": 8,
+        "reason": "Covers wild-capture fishery sustainability across stock status, ecosystem impact and management, plus chain of custody."
+      },
+      "governance_trust": {
+        "score": 10,
+        "reason": "The Marine Stewardship Council is an ISEAL Code Compliant member."
+      }
+    }
+  },
+  {
+    "id": "asc",
+    "name": "Aquaculture Stewardship Council (ASC)",
+    "category": "Aquaculture",
+    "description": "Label for farmed seafood that meets strict environmental and social standards.",
+    "source_url": "https://asc-aqua.org/",
+    "seed_urls": [
+      "https://asc-aqua.org/find-a-product/",
+      "https://asc-aqua.org/find-a-supplier/"
+    ],
+    "image_name": "asc.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Accredited third-party onsite farm audits plus chain-of-custody certification."
+      },
+      "standard_scope": {
+        "score": 7,
+        "reason": "Addresses the environmental and social impacts of seafood farming at the farm tier, with chain of custody downstream."
+      },
+      "governance_trust": {
+        "score": 10,
+        "reason": "The Aquaculture Stewardship Council is an ISEAL Code Compliant member."
+      }
+    }
+  },
+  {
+    "id": "pefc",
+    "name": "PEFC",
+    "category": "Forestry",
+    "description": "Global umbrella system endorsing national forest certification schemes for sustainable forest management.",
+    "source_url": "https://www.pefc.org/",
+    "seed_urls": [
+      "https://pefc.org/find-certified"
+    ],
+    "image_name": "pefc.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 6,
+        "reason": "Relies on third-party audits delivered through endorsed national schemes and chain of custody, with rigor varying between countries."
+      },
+      "standard_scope": {
+        "score": 6,
+        "reason": "Covers forest management and chain of custody, but as an umbrella endorsing diverse national standards it is generally seen as less stringent than FSC."
+      },
+      "governance_trust": {
+        "score": 4,
+        "reason": "PEFC is widely viewed as more forest-owner and industry aligned than FSC, and it is not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "rspo",
+    "name": "RSPO Certified Sustainable Palm Oil",
+    "category": "Agriculture/Commodities",
+    "description": "Label for products using certified sustainable palm oil meeting RSPO principles and criteria.",
+    "source_url": "https://rspo.org/",
+    "seed_urls": [
+      "https://rspo.org/as-an-organisation/our-trademark/products-with-rspo-label/"
+    ],
+    "image_name": "rspo.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 6,
+        "reason": "Members face annual third-party onsite audits, but the system also permits Mass Balance and Book & Claim models that allow certified and conventional palm oil to mix."
+      },
+      "standard_scope": {
+        "score": 7,
+        "reason": "The Principles & Criteria cover environmental, social and no-deforestation requirements across production and the supply chain, though enforcement has been criticized as weak."
+      },
+      "governance_trust": {
+        "score": 6,
+        "reason": "RSPO is a WWF-founded multi-stakeholder ISEAL member, but its roundtable governance carries documented industry-influence concerns."
+      }
+    }
+  },
+  {
+    "id": "non-gmo-project",
+    "name": "Non-GMO Project Verified",
+    "category": "Agriculture/Food",
+    "description": "North America’s leading third-party verification for avoiding genetically modified organisms in food and products.",
+    "source_url": "https://www.nongmoproject.org/",
+    "seed_urls": [
+      "https://www.nongmoproject.org/find-non-gmo/"
+    ],
+    "image_name": "non-gmo-project.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Third-party technical administrators review traceability and segregation and require testing of high-GMO-risk inputs on an ongoing basis."
+      },
+      "standard_scope": {
+        "score": 3,
+        "reason": "Single-attribute standard verifying avoidance of GMOs only; it says nothing about pesticides, organic status or environmental impact."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "The Non-GMO Project is an independent, reputable nonprofit, but not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "blue-angel",
+    "name": "Blue Angel",
+    "category": "Multi-Category",
+    "description": "German federal government ecolabel for a wide range of low-impact non-food products and services.",
+    "source_url": "https://www.blauer-engel.de/en",
+    "seed_urls": [
+      "https://www.blauer-engel.de/en/products"
+    ],
+    "image_name": "blue-angel.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Compliance is checked by independent bodies using laboratory testing and documentary verification."
+      },
+      "standard_scope": {
+        "score": 9,
+        "reason": "The world's oldest ecolabel, applying lifecycle-based, product-group-specific criteria as an ISO Type I program."
+      },
+      "governance_trust": {
+        "score": 7,
+        "reason": "Owned by the German government (Federal Environment Agency) with an independent award jury."
+      }
+    }
+  },
+  {
+    "id": "epeat",
+    "name": "EPEAT",
+    "category": "Electronics",
+    "description": "Global Type 1 ecolabel for electronics measuring environmental and social impacts from design to end-of-life.",
+    "source_url": "https://epeat.net/",
+    "seed_urls": [
+      "https://epeat.net/"
+    ],
+    "image_name": "epeat.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 6,
+        "reason": "Registration relies on manufacturer declarations backed by ongoing third-party conformity monitoring and selective verification."
+      },
+      "standard_scope": {
+        "score": 8,
+        "reason": "Evaluates electronics across their lifecycle, including materials, energy, design for recycling and corporate responsibility."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "Managed by the Global Electronics Council, a reputable nonprofit, though tied to industry-developed standards and not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "tco-certified",
+    "name": "TCO Certified",
+    "category": "Electronics",
+    "description": "Comprehensive sustainability certification for IT products, covering social and environmental criteria with independent verification.",
+    "source_url": "https://tcocertified.com/",
+    "seed_urls": [
+      "https://tcocertified.com/product-finder/"
+    ],
+    "image_name": "tco-certified.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Independent third-party verification combines product performance testing with onsite factory audits, including socially responsible manufacturing checks."
+      },
+      "standard_scope": {
+        "score": 8,
+        "reason": "Covers the electronics lifecycle from materials and manufacturing social responsibility through use and end-of-life."
+      },
+      "governance_trust": {
+        "score": 6,
+        "reason": "Run by TCO Development, an independent and reputable Swedish organization, but not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "green-e-energy",
+    "name": "Green-e Energy",
+    "category": "Energy",
+    "description": "Certification for renewable electricity and related products ensuring verified, high-standard clean energy.",
+    "source_url": "https://www.green-e.org/programs/energy",
+    "seed_urls": [
+      "https://www.green-e.org/certified-resources"
+    ],
+    "image_name": "green-e-energy.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Certified products are subject to annual third-party verification and auditing of renewable energy certificate tracking."
+      },
+      "standard_scope": {
+        "score": 4,
+        "reason": "Single-attribute standard verifying renewable electricity sourcing via RECs, not broader environmental impact."
+      },
+      "governance_trust": {
+        "score": 6,
+        "reason": "Administered by the nonprofit Center for Resource Solutions, a credible body that is not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "watersense",
+    "name": "WaterSense",
+    "category": "Water/Energy",
+    "description": "US EPA label for water-efficient plumbing fixtures and products that use at least 20% less water while performing as well as standard models.",
+    "source_url": "https://www.epa.gov/watersense",
+    "seed_urls": [
+      "https://www.epa.gov/watersense/watersense-label"
+    ],
+    "image_name": "watersense.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Products are independently certified by EPA-licensed certifying bodies that test water-efficiency performance."
+      },
+      "standard_scope": {
+        "score": 4,
+        "reason": "Single-attribute label rating water efficiency of a product during use only."
+      },
+      "governance_trust": {
+        "score": 7,
+        "reason": "A US EPA government program with strong institutional credibility."
+      }
+    }
+  },
+  {
+    "id": "breeam",
+    "name": "BREEAM",
+    "category": "Buildings",
+    "description": "The world's leading science-based suite of validation and certification systems for sustainable built environment. A major global alternative/competitor to LEED.",
+    "source_url": "https://bregroup.com/products/breeam/",
+    "seed_urls": [
+      "https://bregroup.com/products/breeam/"
+    ],
+    "image_name": "breaam.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Independent licensed assessors verify the submitted evidence, combining documentation review with site verification."
+      },
+      "standard_scope": {
+        "score": 8,
+        "reason": "Whole-building lifecycle assessment covering management, energy, water, materials, waste, ecology and pollution."
+      },
+      "governance_trust": {
+        "score": 6,
+        "reason": "Operated by BRE, an independent and well-established UK building research body, but not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "sfi",
+    "name": "Sustainable Forestry Initiative (SFI)",
+    "category": "Forestry",
+    "description": "A major North American standard for sustainable forest management. Along with FSC and PEFC, it is one of the 'Big Three' forestry labels.",
+    "source_url": "https://forests.org/",
+    "seed_urls": [
+      "https://forests.org/"
+    ],
+    "image_name": "sustainable-forestry-initiative.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Third-party onsite audits and chain-of-custody certification are required, with credible audit procedures."
+      },
+      "standard_scope": {
+        "score": 6,
+        "reason": "Covers forest management and fiber sourcing with chain of custody, but uses controlled-source allowances and is concentrated in North America."
+      },
+      "governance_trust": {
+        "score": 4,
+        "reason": "The Sustainable Forestry Initiative originated from the timber industry (AF&PA); now an independent nonprofit, it still draws industry-influence criticism and is not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "greenguard",
+    "name": "GREENGUARD / GREENGUARD Gold",
+    "category": "Indoor Health",
+    "description": "Certifies products (furniture, flooring, paint) for low chemical emissions (VOCs). 'Gold' is the standard often required for schools and healthcare.",
+    "source_url": "https://www.ul.com/resources/ul-greenguard-certification",
+    "seed_urls": [
+      "https://www.ul.com/resources/ul-greenguard-certification"
+    ],
+    "image_name": "greenguard.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Products undergo accredited laboratory emissions testing by UL, with periodic re-testing to maintain certification."
+      },
+      "standard_scope": {
+        "score": 3,
+        "reason": "Single-attribute indoor-air-quality standard measuring chemical and VOC emissions only, not materials sourcing or lifecycle impact."
+      },
+      "governance_trust": {
+        "score": 4,
+        "reason": "Owned and operated by UL Solutions, a commercial for-profit certification company rather than an ISEAL body."
+      }
+    }
+  },
+  {
+    "id": "friend-of-the-sea",
+    "name": "Friend of the Sea",
+    "category": "Seafood",
+    "description": "A leading global standard for sustainable seafood and aquaculture. It is the primary competitor to MSC/ASC and certifies a massive volume of global tonnage.",
+    "source_url": "https://friendofthesea.org/",
+    "seed_urls": [
+      "https://friendofthesea.org/"
+    ],
+    "image_name": "friend-of-sea.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 6,
+        "reason": "Third-party onsite audits are used, but the program has been criticized for shorter and less stringent assessments than MSC."
+      },
+      "standard_scope": {
+        "score": 6,
+        "reason": "Covers both wild-capture and farmed seafood with broad commodity coverage, though the depth of its criteria is contested."
+      },
+      "governance_trust": {
+        "score": 4,
+        "reason": "Run by the private World Sustainability Organization, which has faced transparency criticism, and is not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "ok-compost",
+    "name": "OK Compost (TÜV AUSTRIA)",
+    "category": "Packaging/Waste",
+    "description": "The dominant European/Global verification for industrial and home compostability. Essential for the bioplastics and packaging sectors.",
+    "source_url": "https://www.tuv-at.be/green-marks/official-certifications/ok-compost/",
+    "seed_urls": [
+      "https://www.tuv-at.be/green-marks/official-certifications/ok-compost/"
+    ],
+    "image_name": "ok-compost.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Certification is based on accredited laboratory testing against the EN 13432 compostability standard by a third-party body."
+      },
+      "standard_scope": {
+        "score": 4,
+        "reason": "Single-attribute end-of-life standard verifying compostability/biodegradation of a material, not its sourcing or production impacts."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "Issued by TÜV AUSTRIA, an accredited and reputable commercial third-party certification body."
+      }
+    }
+  },
+  {
+    "id": "demeter",
+    "name": "Demeter Biodynamic",
+    "category": "Agriculture",
+    "description": "The oldest and strictest organic certification in the world. It goes beyond standard organic (EU/USDA) to verify Biodynamic farming methods.",
+    "source_url": "https://demeter.net/",
+    "seed_urls": [
+      "https://demeter.net/"
+    ],
+    "image_name": "demeter.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 9,
+        "reason": "Requires annual onsite inspections covering both organic and additional biodynamic criteria, conducted by accredited third parties."
+      },
+      "standard_scope": {
+        "score": 8,
+        "reason": "Holistic whole-farm biodynamic standard extending beyond organic into a closed-system approach, covering production through processing."
+      },
+      "governance_trust": {
+        "score": 6,
+        "reason": "Demeter International is the oldest organic certification federation, an independent and reputable association, though not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "blue-flag",
+    "name": "Blue Flag",
+    "category": "Tourism/Nature",
+    "description": "One of the world’s most recognized voluntary awards for beaches, marinas, and sustainable boating tourism operators.",
+    "source_url": "https://www.blueflag.global/",
+    "seed_urls": [
+      "https://www.blueflag.global/"
+    ],
+    "image_name": "blue-flag.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Sites are assessed through onsite verification and periodic control visits managed by the program."
+      },
+      "standard_scope": {
+        "score": 6,
+        "reason": "Site-level standard for beaches and marinas covering water quality, safety, environmental management and education."
+      },
+      "governance_trust": {
+        "score": 6,
+        "reason": "Administered by the Foundation for Environmental Education, an established international NGO."
+      }
+    }
+  },
+  {
+    "id": "fair-for-life",
+    "name": "Fair for Life",
+    "category": "Labor/Trade",
+    "description": "A rigorous fair trade standard covering the entire supply chain. Used by major ethical brands (e.g., Dr. Bronner's) distinct from the 'Fair Trade Certified' label.",
+    "source_url": "https://www.fairforlife.org/",
+    "seed_urls": [
+      "https://www.fairforlife.org/"
+    ],
+    "image_name": "fair-for-life.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Operations undergo annual third-party onsite audits of fair-trade and responsible-supply-chain criteria."
+      },
+      "standard_scope": {
+        "score": 8,
+        "reason": "Combines fair-trade, social-responsibility and ecological criteria across the whole supply chain and is applicable to any commodity."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "Managed under the Ecocert group's Bio-Foundation, an independent and reputable system that is not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "ecologo",
+    "name": "ECOLOGO",
+    "category": "Multi-Category",
+    "description": "A prominent North American ecolabel (managed by UL) certifying products for reduced environmental impact across their lifecycle.",
+    "source_url": "https://www.ul.com/resources/ecologo-certification-program",
+    "seed_urls": [
+      "https://www.ul.com/resources/ecologo-certification-program"
+    ],
+    "image_name": "ecologo.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Third-party certification combines lifecycle-criteria assessment with product testing and verification."
+      },
+      "standard_scope": {
+        "score": 8,
+        "reason": "ISO Type I lifecycle-based, multi-attribute standard spanning many product categories."
+      },
+      "governance_trust": {
+        "score": 4,
+        "reason": "Owned and operated by UL Solutions, a commercial for-profit certifier rather than an ISEAL body."
+      }
+    }
+  },
+  {
+    "id": "dolphin-safe",
+    "name": "Dolphin Safe",
+    "category": "Seafood",
+    "description": "One of the most ubiquitous consumer labels on canned tuna, managed by the Earth Island Institute to ensure fishing methods do not harm dolphins.",
+    "source_url": "https://www.earthisland.org/dolphin_safe_tuna_monitor/",
+    "seed_urls": [
+      "https://www.earthisland.org/dolphin_safe_tuna_monitor/"
+    ],
+    "image_name": "dolphin-safe.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 5,
+        "reason": "Monitoring uses onboard observers and some audits, but in many fisheries it depends heavily on captain statements and self-reporting."
+      },
+      "standard_scope": {
+        "score": 3,
+        "reason": "Single-issue label confirming only that no dolphins were chased or netted, ignoring bycatch, habitat damage and stock health."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "Run by Earth Island Institute's International Marine Mammal Project, a reputable NGO."
+      }
+    }
+  },
+  {
+    "id": "green-globe",
+    "name": "Green Globe",
+    "category": "Tourism",
+    "description": "The premier global certification for sustainable tourism, covering hotels, resorts, and conference centers. A massive gap in your current 'Tourism' category.",
+    "source_url": "https://greenglobe.com/",
+    "seed_urls": [
+      "https://greenglobe.com/"
+    ],
+    "image_name": "green-globe.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Member properties are independently audited against the criteria, with mandatory annual recertification."
+      },
+      "standard_scope": {
+        "score": 7,
+        "reason": "Based on the Global Sustainable Tourism Council criteria, covering energy, water, social policy and cultural heritage at the operation level."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "Green Globe is a commercial certification company applying GSTC-recognized criteria, not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "goodweave",
+    "name": "GoodWeave",
+    "category": "Textiles/Labor",
+    "description": "The definitive label for eliminating child labor in the carpet and rug industry. Highly recognized in the home goods sector.",
+    "source_url": "https://goodweave.org/",
+    "seed_urls": [
+      "https://goodweave.org/"
+    ],
+    "image_name": "good-weave.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 9,
+        "reason": "Conducts unannounced inspections of looms and factories, reaching into decentralized home-based production, and actively removes children found working."
+      },
+      "standard_scope": {
+        "score": 6,
+        "reason": "Focused on eliminating child and forced labor across the carpet and rug supply chain, a labor-specific scope that nonetheless probes deep informal tiers."
+      },
+      "governance_trust": {
+        "score": 6,
+        "reason": "GoodWeave International is a reputable independent NGO and an ISEAL Community Member."
+      }
+    }
+  },
+  {
+    "id": "natrue",
+    "name": "NaTrue",
+    "category": "Cosmetics",
+    "description": "A major international standard for natural and organic cosmetics, particularly dominant in Europe. It competes directly with COSMOS/Soil Association.",
+    "source_url": "https://www.natrue.org/",
+    "seed_urls": [
+      "https://www.natrue.org/"
+    ],
+    "image_name": "natrue.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Products are certified by approved third-party certifiers that verify ingredient origin and processing against the standard."
+      },
+      "standard_scope": {
+        "score": 5,
+        "reason": "Focused on the naturalness of cosmetic formulations (banning petrochemicals, silicones and synthetic fragrance), rather than the full supply chain or social criteria."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "NATRUE is an international nonprofit association founded by natural-cosmetics pioneers; reputable but industry-association in origin and not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "usda-biobased",
+    "name": "USDA Certified Biobased",
+    "category": "Materials",
+    "description": "A US government label verifying the percentage of renewable biological ingredients in products (cleaners, packaging, insulation).",
+    "source_url": "https://www.biopreferred.gov/",
+    "seed_urls": [
+      "https://www.biopreferred.gov/BioPreferred/"
+    ],
+    "image_name": "usda-certified-biobased.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Biobased content is verified by accredited third-party laboratories using ASTM D6866 radiocarbon testing."
+      },
+      "standard_scope": {
+        "score": 3,
+        "reason": "Measures only the renewable biobased carbon content of a product, saying nothing about toxicity, biodegradability or lifecycle impact."
+      },
+      "governance_trust": {
+        "score": 7,
+        "reason": "The USDA BioPreferred program is a US government label with regulatory backing."
+      }
+    }
+  },
+  {
+    "id": "floorscore",
+    "name": "FloorScore",
+    "category": "Building Materials",
+    "description": "The most recognized indoor air quality standard specifically for hard surface flooring materials. It is widely required for LEED/BREEAM projects.",
+    "source_url": "https://www.scsglobalservices.com/services/floorscore",
+    "seed_urls": [
+      "https://www.scsglobalservices.com/services/floorscore"
+    ],
+    "image_name": "floorscore.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Flooring products undergo accredited laboratory VOC-emissions testing by SCS Global Services, with periodic re-testing."
+      },
+      "standard_scope": {
+        "score": 3,
+        "reason": "Single-attribute indoor-air-quality standard testing VOC emissions of hard-surface flooring only, not its material sourcing or sustainability."
+      },
+      "governance_trust": {
+        "score": 4,
+        "reason": "Administered by SCS Global Services, a commercial third-party certifier rather than an ISEAL body."
+      }
+    }
+  },
+  {
+    "id": "terracycle",
+    "name": "TerraCycle",
+    "category": "Recycling/Waste",
+    "description": "While technically a recycling platform, their logo on packaging is widely recognized by consumers as a mark that the packaging is recyclable through their programs.",
+    "source_url": "https://www.terracycle.com/",
+    "seed_urls": [
+      "https://www.terracycle.com/"
+    ],
+    "image_name": "terracycle.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 2,
+        "reason": "Not a verified product standard; the logo signals that a mail-in or collection recycling program exists, with no audit of a product attribute."
+      },
+      "standard_scope": {
+        "score": 4,
+        "reason": "Provides end-of-life recycling access for specific hard-to-recycle waste streams, a single recoverability attribute."
+      },
+      "governance_trust": {
+        "score": 3,
+        "reason": "Run by TerraCycle, a for-profit company funded by the brands whose packaging it recycles, drawing greenwashing and conflict-of-interest criticism."
+      }
+    }
+  },
+  {
+    "id": "cotton-made-in-africa",
+    "name": "Cotton Made in Africa (CmiA)",
+    "category": "Textiles",
+    "description": "One of the world's largest standards for sustainable cotton, focusing on smallholder farmers in Africa. A major peer to Better Cotton (BCI).",
+    "source_url": "https://cottonmadeinafrica.org/",
+    "seed_urls": [
+      "https://cottonmadeinafrica.org/"
+    ],
+    "image_name": "cotton-made-in-africa.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 6,
+        "reason": "Independent third-party verification of smallholder farms is used, but a mass-balance supply chain means the CmiA cotton is not guaranteed to be physically present in the product."
+      },
+      "standard_scope": {
+        "score": 6,
+        "reason": "Covers rain-fed cotton, smallholder support, GMO exclusion and labor at the farm tier, but mass balance breaks physical traceability downstream."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "Owned by the nonprofit Aid by Trade Foundation, a reputable body that is not an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "gold-standard",
+    "name": "Gold Standard",
+    "category": "Carbon/Climate",
+    "description": "Founded by WWF, this is widely considered the most rigorous standard for carbon offset projects, requiring them to also contribute to UN Sustainable Development Goals.",
+    "source_url": "https://www.goldstandard.org/",
+    "seed_urls": [
+      "https://www.goldstandard.org/"
+    ],
+    "image_name": "gold-standard.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "Carbon projects are validated and verified by accredited independent auditors (VVBs), with strict additionality and no-double-counting checks."
+      },
+      "standard_scope": {
+        "score": 7,
+        "reason": "Goes beyond emissions accounting to require demonstrated UN Sustainable Development Goal co-benefits at the project level."
+      },
+      "governance_trust": {
+        "score": 7,
+        "reason": "Gold Standard was founded by WWF and other NGOs and is an ISEAL member, widely regarded as the benchmark for high-quality offsets."
+      }
+    }
+  },
+  {
+    "id": "ecocert",
+    "name": "Ecocert",
+    "category": "Cosmetics/Home",
+    "description": "A globally ubiquitous French certification mark found on organic cosmetics, detergents, and textiles. It often verifies compliance with the COSMOS standard.",
+    "source_url": "https://www.ecocert.com/en",
+    "seed_urls": [
+      "https://www.ecocert.com/en/home"
+    ],
+    "image_name": "ecocert.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 8,
+        "reason": "An accredited third-party certification body conducting onsite audits, including, for COSMOS cosmetics, twice-yearly facility inspections."
+      },
+      "standard_scope": {
+        "score": 7,
+        "reason": "Scope depends on the standard applied (organic agriculture, COSMOS cosmetics, textiles, Fair for Life), typically covering ingredients and processing rather than every lifecycle stage."
+      },
+      "governance_trust": {
+        "score": 5,
+        "reason": "Ecocert is a private accredited certification body (ISO 17065), reputable and rigorous, but not itself an ISEAL member."
+      }
+    }
+  },
+  {
+    "id": "green-key",
+    "name": "Green Key",
+    "category": "Tourism",
+    "description": "A leading international eco-label for tourism facilities (hotels, campsites, restaurants), rivaling Green Globe in global recognition.",
+    "source_url": "https://www.greenkey.global/",
+    "seed_urls": [
+      "https://www.greenkey.global/"
+    ],
+    "image_name": "greenkey.png",
+    "rigor_breakdown": {
+      "verification_quality": {
+        "score": 7,
+        "reason": "Establishments are audited onsite (first year then on a periodic cycle), with some reliance on self-reported data between audits."
+      },
+      "standard_scope": {
+        "score": 6,
+        "reason": "Operation-level tourism standard covering water, waste, energy, management and guest education."
+      },
+      "governance_trust": {
+        "score": 6,
+        "reason": "Managed by the Foundation for Environmental Education, an established international NGO."
+      }
+    }
+  }
 ]

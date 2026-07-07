@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { searchProducts } from "../../services/searchService";
 import EcoLabelLogo from "../../components/EcoLabelLogo";
+import { calculateRigorScore, formatRigorScore } from "../../lib/rigorScore";
 import "../../styles/product-search.css";
 
 export default function ProductSearch() {
@@ -164,7 +165,9 @@ function HeroProductCard({ product }) {
 											</div>
 											<div className="hero-label-text">
 												<span className="name">{label.name}</span>
-												<span className="score">Rigor: {label.rigor_score}/10</span>
+												<span className="score">
+													Rigor: {formatRigorScore(calculateRigorScore(label))}/10
+												</span>
 											</div>
 										</div>
 									))}
@@ -203,7 +206,11 @@ function ProductCard({ product }) {
 				{hasEcoData ?
 					<div className="product-labels-grid">
 						{product.eco_data.labels.slice(0, 4).map((label) => (
-							<div key={label.id} className="label-chip" title={`${label.name} (${label.rigor_score}/10)`}>
+							<div
+								key={label.id}
+								className="label-chip"
+								title={`${label.name} (${formatRigorScore(calculateRigorScore(label))}/10)`}
+							>
 								<div className="label-icon-wrap">
 									<EcoLabelLogo imageName={label.image_name} name={label.name} />
 								</div>

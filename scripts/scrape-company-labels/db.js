@@ -2,6 +2,7 @@
 
 import Database from "better-sqlite3";
 import path from "path";
+import { calculateRigorScore } from "../../lib/rigorScore.js";
 import { PATHS } from "./config.js";
 
 // We resolve the root directory dynamically based on the script location to avoid cwd issues
@@ -71,7 +72,7 @@ export function seedLabelsTable(labels) {
 				id: label.id,
 				name: label.name,
 				category: label.category,
-				rigor_score: label.rigor_score || 0,
+				rigor_score: calculateRigorScore(label) ?? 0,
 			});
 		}
 	});

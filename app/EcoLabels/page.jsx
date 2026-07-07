@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import EcoLabelLogo from "../../components/EcoLabelLogo";
+import RigorScoreDisplay from "../../components/RigorScoreDisplay";
 import "../../styles/eco-labels.css";
 
 export default function EcoLabels() {
@@ -100,26 +101,6 @@ export default function EcoLabels() {
 						</p>
 					:	<div className="eco-grid">
 							{filteredLabels.map((label) => {
-								// --- RIGOR LOGIC ---
-								const rigorScore = typeof label.rigor_score === "number" ? label.rigor_score : null;
-								const rigorReason = label.reason_for_rigor_score || "";
-
-								let rigorBand = "";
-								let rigorLabel = "";
-
-								if (rigorScore !== null) {
-									if (rigorScore >= 8) {
-										rigorBand = "high";
-										rigorLabel = "High Rigor";
-									} else if (rigorScore >= 6) {
-										rigorBand = "medium";
-										rigorLabel = "Moderate Rigor";
-									} else {
-										rigorBand = "low";
-										rigorLabel = "Low Rigor";
-									}
-								}
-
 								return (
 									<article key={label.id || label.name} className="eco-card">
 										{/* ---------- LOGO ---------- */}
@@ -138,30 +119,7 @@ export default function EcoLabels() {
 													)}
 												</div>
 
-												{/* ---------- RIGOR SCORE ---------- */}
-												{rigorScore !== null && (
-													<div className={`eco-rigor-row rigor-${rigorBand}`}>
-														<span className="eco-rigor-dot" />
-														<div className="eco-rigor-text">
-															<span className="eco-rigor-score">
-																{rigorScore}
-																<span className="eco-rigor-max">/10</span>
-															</span>
-															<span className="eco-rigor-level">{rigorLabel}</span>
-														</div>
-
-														{/* CUSTOM TOOLTIP POPUP */}
-														{rigorReason && (
-															<div className="eco-rigor-tooltip">
-																<div className="eco-tooltip-arrow" />
-																<strong className="eco-tooltip-title">
-																	Why this score?
-																</strong>
-																<p className="eco-tooltip-text">{rigorReason}</p>
-															</div>
-														)}
-													</div>
-												)}
+												<RigorScoreDisplay label={label} variant="eco" />
 											</header>
 
 											{label.description && <p className="eco-card-description">{label.description}</p>}
