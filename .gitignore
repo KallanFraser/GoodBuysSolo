@@ -11,3 +11,5 @@ goodbuys.db-wal
 /public/data/news-preview.host-stats.json
 /public/data/news-preview.host-stats.json.tmp
 CLAUDE.md
+.DS_Store
+**/.DS_Store
